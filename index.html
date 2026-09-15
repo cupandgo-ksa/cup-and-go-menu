@@ -289,13 +289,92 @@
     const savedLanguage=localStorage.getItem('cng_lang');
     let products=cachedProducts||[],productsLoaded=Array.isArray(cachedProducts),settings=cachedSettings,adminCategories=Array.isArray(cachedSettings.categories)?cachedSettings.categories:[],activeCategory='all',isArabic=savedLanguage!=='en',slides=[],slideIndex=0,sliderTimer=null,introStartedAt=Date.now(),introHidden=false,promoShown=false,promoTimer=null,promoDataPromise=null,promoWarmPromise=null;
     const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-    const catAr={Coffee:'قهوة',Sweet:'حلويات','Sweet Box':'بوكس حلويات','Cold Drink':'مشروبات باردة','Cold Drinks':'مشروبات باردة',Tea:'شاي',Matcha:'ماتشا',Breakfast:'فطور',Dessert:'حلويات',Offers:'العروض',Other:'أخرى'};
+    const catAr={Coffee:'قهوة',Sweet:'حلويات','Coffee Box':'بوكس القهوة','Sweet Box':'بوكس الحلويات','Cold Drink':'مشروبات باردة','Cold Drinks':'مشروبات باردة','Special Offer':'العروض الخاصة',Tea:'شاي',Matcha:'ماتشا',Breakfast:'فطور',Dessert:'حلويات',Offers:'العروض',Other:'أخرى'};
+    const normalizeProductKey=value=>String(value||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().replace(/\b(?:karkede|kerkede)\b/g,'karkade').replace(/\bfassion\b/g,'passion').replace(/\btermisu\b/g,'tiramisu').replace(/\bcode rad\b/g,'code red');
+    const productTokenKey=value=>normalizeProductKey(value).split(/\s+/).filter(Boolean).sort().join(' ');
+    const arabicProducts={
+      'coffee day big cold':{name:'قهوة اليوم الباردة - كبير',description:'قهوة اليوم الباردة بحجم كبير، بنكهة غنية ومنعشة.'},
+      'coffee day big hot':{name:'قهوة اليوم الساخنة - كبير',description:'قهوة اليوم الساخنة بحجم كبير، بطعم غني ومثالي لعشاق القهوة.'},
+      'coffee day small cold':{name:'قهوة اليوم الباردة - صغير',description:'قهوة اليوم الباردة بحجم صغير، خفيفة ومنعشة في كل وقت.'},
+      'coffee day small hot':{name:'قهوة اليوم الساخنة - صغير',description:'قهوة اليوم الساخنة بحجم صغير، دافئة وغنية بالنكهة.'},
+      'coffee v60 cold':{name:'قهوة V60 باردة',description:'قهوة V60 محضّرة بعناية وتُقدم باردة بنكهة ناعمة ومتوازنة.'},
+      'coffee v60 hot':{name:'قهوة V60 ساخنة',description:'قهوة V60 ساخنة محضّرة بعناية لإبراز نكهة القهوة المميزة.'},
+      'brownies caramel':{name:'براونيز كراميل',description:'براونيز طرية وغنية بالشوكولاتة مع نكهة الكراميل اللذيذة.'},
+      'brownies classic':{name:'براونيز كلاسيك',description:'براونيز كلاسيكية طرية وغنية بطعم الشوكولاتة.'},
+      'crunchy caramel':{name:'كرانشي كراميل',description:'حلى مقرمش ولذيذ مع نكهة الكراميل الغنية.'},
+      'marshmallow':{name:'مارشميلو',description:'حلى مارشميلو خفيف وطري بطعم حلو ولذيذ.'},
+      'code red':{name:'كود رِد',description:'مشروب بارد ومنعش بنكهة مميزة وحيوية.'},
+      'code rad':{name:'كود رِد',description:'مشروب بارد ومنعش بنكهة مميزة وحيوية.'},
+      'mojito special':{name:'موهيتو سبيشل',description:'موهيتو خاص ومنعش بمزيج مميز من النكهات.'},
+      'mojito':{name:'موهيتو',description:'مشروب موهيتو بارد ومنعش، مثالي لجميع الأوقات.'},
+      'passion fruit':{name:'باشن فروت',description:'مشروب بارد ومنعش بنكهة فاكهة الباشن فروت الاستوائية.'},
+      'fassion fruit':{name:'باشن فروت',description:'مشروب بارد ومنعش بنكهة فاكهة الباشن فروت الاستوائية.'},
+      'karkade big':{name:'كركديه - كبير',description:'مشروب كركديه بارد ومنعش بحجم كبير وبنكهة غنية.'},
+      'kerkede big':{name:'كركديه - كبير',description:'مشروب كركديه بارد ومنعش بحجم كبير وبنكهة غنية.'},
+      'matcha vanilla':{name:'ماتشا فانيلا',description:'مشروب ماتشا كريمي مع نكهة الفانيلا الناعمة.'},
+      'ice tea':{name:'آيس تي',description:'شاي مثلج بارد وخفيف بنكهة منعشة.'},
+      'karkade small':{name:'كركديه - صغير',description:'مشروب كركديه بارد ومنعش بحجم صغير.'},
+      'kerkede small':{name:'كركديه - صغير',description:'مشروب كركديه بارد ومنعش بحجم صغير.'},
+      'coffee day cold box':{name:'بوكس قهوة اليوم الباردة',description:'بوكس قهوة اليوم الباردة، مناسب للمشاركة والتجمعات.'},
+      'coffee day hot box':{name:'بوكس قهوة اليوم الساخنة',description:'بوكس قهوة اليوم الساخنة، مثالي للمشاركة في المناسبات والتجمعات.'},
+      'karkade box':{name:'بوكس كركديه',description:'بوكس مشروب الكركديه المنعش، مناسب للمشاركة والتجمعات.'},
+      'kerkede box':{name:'بوكس كركديه',description:'بوكس مشروب الكركديه المنعش، مناسب للمشاركة والتجمعات.'},
+      'brownies caramel box':{name:'بوكس براونيز كراميل',description:'بوكس براونيز غني بالشوكولاتة والكراميل، مناسب للمشاركة.'},
+      'brownies classic box':{name:'بوكس براونيز كلاسيك',description:'بوكس براونيز كلاسيكي بطعم الشوكولاتة الغني واللذيذ.'},
+      'crunchy caramel box':{name:'بوكس كرانشي كراميل',description:'بوكس حلى كرانشي مقرمش مع نكهة الكراميل الغنية.'},
+      'marshmallow box':{name:'بوكس مارشميلو',description:'بوكس مارشميلو طري وخفيف، مناسب للمشاركة والتجمعات.'},
+      'brownies caramel 8 pcs crunchy caramel 7 pcs':{name:'٨ قطع براونيز كراميل + ٧ قطع كرانشي كراميل',description:'بوكس مشكل يحتوي على ٨ قطع براونيز كراميل و٧ قطع كرانشي كراميل.'},
+      'brownies classic 8 pcs marshmallow 7 pcs':{name:'٨ قطع براونيز كلاسيك + ٧ قطع مارشميلو',description:'بوكس مشكل يحتوي على ٨ قطع براونيز كلاسيك و٧ قطع مارشميلو.'},
+      'tiramisu coffee day small':{name:'تيراميسو + قهوة اليوم صغير',description:'عرض خاص يشمل قطعة تيراميسو لذيذة مع قهوة اليوم بحجم صغير.'},
+      'termisu coffee day small':{name:'تيراميسو + قهوة اليوم صغير',description:'عرض خاص يشمل قطعة تيراميسو لذيذة مع قهوة اليوم بحجم صغير.'},
+      'cake caramel coffee day small':{name:'كيك كراميل + قهوة اليوم صغير',description:'عرض خاص يشمل قطعة كيك كراميل لذيذة مع قهوة اليوم بحجم صغير.'}
+    };
+    const englishDescriptions={
+      'coffee day big cold':'A large cold coffee of the day with a rich and refreshing flavour.',
+      'coffee day big hot':'A large hot coffee of the day with a rich, satisfying flavour.',
+      'coffee day small cold':'A small cold coffee of the day, light and refreshing.',
+      'coffee day small hot':'A small hot coffee of the day, warm and full of flavour.',
+      'coffee v60 cold':'Carefully brewed V60 coffee served cold with a smooth, balanced flavour.',
+      'coffee v60 hot':'Carefully brewed hot V60 coffee that highlights its distinctive flavour.',
+      'brownies caramel':'Soft chocolate brownies with a delicious caramel flavour.',
+      'brownies classic':'Soft classic brownies with a rich chocolate flavour.',
+      'crunchy caramel':'A delicious crunchy dessert with a rich caramel flavour.',
+      'marshmallow':'A light and soft marshmallow dessert with a delicious sweet taste.',
+      'code red':'A cold and refreshing drink with a distinctive vibrant flavour.',
+      'code rad':'A cold and refreshing drink with a distinctive vibrant flavour.',
+      'mojito special':'A special refreshing mojito with a distinctive blend of flavours.',
+      'mojito':'A cold and refreshing mojito, perfect at any time.',
+      'passion fruit':'A cold and refreshing drink with tropical passion fruit flavour.',
+      'fassion fruit':'A cold and refreshing drink with tropical passion fruit flavour.',
+      'karkade big':'A large cold and refreshing hibiscus drink with a rich flavour.',
+      'kerkede big':'A large cold and refreshing hibiscus drink with a rich flavour.',
+      'matcha vanilla':'A creamy matcha drink with a smooth vanilla flavour.',
+      'ice tea':'A light and refreshing cold iced tea.',
+      'karkade small':'A small cold and refreshing hibiscus drink.',
+      'kerkede small':'A small cold and refreshing hibiscus drink.',
+      'coffee day cold box':'A cold Coffee Day box, perfect for sharing and gatherings.',
+      'coffee day hot box':'A hot Coffee Day box, perfect for sharing and gatherings.',
+      'karkade box':'A refreshing hibiscus drink box, perfect for sharing and gatherings.',
+      'kerkede box':'A refreshing hibiscus drink box, perfect for sharing and gatherings.',
+      'brownies caramel box':'A rich chocolate and caramel brownie box, perfect for sharing.',
+      'brownies classic box':'A classic brownie box with a rich and delicious chocolate flavour.',
+      'crunchy caramel box':'A crunchy dessert box with a rich caramel flavour.',
+      'marshmallow box':'A soft and light marshmallow box, perfect for sharing.',
+      'brownies caramel 8 pcs crunchy caramel 7 pcs':'A mixed box with 8 caramel brownies and 7 crunchy caramel pieces.',
+      'brownies classic 8 pcs marshmallow 7 pcs':'A mixed box with 8 classic brownies and 7 marshmallow pieces.',
+      'tiramisu coffee day small':'A special offer with delicious tiramisu and a small Coffee Day.',
+      'termisu coffee day small':'A special offer with delicious tiramisu and a small Coffee Day.',
+      'cake caramel coffee day small':'A special offer with delicious caramel cake and a small Coffee Day.'
+    };
     const text={en:{menu:'Full Menu',sub:'Tap any picture to view it full size',all:'All Items',loading:'Loading menu…',empty:'No menu items found.',offline:'Connection unavailable — retrying…',lang:'عربي'},ar:{menu:'القائمة الكاملة',sub:'اضغط على أي صورة لعرضها بالحجم الكامل',all:'جميع الأصناف',loading:'جاري تحميل القائمة…',empty:'لا توجد أصناف في القائمة.',offline:'الاتصال غير متاح — جاري إعادة المحاولة…',lang:'English'}};
-    function nameOf(p){return isArabic?(p.nameAr||p.name||'صنف'):(p.name||p.nameAr||'Item')}
-    function descOf(p){return isArabic?(p.descriptionAr||p.descriptionEn||p.description||''):(p.descriptionEn||p.description||p.descriptionAr||'')}
-    function categoryName(c){if(!isArabic)return c;const key=Object.keys(catAr).find(k=>k.toLowerCase()===String(c).toLowerCase());return key?catAr[key]:c}
+    const hasArabic=value=>/[\u0600-\u06ff]/.test(String(value||''));
+    function matchedProductKey(p){const key=normalizeProductKey(p?.name||p?.nameEn);if(arabicProducts[key])return key;const tokenKey=productTokenKey(key);return Object.keys(arabicProducts).find(candidate=>productTokenKey(candidate)===tokenKey)||key}
+    function arabicProductOf(p){return arabicProducts[matchedProductKey(p)]||null}
+    function nameOf(p){const translated=arabicProductOf(p),arabicSaved=[p.nameAr,p.name].find(hasArabic);return isArabic?(arabicSaved||translated?.name||'صنف'):(p.name||p.nameEn||p.nameAr||'Item')}
+    function descOf(p){const translated=arabicProductOf(p),key=matchedProductKey(p),fallbackEn=englishDescriptions[key]||'',englishCandidates=[p.descriptionEn,p.description].filter(v=>v&&!hasArabic(v)),arabicSaved=[p.descriptionAr,p.description].find(hasArabic);return isArabic?(arabicSaved||translated?.description||''):(englishCandidates[0]||fallbackEn||'')}
+    function categoryName(c){if(!isArabic)return c;const raw=String(c||''),clean=normalizeProductKey(raw),aliases=[['special offer','Special Offer'],['coffee box','Coffee Box'],['sweet box','Sweet Box'],['cold drinks','Cold Drinks'],['cold drink','Cold Drink'],['coffee','Coffee'],['sweet','Sweet'],['dessert','Dessert'],['breakfast','Breakfast'],['matcha','Matcha'],['tea','Tea'],['offers','Offers'],['other','Other']],matched=aliases.find(([needle])=>clean===needle||clean.includes(needle)),icons=[...new Set(raw.match(/\p{Extended_Pictographic}/gu)||[])].join(' ');return matched?`${catAr[matched[1]]}${icons?' '+icons:''}`:raw}
     function updateClock(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString(isArabic?'ar-SA':'en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});const h=d.getHours();document.getElementById('greeting').textContent=isArabic?(h<12?'صباح الخير ☀️':h<17?'مساء الخير 🌤️':'مساء النور 🌙'):(h<12?'Good Morning ☀️':h<17?'Good Afternoon 🌤️':h<21?'Good Evening 🌙':'Have a great night ☕')}
-    function updateLedLanguage(){const el=document.getElementById('ledText');if(!el)return;const raw=el.dataset.rawText||'☕ Welcome to Cup And Go ☕';el.textContent=isArabic&&/^\s*☕?\s*Welcome to Cup And Go\s*☕?\s*$/i.test(raw)?'☕ مرحباً بكم في كوب آند جو ☕':raw}
+    function updateLedLanguage(){const el=document.getElementById('ledText');if(!el)return;const raw=el.dataset.rawText||'☕ Welcome to Cup And Go ☕',plain=normalizeProductKey(raw);if(isArabic&&plain.includes('welcome to cup and go'))el.textContent='☕ مرحباً بكم في كوب آند جو ☕';else if(isArabic&&plain.includes('get 1 free')&&plain.includes('cup and go'))el.textContent='☕ احصل على كوب مجاني من كوب آند جو ☕';else el.textContent=raw}
     function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'كوب آند جو — القائمة الكاملة':'Cup And Go — Full Menu';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;document.getElementById('menuSub').textContent=t.sub;document.getElementById('shopName').textContent=isArabic?'كوب آند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب آند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب آند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu()}
     function toggleLanguage(){isArabic=!isArabic;localStorage.setItem('cng_lang',isArabic?'ar':'en');applyLanguage()}
     function showStatus(message){const el=document.getElementById('status');el.textContent=message;el.classList.add('show');clearTimeout(showStatus.timer);showStatus.timer=setTimeout(()=>el.classList.remove('show'),2200)}
