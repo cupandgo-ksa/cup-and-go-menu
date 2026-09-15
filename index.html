@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Cormorant+Garamond:wght@600&family=Great+Vibes&family=Inter:wght@400;600;700;900&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Black+Ops+One&family=Cairo:wght@400;700;900&family=Cormorant+Garamond:wght@600&family=Dancing+Script:wght@700&family=Fredoka+One&family=Great+Vibes&family=Inter:wght@400;600;700;900&family=Lobster&family=Monofett&family=Monoton&family=Orbitron:wght@700&family=Pacifico&family=Playfair+Display:ital,wght@1,700&family=Press+Start+2P&family=Rampart+One&family=Righteous&family=Six+Caps&family=Staatliches&family=Tourney:wght@900&family=VT323&family=Zen+Dots&display=swap" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <style>
@@ -204,11 +204,28 @@
       transform:translateY(15px) scale(.95);
       text-shadow:0 0 30px rgba(229,193,88,.13)!important;
     }
+    .menu-intro-developer{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:max(18px,calc(env(safe-area-inset-bottom,0px) + 10px));
+      z-index:3;
+      color:rgba(255,255,255,.28);
+      font-family:'Inter','Cairo',sans-serif;
+      font-size:8px;
+      font-weight:500;
+      letter-spacing:.08em;
+      text-align:center;
+      white-space:nowrap;
+      opacity:0;
+      animation:introFade .45s .38s ease forwards;
+    }
   </style>
 </head>
 <body>
   <div id="menuIntro" class="menu-intro" role="status" aria-label="Loading Cup And Go menu">
     <div class="menu-intro-copy"><div id="menuIntroName" class="menu-intro-name">Cup And Go</div><div class="menu-intro-label">MENU</div><div class="menu-intro-dots" aria-hidden="true"><i></i><i></i><i></i></div></div>
+    <div class="menu-intro-developer">Developed by Mohammed Ashik</div>
   </div>
   <header class="header">
     <img id="shopLogo" class="shop-logo" alt="Cup And Go logo">
@@ -247,15 +264,17 @@
     function showStatus(message){const el=document.getElementById('status');el.textContent=message;el.classList.add('show');clearTimeout(showStatus.timer);showStatus.timer=setTimeout(()=>el.classList.remove('show'),2200)}
     function hideMenuIntro(){if(introHidden)return;const wait=Math.max(0,900-(Date.now()-introStartedAt));setTimeout(()=>{if(introHidden)return;introHidden=true;const el=document.getElementById('menuIntro');if(!el)return;el.classList.add('hide');setTimeout(()=>el.remove(),540)},wait)}
     function initSlider(images){slides=(images||[]).filter(Boolean).slice(0,3);const box=document.getElementById('slider'),track=document.getElementById('sliderTrack'),dots=document.getElementById('sliderDots');clearInterval(sliderTimer);slideIndex=0;if(!slides.length){box.style.display='none';return}box.style.display='block';track.innerHTML=slides.map((src,i)=>`<div class="slide"><img src="${esc(src)}" alt="Offer ${i+1}" loading="${i?'lazy':'eager'}" decoding="async"></div>`).join('');dots.innerHTML=slides.map((_,i)=>`<span class="dot ${i===0?'active':''}"></span>`).join('');track.style.transform='translateX(0)';if(slides.length>1)sliderTimer=setInterval(()=>{slideIndex=(slideIndex+1)%slides.length;track.style.transform=`translateX(${(isArabic?1:-1)*slideIndex*100}%)`;[...dots.children].forEach((d,i)=>d.classList.toggle('active',i===slideIndex))},3000)}
-    function renderCategories(){const cats=adminCategories.length?adminCategories:[...new Set(products.map(p=>p.category).filter(Boolean))];const box=document.getElementById('categories');box.innerHTML=`<button class="cat-btn ${activeCategory==='all'?'active':''}" onclick="setCategory('all')">${isArabic?text.ar.all:text.en.all}</button>`+cats.map(c=>`<button class="cat-btn ${activeCategory===c?'active':''}" onclick="setCategory(decodeURIComponent('${encodeURIComponent(c)}'))">${esc(categoryName(c))}</button>`).join('')}
+    function productCategory(p){return String((p&&p.category)||'Other').trim()||'Other'}
+    function allMenuCategories(items=products){return [...new Set([...(adminCategories||[]),...items.map(productCategory)].filter(Boolean))]}
+    function renderCategories(){const cats=allMenuCategories();const box=document.getElementById('categories');box.innerHTML=`<button class="cat-btn ${activeCategory==='all'?'active':''}" onclick="setCategory('all')">${isArabic?text.ar.all:text.en.all}</button>`+cats.map(c=>`<button class="cat-btn ${activeCategory===c?'active':''}" onclick="setCategory(decodeURIComponent('${encodeURIComponent(c)}'))">${esc(categoryName(c))}</button>`).join('')}
     function setCategory(c){activeCategory=c;renderCategories();renderMenu()}
     function card(p){const id=encodeURIComponent(String(p.id??p.name??'')),name=nameOf(p),desc=descOf(p),hasImage=p.icon&&String(p.icon).length>15,sold=!!(p.customerUnavailable||p.soldOut);return `<article class="item-card"><button class="item-image-btn" type="button" onclick="openPreview('${id}')" aria-label="${esc(name)}">${hasImage?`<img class="item-image" src="${esc(p.icon)}" alt="${esc(name)}" loading="lazy" decoding="async">`:`<span class="item-fallback">${esc(p.icon||'☕')}</span>`}<span class="zoom-badge">⌕</span></button><div class="item-info"><div class="item-name">${esc(name)}</div>${desc?`<div class="item-desc">${esc(desc)}</div>`:''}<div class="item-bottom"><div class="item-price">${Number(p.price||0).toFixed(2)} ${isArabic?'ر.س':'SR'}</div>${sold?`<span class="badge sold">${isArabic?'نفد مؤقتاً':'SOLD OUT'}</span>`:(p.isPopular?`<span class="badge">${isArabic?'الأكثر طلباً':'POPULAR'}</span>`:'')}</div></div></article>`}
-    function renderMenu(){const grid=document.getElementById('menuGrid');if(!productsLoaded){grid.innerHTML='<div class="menu-skeleton" aria-label="Loading menu"><div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-lines"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div></div>';return}if(!products.length){grid.innerHTML=`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`;return}if(activeCategory!=='all'){const list=products.filter(p=>p.category===activeCategory);grid.innerHTML=list.length?list.map(card).join(''):`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`;return}const cats=adminCategories.length?adminCategories:[...new Set(products.map(p=>p.category).filter(Boolean))];let html='';cats.forEach(c=>{const list=products.filter(p=>p.category===c);if(list.length)html+=`<h3 class="category-title">${esc(categoryName(c))}</h3>${list.map(card).join('')}`});const uncategorized=products.filter(p=>!p.category||!cats.includes(p.category));if(uncategorized.length)html+=uncategorized.map(card).join('');grid.innerHTML=html||`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`}
+    function renderMenu(){const grid=document.getElementById('menuGrid');if(!productsLoaded){grid.innerHTML='<div class="menu-skeleton" aria-label="Loading menu"><div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-lines"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div></div>';return}if(!products.length){grid.innerHTML=`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`;return}if(activeCategory!=='all'){const list=products.filter(p=>productCategory(p)===activeCategory);grid.innerHTML=list.length?list.map(card).join(''):`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`;return}const cats=allMenuCategories();let html='';cats.forEach(c=>{const list=products.filter(p=>productCategory(p)===c);if(list.length)html+=`<h3 class="category-title">${esc(categoryName(c))}</h3>${list.map(card).join('')}`});grid.innerHTML=html||`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`}
     function openPreview(encoded){let id='';try{id=decodeURIComponent(encoded)}catch(e){id=encoded}const p=products.find(x=>String(x.id??x.name??'')===id);if(!p)return;const hasImage=p.icon&&String(p.icon).length>15;document.getElementById('previewImageWrap').innerHTML=hasImage?`<img class="preview-img" src="${esc(p.icon)}" alt="${esc(nameOf(p))}">`:`<span class="item-fallback">${esc(p.icon||'☕')}</span>`;document.getElementById('previewName').textContent=nameOf(p);document.getElementById('previewDesc').textContent=descOf(p);document.getElementById('previewPrice').textContent=`${Number(p.price||0).toFixed(2)} ${isArabic?'ر.س':'SR'}`;document.getElementById('previewModal').classList.add('show');document.body.style.overflow='hidden'}
     function closePreview(){document.getElementById('previewModal').classList.remove('show');document.body.style.overflow=''}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closePreview()});
     db.ref('/settings').on('value',snap=>{settings=snap.val()||{};try{localStorage.setItem(SETTINGS_CACHE,JSON.stringify(settings))}catch(e){}document.getElementById('shopLogo').src=settings.shopLogo||FALLBACK_LOGO;const introName=document.getElementById('menuIntroName');if(introName)introName.textContent=settings.shopName||'Cup And Go';adminCategories=Array.isArray(settings.categories)?settings.categories:[];const banners=Array.isArray(settings.promoBanners)?settings.promoBanners:(settings.offerPosterImage?[settings.offerPosterImage]:[]);initSlider(banners);applyLanguage()},()=>showStatus(isArabic?text.ar.offline:text.en.offline));
-    db.ref('/ledMatrix').on('value',snap=>{const led=snap.val()||{};const el=document.getElementById('ledText');el.textContent=led.text||'☕ Welcome to Cup And Go ☕';el.style.color=led.color||'#ffe855'});
+    db.ref('/ledMatrix').on('value',snap=>{const led=snap.val()||{};const el=document.getElementById('ledText');el.textContent=led.text||'☕ Welcome to Cup And Go ☕';el.style.color=led.color||'#ffe855';el.style.fontFamily=led.font||"'Courier New', monospace";el.style.animationDuration=`${Math.min(Math.max(Number(led.speed)||20,5),60)}s`});
     db.ref('/products').on('value',snap=>{const data=snap.val();products=data?Object.values(data).filter(Boolean):[];productsLoaded=true;try{localStorage.setItem(PRODUCTS_CACHE,JSON.stringify(products))}catch(e){}renderCategories();renderMenu();hideMenuIntro()},()=>{showStatus(isArabic?text.ar.offline:text.en.offline);setTimeout(hideMenuIntro,500)});
     document.getElementById('shopLogo').src=settings.shopLogo||FALLBACK_LOGO;document.getElementById('menuIntroName').textContent=settings.shopName||'Cup And Go';const cachedBanners=Array.isArray(settings.promoBanners)?settings.promoBanners:(settings.offerPosterImage?[settings.offerPosterImage]:[]);initSlider(cachedBanners);updateClock();setInterval(updateClock,1000);applyLanguage();if(productsLoaded)hideMenuIntro();setTimeout(hideMenuIntro,3200);
   </script>
