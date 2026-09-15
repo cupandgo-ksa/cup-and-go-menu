@@ -175,7 +175,7 @@
     .signboard::after{right:13px!important;bottom:5px!important;font-size:6px!important;letter-spacing:1.4px!important}
     [dir="rtl"] .signboard::after{right:auto!important;left:13px!important}
     .led-window{inset:4px 0 9px!important}
-    .led-text{font-size:18px!important;letter-spacing:4px!important}
+    .led-text{font-size:22px!important;letter-spacing:4px!important}
     @media(max-width:430px){
       .header{min-height:94px!important;padding-left:12px!important;padding-right:12px!important}
       .shop-logo{width:48px!important;height:48px!important;flex-basis:48px!important}
@@ -183,7 +183,7 @@
       .lang-btn{min-width:52px!important;width:52px!important;height:34px!important}
       .content{padding-top:18px!important}
       .signboard{height:56px!important;min-height:56px!important;border-radius:19px!important}
-      .led-text{font-size:17px!important;letter-spacing:3px!important}
+      .led-text{font-size:21px!important;letter-spacing:3px!important}
     }
     @media(max-width:340px){
       .header{gap:7px!important}
@@ -256,7 +256,7 @@
     const catAr={Coffee:'قهوة',Sweet:'حلويات','Cold Drink':'مشروبات باردة','Cold Drinks':'مشروبات باردة',Tea:'شاي',Matcha:'ماتشا',Breakfast:'فطور',Dessert:'حلويات'};
     const text={en:{menu:'Full Menu',sub:'Tap any picture to view it full size',all:'All Items',loading:'Loading menu…',empty:'No menu items found.',offline:'Connection unavailable — retrying…',lang:'عربي'},ar:{menu:'القائمة الكاملة',sub:'اضغط على أي صورة لعرضها بالحجم الكامل',all:'جميع الأصناف',loading:'جاري تحميل القائمة…',empty:'لا توجد أصناف في القائمة.',offline:'الاتصال غير متاح — جاري إعادة المحاولة…',lang:'English'}};
     function nameOf(p){return isArabic?(p.nameAr||p.name||'صنف'):(p.name||p.nameAr||'Item')}
-    function descOf(p){return isArabic?(p.descriptionAr||p.descriptionEn||''):(p.descriptionEn||p.descriptionAr||'')}
+    function descOf(p){return isArabic?(p.descriptionAr||p.descriptionEn||p.description||''):(p.descriptionEn||p.description||p.descriptionAr||'')}
     function categoryName(c){return isArabic?(catAr[c]||c):c}
     function updateClock(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});const h=d.getHours();document.getElementById('greeting').textContent=isArabic?(h<12?'صباح الخير ☀️':h<17?'مساء الخير 🌤️':'مساء النور 🌙'):(h<12?'Good Morning ☀️':h<17?'Good Afternoon 🌤️':h<21?'Good Evening 🌙':'Have a great night ☕')}
     function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;document.getElementById('menuSub').textContent=t.sub;document.getElementById('shopName').textContent=isArabic?'كوب آند جو':(settings.shopName||'Cup And Go');updateClock();renderCategories();renderMenu()}
@@ -268,9 +268,9 @@
     function allMenuCategories(items=products){return [...new Set([...(adminCategories||[]),...items.map(productCategory)].filter(Boolean))]}
     function renderCategories(){const cats=allMenuCategories();const box=document.getElementById('categories');box.innerHTML=`<button class="cat-btn ${activeCategory==='all'?'active':''}" onclick="setCategory('all')">${isArabic?text.ar.all:text.en.all}</button>`+cats.map(c=>`<button class="cat-btn ${activeCategory===c?'active':''}" onclick="setCategory(decodeURIComponent('${encodeURIComponent(c)}'))">${esc(categoryName(c))}</button>`).join('')}
     function setCategory(c){activeCategory=c;renderCategories();renderMenu()}
-    function card(p){const id=encodeURIComponent(String(p.id??p.name??'')),name=nameOf(p),desc=descOf(p),hasImage=p.icon&&String(p.icon).length>15,sold=!!(p.customerUnavailable||p.soldOut);return `<article class="item-card"><button class="item-image-btn" type="button" onclick="openPreview('${id}')" aria-label="${esc(name)}">${hasImage?`<img class="item-image" src="${esc(p.icon)}" alt="${esc(name)}" loading="lazy" decoding="async">`:`<span class="item-fallback">${esc(p.icon||'☕')}</span>`}<span class="zoom-badge">⌕</span></button><div class="item-info"><div class="item-name">${esc(name)}</div>${desc?`<div class="item-desc">${esc(desc)}</div>`:''}<div class="item-bottom"><div class="item-price">${Number(p.price||0).toFixed(2)} ${isArabic?'ر.س':'SR'}</div>${sold?`<span class="badge sold">${isArabic?'نفد مؤقتاً':'SOLD OUT'}</span>`:(p.isPopular?`<span class="badge">${isArabic?'الأكثر طلباً':'POPULAR'}</span>`:'')}</div></div></article>`}
+    function card(p){const id=encodeURIComponent(String(p.id??p.name??'')),name=nameOf(p),desc=descOf(p),hasImage=p.icon&&String(p.icon).length>15,sold=!!(p.customerUnavailable||p.soldOut);return `<article class="item-card"><button class="item-image-btn" type="button" onclick="openPreview('${id}')" aria-label="${esc(name)}">${hasImage?`<img class="item-image" src="${esc(p.icon)}" alt="${esc(name)}" loading="lazy" decoding="async">`:`<span class="item-fallback">${esc(p.icon||'☕')}</span>`}<span class="zoom-badge">⌕</span></button><div class="item-info"><div class="item-name">${esc(name)}</div>${desc?`<div class="item-desc">${esc(desc)}</div>`:''}<div class="item-bottom"><div class="item-price">${Number(p.price||0).toFixed(2)} ﷼</div>${sold?`<span class="badge sold">${isArabic?'نفد مؤقتاً':'SOLD OUT'}</span>`:(p.isPopular?`<span class="badge">${isArabic?'الأكثر طلباً':'POPULAR'}</span>`:'')}</div></div></article>`}
     function renderMenu(){const grid=document.getElementById('menuGrid');if(!productsLoaded){grid.innerHTML='<div class="menu-skeleton" aria-label="Loading menu"><div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-lines"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div></div>';return}if(!products.length){grid.innerHTML=`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`;return}if(activeCategory!=='all'){const list=products.filter(p=>productCategory(p)===activeCategory);grid.innerHTML=list.length?list.map(card).join(''):`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`;return}const cats=allMenuCategories();let html='';cats.forEach(c=>{const list=products.filter(p=>productCategory(p)===c);if(list.length)html+=`<h3 class="category-title">${esc(categoryName(c))}</h3>${list.map(card).join('')}`});grid.innerHTML=html||`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`}
-    function openPreview(encoded){let id='';try{id=decodeURIComponent(encoded)}catch(e){id=encoded}const p=products.find(x=>String(x.id??x.name??'')===id);if(!p)return;const hasImage=p.icon&&String(p.icon).length>15;document.getElementById('previewImageWrap').innerHTML=hasImage?`<img class="preview-img" src="${esc(p.icon)}" alt="${esc(nameOf(p))}">`:`<span class="item-fallback">${esc(p.icon||'☕')}</span>`;document.getElementById('previewName').textContent=nameOf(p);document.getElementById('previewDesc').textContent=descOf(p);document.getElementById('previewPrice').textContent=`${Number(p.price||0).toFixed(2)} ${isArabic?'ر.س':'SR'}`;document.getElementById('previewModal').classList.add('show');document.body.style.overflow='hidden'}
+    function openPreview(encoded){let id='';try{id=decodeURIComponent(encoded)}catch(e){id=encoded}const p=products.find(x=>String(x.id??x.name??'')===id);if(!p)return;const hasImage=p.icon&&String(p.icon).length>15;document.getElementById('previewImageWrap').innerHTML=hasImage?`<img class="preview-img" src="${esc(p.icon)}" alt="${esc(nameOf(p))}">`:`<span class="item-fallback">${esc(p.icon||'☕')}</span>`;document.getElementById('previewName').textContent=nameOf(p);document.getElementById('previewDesc').textContent=descOf(p);document.getElementById('previewPrice').textContent=`${Number(p.price||0).toFixed(2)} ﷼`;document.getElementById('previewModal').classList.add('show');document.body.style.overflow='hidden'}
     function closePreview(){document.getElementById('previewModal').classList.remove('show');document.body.style.overflow=''}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closePreview()});
     db.ref('/settings').on('value',snap=>{settings=snap.val()||{};try{localStorage.setItem(SETTINGS_CACHE,JSON.stringify(settings))}catch(e){}document.getElementById('shopLogo').src=settings.shopLogo||FALLBACK_LOGO;const introName=document.getElementById('menuIntroName');if(introName)introName.textContent=settings.shopName||'Cup And Go';adminCategories=Array.isArray(settings.categories)?settings.categories:[];const banners=Array.isArray(settings.promoBanners)?settings.promoBanners:(settings.offerPosterImage?[settings.offerPosterImage]:[]);initSlider(banners);applyLanguage()},()=>showStatus(isArabic?text.ar.offline:text.en.offline));
@@ -278,5 +278,21 @@
     db.ref('/products').on('value',snap=>{const data=snap.val();products=data?Object.values(data).filter(Boolean):[];productsLoaded=true;try{localStorage.setItem(PRODUCTS_CACHE,JSON.stringify(products))}catch(e){}renderCategories();renderMenu();hideMenuIntro()},()=>{showStatus(isArabic?text.ar.offline:text.en.offline);setTimeout(hideMenuIntro,500)});
     document.getElementById('shopLogo').src=settings.shopLogo||FALLBACK_LOGO;document.getElementById('menuIntroName').textContent=settings.shopName||'Cup And Go';const cachedBanners=Array.isArray(settings.promoBanners)?settings.promoBanners:(settings.offerPosterImage?[settings.offerPosterImage]:[]);initSlider(cachedBanners);updateClock();setInterval(updateClock,1000);applyLanguage();if(productsLoaded)hideMenuIntro();setTimeout(hideMenuIntro,3200);
   </script>
+<style id="cng-fast-menu-images-style">
+.cng-img-loading{position:relative;overflow:hidden;background:#efe8e1!important}.cng-img-loading::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(105deg,transparent 28%,rgba(255,255,255,.68) 46%,transparent 64%);transform:translateX(-110%);animation:cngImageShimmer 1.15s ease-in-out infinite}.cng-img-loaded::after{display:none}@keyframes cngImageShimmer{to{transform:translateX(110%)}}
+</style>
+<script id="cng-fast-menu-images-script">
+(function(){
+  const selector='img.admin-product-img,img.item-img,img.item-image';
+  function prepare(){
+    document.querySelectorAll(selector).forEach((img,index)=>{
+      if(img.dataset.cngPrepared)return;img.dataset.cngPrepared='1';
+      const first=index<6;img.loading=first?'eager':'lazy';img.decoding='async';img.setAttribute('fetchpriority',first?'high':'low');
+      const box=img.parentElement;if(box){box.classList.add('cng-img-loading');const done=()=>{box.classList.remove('cng-img-loading');box.classList.add('cng-img-loaded')};if(img.complete)done();else{img.addEventListener('load',done,{once:true});img.addEventListener('error',done,{once:true})}}
+    });
+  }
+  document.addEventListener('DOMContentLoaded',()=>{prepare();new MutationObserver(prepare).observe(document.body,{childList:true,subtree:true})});
+})();
+</script>
 </body>
 </html>
