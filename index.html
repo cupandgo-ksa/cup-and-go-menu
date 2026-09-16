@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://i.ibb.co" crossorigin>
+  <link rel="dns-prefetch" href="//i.ibb.co">
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Black+Ops+One&family=Cairo:wght@400;700;900&family=Cormorant+Garamond:wght@600&family=Dancing+Script:wght@700&family=Fredoka+One&family=Great+Vibes&family=Inter:wght@400;600;700;900&family=Lobster&family=Monofett&family=Monoton&family=Orbitron:wght@700&family=Pacifico&family=Playfair+Display:ital,wght@1,700&family=Press+Start+2P&family=Rampart+One&family=Righteous&family=Six+Caps&family=Staatliches&family=Tourney:wght@900&family=VT323&family=Zen+Dots&display=swap" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -504,7 +506,7 @@
     function starText(value){const rounded=Math.round(Number(value)||0);return'★'.repeat(rounded)+'☆'.repeat(5-rounded)}
     function merchTags(p){const tags=[];if(p.isNew)tags.push(`<span class="merch-tag new">${isArabic?'جديد':'NEW'}</span>`);if(p.isOffer)tags.push(`<span class="merch-tag offer">${isArabic?'عرض':'OFFER'}</span>`);if(p.isPopular)tags.push(`<span class="merch-tag popular">★ ${isArabic?'الأكثر طلباً':'POPULAR'}</span>`);return tags.length?`<span class="merch-tags">${tags.join('')}</span>`:''}
     function ratingRow(p){const info=ratingInfo(p);return`<div class="premium-row"><div class="rating-readout"><span class="rating-stars">${starText(info.average)}</span>${info.count?`<span class="rating-average">${info.average.toFixed(1)}</span>`:''}</div>${p.isPopular?`<span class="premium-badge">✦ ${isArabic?'مميز':'Premium'}</span>`:''}</div>`}
-    function card(p){const id=encodeURIComponent(String(p.id??p.name??'')),name=nameOf(p),desc=descOf(p),hasImage=p.icon&&String(p.icon).length>15,sold=!!(p.customerUnavailable||p.soldOut);return `<article class="item-card ${p.isPopular?'premium-item':''}"><button class="item-image-btn" type="button" onclick="openPreview('${id}')" aria-label="${esc(name)}">${hasImage?`<img class="item-image" src="${esc(p.icon)}" alt="${esc(name)}" loading="lazy" decoding="async">`:`<span class="item-fallback">${esc(p.icon||'☕')}</span>`}${merchTags(p)}<span class="zoom-badge">⌕</span></button><div class="item-info"><div class="item-name">${esc(name)}</div>${desc?`<div class="item-desc">${esc(desc)}</div>`:''}${ratingRow(p)}<div class="item-bottom"><div class="item-price">${Number(p.price||0).toFixed(2)} ﷼</div>${sold?`<span class="badge sold">${isArabic?'نفد مؤقتاً':'SOLD OUT'}</span>`:''}</div></div></article>`}
+    function card(p){const id=encodeURIComponent(String(p.id??p.name??'')),name=nameOf(p),desc=descOf(p),hasImage=p.icon&&String(p.icon).length>15,sold=!!(p.customerUnavailable||p.soldOut);return `<article class="item-card ${p.isPopular?'premium-item':''}"><button class="item-image-btn" type="button" onclick="openPreview('${id}')" aria-label="${esc(name)}">${hasImage?`<img class="item-image lazy-product-image" data-src="${esc(p.icon)}" alt="${esc(name)}" loading="lazy" decoding="async" fetchpriority="low">`:`<span class="item-fallback">${esc(p.icon||'☕')}</span>`}${merchTags(p)}<span class="zoom-badge">⌕</span></button><div class="item-info"><div class="item-name">${esc(name)}</div>${desc?`<div class="item-desc">${esc(desc)}</div>`:''}${ratingRow(p)}<div class="item-bottom"><div class="item-price">${Number(p.price||0).toFixed(2)} ﷼</div>${sold?`<span class="badge sold">${isArabic?'نفد مؤقتاً':'SOLD OUT'}</span>`:''}</div></div></article>`}
     function renderMenu(){const grid=document.getElementById('menuGrid');if(!productsLoaded){grid.innerHTML='<div class="menu-skeleton" aria-label="Loading menu"><div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-lines"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div></div>';return}if(!products.length){grid.innerHTML=`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`;return}if(activeCategory!=='all'){const list=products.filter(p=>productCategory(p)===activeCategory);grid.innerHTML=list.length?list.map(card).join(''):`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`;return}const cats=allMenuCategories();let html='';cats.forEach(c=>{const list=products.filter(p=>productCategory(p)===c);if(list.length)html+=`<h3 class="category-title">${esc(categoryName(c))}</h3>${list.map(card).join('')}`});grid.innerHTML=html||`<div class="empty">${isArabic?text.ar.empty:text.en.empty}</div>`}
     function renderPreviewRating(p){const box=document.getElementById('previewRating');if(!box||!p)return;const info=ratingInfo(p),rated=info.my>=1;box.innerHTML=`<div class="preview-rating-title">${rated?(isArabic?'تم حفظ تقييمك ولا يمكن تغييره':'Your rating is saved and cannot be changed'):(isArabic?'قيّم هذا المنتج':'Rate this item')}</div><div class="rating-buttons">${[1,2,3,4,5].map(n=>`<button class="rating-button ${n<=info.my?'active':''}" type="button" onclick="ratePreview(${n})" aria-label="${n} ${isArabic?'نجوم':'stars'}" ${rated?'disabled aria-disabled="true"':''}>★</button>`).join('')}</div>`}
     async function ratePreview(stars){const p=products.find(x=>String(x.id??x.name??'')===currentPreviewId);if(!p)return;const info=ratingInfo(p);if(info.my>=1){showStatus(isArabic?'تم حفظ تقييمك مسبقاً ولا يمكن تغييره':'Your rating is already saved and cannot be changed');return}const safeStars=Math.max(1,Math.min(5,Number(stars)||0)),voteRef=db.ref(`/menuRatings/${ratingKey(p)}/votes/${ratingDeviceId}`);try{const result=await voteRef.transaction(current=>current===null?{stars:safeStars,updatedAt:firebase.database.ServerValue.TIMESTAMP}:undefined);if(result.committed)showStatus(isArabic?'شكراً، تم حفظ تقييمك':'Thank you, your rating has been saved');else showStatus(isArabic?'تم حفظ تقييمك مسبقاً ولا يمكن تغييره':'Your rating is already saved and cannot be changed')}catch(e){showStatus(isArabic?'تعذر حفظ التقييم':'Could not save rating')}}
@@ -527,15 +529,22 @@
 </style>
 <script id="cng-fast-menu-images-script">
 (function(){
-  const selector='img.admin-product-img,img.item-img,img.item-image';
+  const selector='img.lazy-product-image';
+  const loadImage=(img,priority=false)=>{
+    if(!img||img.src||!img.dataset.src)return;
+    img.loading=priority?'eager':'lazy';img.decoding='async';img.setAttribute('fetchpriority',priority?'high':'low');
+    img.src=img.dataset.src;img.removeAttribute('data-src');
+  };
+  const observer='IntersectionObserver'in window?new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;loadImage(entry.target);observer.unobserve(entry.target)})},{root:null,rootMargin:'320px 0px',threshold:.01}):null;
+  let fallbackTick=0;const checkFallback=()=>{fallbackTick=0;document.querySelectorAll(`${selector}[data-src]`).forEach(img=>{const r=img.getBoundingClientRect();if(r.top<innerHeight+320&&r.bottom>-320)loadImage(img)})};const queueFallback=()=>{if(!fallbackTick)fallbackTick=requestAnimationFrame(checkFallback)};
   function prepare(){
     document.querySelectorAll(selector).forEach((img,index)=>{
       if(img.dataset.cngPrepared)return;img.dataset.cngPrepared='1';
-      const first=index<6;img.loading=first?'eager':'lazy';img.decoding='async';img.setAttribute('fetchpriority',first?'high':'low');
       const box=img.parentElement;if(box){box.classList.add('cng-img-loading');const done=()=>{box.classList.remove('cng-img-loading');box.classList.add('cng-img-loaded')};if(img.complete)done();else{img.addEventListener('load',done,{once:true});img.addEventListener('error',done,{once:true})}}
+      if(index<2)loadImage(img,true);else if(observer)observer.observe(img);else queueFallback();
     });
   }
-  document.addEventListener('DOMContentLoaded',()=>{prepare();new MutationObserver(prepare).observe(document.body,{childList:true,subtree:true})});
+  document.addEventListener('DOMContentLoaded',()=>{prepare();new MutationObserver(prepare).observe(document.body,{childList:true,subtree:true});if(!observer){addEventListener('scroll',queueFallback,{passive:true});addEventListener('resize',queueFallback,{passive:true});queueFallback()}});
 })();
 </script>
 </body>
