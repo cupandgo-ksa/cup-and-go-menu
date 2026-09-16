@@ -330,7 +330,7 @@
     const SETTINGS_CACHE='cng_full_menu_settings_v1',PRODUCTS_CACHE='cng_full_menu_products_v1';
     let cachedProducts=null,cachedSettings={};try{const c=JSON.parse(localStorage.getItem(PRODUCTS_CACHE)||'null');if(Array.isArray(c))cachedProducts=c}catch(e){}try{cachedSettings=JSON.parse(localStorage.getItem(SETTINGS_CACHE)||'{}')||{}}catch(e){cachedSettings={}}
     const savedLanguage=localStorage.getItem('cng_lang');
-    let products=cachedProducts||[],productsLoaded=Array.isArray(cachedProducts),settings=cachedSettings,adminCategories=Array.isArray(cachedSettings.categories)?cachedSettings.categories:[],activeCategory='all',isArabic=savedLanguage!=='en',slides=[],slideIndex=0,sliderTimer=null,introStartedAt=Date.now(),introHidden=false,promoShown=false,promoTimer=null,promoDataPromise=null,promoWarmPromise=null,menuRatings={},currentPreviewId='',lockedScrollY=0,pageScrollLocked=false,lastBackAt=0,backGuardReady=false;
+    let products=cachedProducts||[],productsLoaded=Array.isArray(cachedProducts),settings=cachedSettings,adminCategories=Array.isArray(cachedSettings.categories)?cachedSettings.categories:[],activeCategory='all',isArabic=savedLanguage!=='en',slides=[],slideIndex=0,sliderTimer=null,introStartedAt=Date.now(),introHidden=false,promoShown=false,promoTimer=null,promoDataPromise=null,promoWarmPromise=null,menuRatings={},currentPreviewId='',lockedScrollY=0,pageScrollLocked=false,lastBackAt=0,backGuardReady=false,previousInlineScrollBehavior='',scrollRestoreToken=0;
     let ratingDeviceId=localStorage.getItem('cng_rating_device');if(!ratingDeviceId){ratingDeviceId='d_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,10);localStorage.setItem('cng_rating_device',ratingDeviceId)}
     const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     const catAr={Coffee:'قهوة',Sweet:'حلويات','Coffee Box':'بوكس القهوة','Sweet Box':'بوكس الحلويات','Cold Drink':'مشروبات باردة','Cold Drinks':'مشروبات باردة','Special Offer':'العروض الخاصة',Tea:'شاي',Matcha:'ماتشا',Breakfast:'فطور',Dessert:'حلويات',Offers:'العروض',Other:'أخرى'};
@@ -442,14 +442,14 @@
     }
     function lockPageScroll(){
       if(pageScrollLocked)return;pageScrollLocked=true;lockedScrollY=Math.max(0,window.scrollY||document.documentElement.scrollTop||0);
-      document.documentElement.style.overflow='hidden';document.documentElement.style.overscrollBehavior='none';
+      scrollRestoreToken++;previousInlineScrollBehavior=document.documentElement.style.scrollBehavior;document.documentElement.style.scrollBehavior='auto';document.documentElement.style.overflow='hidden';document.documentElement.style.overscrollBehavior='none';
       Object.assign(document.body.style,{position:'fixed',top:`-${lockedScrollY}px`,left:'0',right:'0',width:'100%',overflow:'hidden',touchAction:'none'});
     }
     function unlockPageScroll(){
       if(!pageScrollLocked)return;pageScrollLocked=false;
-      document.documentElement.style.overflow='';document.documentElement.style.overscrollBehavior='';
+      const targetY=lockedScrollY,token=++scrollRestoreToken;document.documentElement.style.scrollBehavior='auto';document.documentElement.style.overflow='';document.documentElement.style.overscrollBehavior='';
       Object.assign(document.body.style,{position:'',top:'',left:'',right:'',width:'',overflow:'',touchAction:''});
-      window.scrollTo(0,lockedScrollY);
+      const restore=()=>{if(token!==scrollRestoreToken)return;window.scrollTo({top:targetY,left:0,behavior:'auto'})};restore();requestAnimationFrame(()=>{restore();requestAnimationFrame(()=>{restore();if(token===scrollRestoreToken)document.documentElement.style.scrollBehavior=previousInlineScrollBehavior})});setTimeout(restore,90);
     }
     function armBackGuard(){
       if(backGuardReady)return;try{history.replaceState({cngMenuRoot:true},document.title,location.href);history.pushState({cngMenuGuard:true},document.title,location.href);backGuardReady=true}catch(e){}
