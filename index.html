@@ -567,7 +567,7 @@
 (function(){
   const selector='img.lazy-product-image';
   const appleMobile=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-  const eagerCount=appleMobile?1:2,nearbyMargin=appleMobile?'140px 0px':'320px 0px';
+  const eagerCount=2,nearbyMargin=appleMobile?'140px 0px':'320px 0px';
   const loadImage=(img,priority=false)=>{
     if(!img||img.src||!img.dataset.src)return;
     img.loading=priority?'eager':'lazy';img.decoding='async';img.setAttribute('fetchpriority',priority?'high':'low');
@@ -578,8 +578,9 @@
   function prepare(){
     document.querySelectorAll(selector).forEach((img,index)=>{
       if(img.dataset.cngPrepared)return;img.dataset.cngPrepared='1';
+      const priority=index<eagerCount;img.loading=priority?'eager':'lazy';img.decoding='async';img.setAttribute('fetchpriority',priority?'high':'low');
       const box=img.parentElement;if(box){box.classList.add('cng-img-loading');const done=()=>{box.classList.remove('cng-img-loading');box.classList.add('cng-img-loaded')};if(img.complete&&img.naturalWidth>0)done();else{img.addEventListener('load',done,{once:true});img.addEventListener('error',done,{once:true})}}
-      if(index<eagerCount)loadImage(img,true);else if(observer)observer.observe(img);else queueFallback();
+      if(priority)loadImage(img,true);else if(observer)observer.observe(img);else queueFallback();
     });
   }
   document.addEventListener('DOMContentLoaded',()=>{prepare();new MutationObserver(prepare).observe(document.body,{childList:true,subtree:true});if(!observer){addEventListener('scroll',queueFallback,{passive:true});addEventListener('resize',queueFallback,{passive:true});queueFallback()}});
