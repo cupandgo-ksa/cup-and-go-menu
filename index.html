@@ -693,6 +693,7 @@
     var code=answerLanguage(query),c=copy[code],q=latin(query).toLowerCase().trim(),list=availableProducts();panel.dir=code==='ar'?'rtl':'ltr';renderQuick(code);if(isLocationQuestion(query)){showLocation(query);return}if(isShopQuestion(query)){addMessage(shopReply(query),'bot');return}if(!list.length){addMessage(c.noProducts,'bot');return}
     if(/^(hi|hello|hey|السلام|سلام|مرحبا|هلا|হাই|হ্যালো|সালাম)/i.test(q)){addMessage(code==='bn'?'হ্যালো 👋 কী চান—কফি, ঠান্ডা পানীয়, মিষ্টি, বক্স নাকি অফার?':(code==='ar'?'هلا والله 👋 وش تحب؟ قهوة، مشروب بارد، حلى، بوكس أو عرض؟':'Hello 👋 What would you like: coffee, a cold drink, sweets, a box, or an offer?'),'bot');return}
     if(/(sugar[- ]?free|without sugar|less sugar|decaf|caffeine|calories|allerg|lactose|بدون سكر|قليل السكر|منزوع الكافيين|كافيين|سعرات|حساسية|لاكتوز)/i.test(q)){addMessage(code==='ar'?'معلومات السكر والكافيين والحساسية غير مسجلة في القائمة، عشان ما أعطيك معلومة غلط اسأل الكاشير قبل الطلب.':'Sugar, caffeine, and allergy details are not stored in the menu. Please ask the cashier so I do not give you incorrect information.','bot');return}
+    if(/(cheapest|lowest price|low price|cheap|أرخص|ارخص|أقل سعر|اقل سعر|رخيص|সবচেয়ে কম|সবচেয়ে কম|সর্বনিম্ন|কম দাম|কম দামে|সস্তা)/i.test(q)&&!/\d+(?:\.\d+)?/.test(q)){var low=list.filter(function(p){return Number(p.price||0)>0}).sort(function(a,b){return Number(a.price||0)-Number(b.price||0)});if(low.length){var min=Number(low[0].price||0),near=low.filter(function(p){return Number(p.price||0)<=min+3}).slice(0,5),txt=code==='bn'?'কম দামের কয়েকটা ভালো অপশন দেখুন — সবচেয়ে কম দাম '+money(min,code)+' SAR থেকে শুরু:':(code==='ar'?'هذي بعض الخيارات الأرخص عندنا — الأسعار تبدأ من '+money(min,code)+' ﷼:':'Here are some of our lower-priced options — starting from '+money(min,code)+' SAR:');renderItems(near,txt,code,5);return}}
     if(/(what do you have|what services|available services|show.*menu|menu categories|وش عندكم|ايش عندكم|إيش عندكم|وش الخدمات|ايش الخدمات|إيش الخدمات|الخدمات المتوفرة|ماذا تقدمون|القائمة|المنيو|কি আছে|কি কি আছে|মেনু|মেনুতে কি)/i.test(q)&&!/(coffee|قهوة|sweet|حلو|حلى|حلويات|box|بوكس|offer|عرض|drink|مشروب|কফি|মিষ্টি|বক্স|অফার|পানীয়|পানীয়)/i.test(q)){addMessage(code==='bn'?'স্বাগতম ✨ আমাদের গরম ও ঠান্ডা কফি, ঠান্ডা পানীয়, মিষ্টি, শেয়ারিং বক্স এবং বিশেষ অফার আছে। নিচের বিভাগ থেকে বেছে নিন।':(code==='ar'?'هلا والله ✨ عندنا قهوة حارة وباردة، مشروبات باردة، حلويات، بوكسات للمشاركة وعروض خاصة. اختر القسم اللي يعجبك من الأزرار تحت، وأنا أساعدك تختار الأنسب.':'Welcome ✨ We offer hot and cold coffee, cold drinks, sweets, sharing boxes, and special offers. Choose a section below and I will help you find the best option.'),'bot');return}
     var named=namedProduct(q,list,code);if(named){renderItems([named],code==='bn'?'অবশ্যই ✨ আপনি যে আইটেমটি জানতে চেয়েছেন সেটি এখানে। দাম ও বর্ণনা দেখুন, চাপলে মেনুতে আইটেমটির জায়গায় যাবে:':(code==='ar'?'أكيد ✨ هذا هو الصنف الذي سألت عنه. ستجد تحته الوصف والسعر، واضغط عليه للانتقال إلى مكانه في القائمة:':'Of course ✨ Here is the item you asked about, with its description and price. Tap it to find it in the menu:'),code,1);return}
     var budget=null,budgetCue=/(under|below|within|less than|budget|max|up to|sar|riyal|ريال|أقل|اقل|تحت|حدود|ميزانية|بحدود|টাকার?\s*(?:ভিতরে|মধ্যে)|(?:ভিতরে|মধ্যে|কম|নিচে)|বাজেট|রিয়াল|রিয়াল|সার)/i.test(q),number=q.match(/\d+(?:\.\d+)?/);if(budgetCue&&number)budget=Number(number[0]);
@@ -723,9 +724,27 @@
     var code=answerLanguage(query),list=availableProducts(),groups=kind==='food'?['sweet','sweetBox','offer']:['coffee','coldDrink','coffeeBox','offer'],labels={ar:{sweet:'🍰 الحلويات',sweetBox:'🍫 بوكسات الحلويات',offer:'🔥 العروض الخاصة',coffee:'☕ القهوة',coldDrink:'🧊 المشروبات الباردة',coffeeBox:'📦 بوكسات القهوة'},en:{sweet:'🍰 Sweets',sweetBox:'🍫 Sweet Boxes',offer:'🔥 Special Offers',coffee:'☕ Coffee',coldDrink:'🧊 Cold Drinks',coffeeBox:'📦 Coffee Boxes'},bn:{sweet:'🍰 মিষ্টি',sweetBox:'🍫 মিষ্টির বক্স',offer:'🔥 বিশেষ অফার',coffee:'☕ কফি',coldDrink:'🧊 ঠান্ডা পানীয়',coffeeBox:'📦 কফি বক্স'}};
     panel.dir=code==='ar'?'rtl':'ltr';renderQuick(code);if(!list.length){addMessage(copy[code].noProducts,'bot');return}addMessage(kind==='food'?(code==='bn'?'অবশ্যই ✨ আমাদের সব খাবারের অপশন বিভাগ অনুযায়ী নিচে দেওয়া হলো:':(code==='ar'?'أكيد ✨ هذي جميع خيارات الأكل المتوفرة عندنا، مرتبة حسب القسم:':'Of course ✨ Here are all available food choices, grouped by category:')):(code==='bn'?'অবশ্যই ✨ আমাদের সব পানীয়ের অপশন বিভাগ অনুযায়ী নিচে দেওয়া হলো:':(code==='ar'?'أكيد ✨ هذي جميع خيارات المشروبات المتوفرة عندنا، مرتبة حسب القسم:':'Of course ✨ Here are all available drinks, grouped by category:')),'bot');var shown=0;groups.forEach(function(key){var items=list.filter(function(p){return categoryKey(p)===key});if(items.length){shown+=items.length;renderItems(items,labels[code][key],code,items.length)}});if(!shown)addMessage(code==='bn'?'এই বিভাগে এখন কোনো আইটেম পাওয়া যাচ্ছে না।':(code==='ar'?'حالياً ما فيه أصناف متوفرة في هذا القسم.':'There are currently no available items in this section.'),'bot')
   }
+  function normalizeAIData(data){
+    if(!data)return null;
+    var reply=String(data.reply||'').trim(),ids=Array.isArray(data.itemIds)?data.itemIds.slice():[];
+    for(var pass=0;pass<2;pass++){
+      var cleaned=reply.replace(/^\`\`\`json\s*/i,'').replace(/^\`\`\`\s*/i,'').replace(/\s*\`\`\`$/,'').trim(),parsed=null;
+      try{parsed=JSON.parse(cleaned)}catch(e){
+        var m=cleaned.match(/["']reply["']\s*:\s*"((?:\\.|[^"\\])*)"/s);
+        if(m){try{reply=JSON.parse('"'+m[1]+'"')}catch(_){reply=m[1]}}
+        break
+      }
+      if(parsed&&typeof parsed==='object'&&!Array.isArray(parsed)){
+        if(Array.isArray(parsed.itemIds)&&!ids.length)ids=parsed.itemIds.slice();
+        if(typeof parsed.reply==='string'){reply=parsed.reply.trim();continue}
+      }
+      break
+    }
+    return{reply:reply,itemIds:ids}
+  }
   async function askAI(query){
     var list=availableProducts(),code=answerLanguage(query);if(!list.length)throw new Error('Menu is empty');
-    activeController=new AbortController();var timeout=setTimeout(function(){activeController&&activeController.abort()},15000);
+    activeController=new AbortController();var timeout=setTimeout(function(){activeController&&activeController.abort()},18000);
     try{
       var workerLanguage=code==='bn'?'en':code;
       var languageInstruction=code==='bn'?'IMPORTANT: The customer wrote in Bengali. Reply fully in natural Bengali (Bangla), even though the transport language field is English. ':code==='ar'?'Reply naturally in Arabic. ':'Reply naturally in English. ';
@@ -743,9 +762,15 @@
         mode:'natural-conversation',
         style:'Friendly, natural Cup And Go coffee-shop assistant. Reply in the same language as the customer. You may answer questions about Cup And Go and its official website using the verified business facts included in the question. If asked for the shop location, map, address or directions, provide the verified Google Maps link exactly as supplied. Do not invent any extra address detail. Use only the supplied live menu for product names, prices, availability and offers. If another shop detail is not provided, say you do not have it instead of guessing. Be conversational, helpful and concise, not robotic.'
       };
-      var response=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},signal:activeController.signal,body:JSON.stringify(payload)});
-      if(!response.ok&&response.status>=500){await new Promise(function(r){setTimeout(r,650)});response=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},signal:activeController.signal,body:JSON.stringify(payload)})}
-      if(!response.ok)throw new Error('AI '+response.status);var data=await response.json();if(!data||!String(data.reply||'').trim())throw new Error('Empty AI reply');
+      var response=null;
+      for(var attempt=0;attempt<3;attempt++){
+        response=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},signal:activeController.signal,body:JSON.stringify(payload)});
+        if(response.ok)break;
+        if(!(response.status===429||response.status>=500))break;
+        if(attempt<2)await new Promise(function(r){setTimeout(r,700+attempt*500)})
+      }
+      if(!response||!response.ok)throw new Error('AI '+(response?response.status:'network'));
+      var raw=await response.json(),data=normalizeAIData(raw);if(!data||!String(data.reply||'').trim())throw new Error('Empty AI reply');
       var byId={};list.forEach(function(p){byId[productId(p)]=p});var items=Array.isArray(data.itemIds)?data.itemIds.map(function(id){return byId[String(id)]}).filter(Boolean).slice(0,5):[];
       addMessage(String(data.reply).trim(),'bot');if(items.length)renderItems(items,'',code,5)
     }finally{clearTimeout(timeout);activeController=null}
