@@ -718,9 +718,15 @@
   }
   async function askAI(query){
     var list=availableProducts(),code=answerLanguage(query);if(!list.length)throw new Error('Menu is empty');
-    activeController=new AbortController();var timeout=setTimeout(function(){activeController&&activeController.abort()},8000);
+    activeController=new AbortController();var timeout=setTimeout(function(){activeController&&activeController.abort()},12000);
     try{
-      var response=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},signal:activeController.signal,body:JSON.stringify({question:query,language:code,menu:aiMenu()})});
+      var response=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},signal:activeController.signal,body:JSON.stringify({
+        question:query,
+        language:code,
+        menu:aiMenu(),
+        mode:'natural-conversation',
+        style:'Friendly, natural Cup And Go coffee-shop assistant. Reply in the same language as the customer. Use only the supplied live menu for product names, prices and offers. Be conversational, helpful and concise, not robotic.'
+      })});
       if(!response.ok)throw new Error('AI '+response.status);var data=await response.json();if(!data||!String(data.reply||'').trim())throw new Error('Empty AI reply');
       var byId={};list.forEach(function(p){byId[productId(p)]=p});var items=Array.isArray(data.itemIds)?data.itemIds.map(function(id){return byId[String(id)]}).filter(Boolean).slice(0,5):[];
       addMessage(String(data.reply).trim(),'bot');if(items.length)renderItems(items,'',code,5)
@@ -728,7 +734,7 @@
   }
   function clearConversation(){clearTimeout(clearTimer);clearTimeout(replyTimer);if(activeController)activeController.abort();clearTimer=null;replyTimer=null;activeController=null;replying=false;sendButton.disabled=false;log.innerHTML='';input.value='';if(overlay.classList.contains('show')){started=true;addMessage(t().welcome,'bot')}else started=false}
   function resetExpiry(){clearTimeout(clearTimer);clearTimer=setTimeout(clearConversation,CHAT_TTL)}
-  async function ask(value){var q=String(value||'').trim();if(!q||replying)return;addMessage(q,'user');input.value='';replying=true;sendButton.disabled=true;var typing=addTyping(),delay=Math.min(1900,1200+q.length*12),minimum=new Promise(function(resolve){replyTimer=setTimeout(resolve,delay)});try{var kind=catalogKind(q);if(isBudgetQuestion(q)||isPriceQuestion(q)||isOfferQuestion(q)){await minimum;classify(q)}else if(kind){await minimum;showCatalog(kind,q)}else{var result=askAI(q);await minimum;await result}}catch(error){if(error&&error.name!=='AbortError')console.warn('Assistant fallback:',error.message||error);classify(q)}finally{typing.remove();replying=false;sendButton.disabled=false;replyTimer=null;resetExpiry()}}
+  async function ask(value){var q=String(value||'').trim();if(!q||replying)return;addMessage(q,'user');input.value='';replying=true;sendButton.disabled=true;var typing=addTyping(),delay=Math.min(1600,850+q.length*9),minimum=new Promise(function(resolve){replyTimer=setTimeout(resolve,delay)});try{var result=askAI(q);await minimum;await result}catch(error){if(error&&error.name!=='AbortError')console.warn('Assistant fallback:',error.message||error);var kind=catalogKind(q);if(kind)showCatalog(kind,q);else classify(q)}finally{typing.remove();replying=false;sendButton.disabled=false;replyTimer=null;resetExpiry()}}
   function renderQuick(code){quick.innerHTML='';copy[code].quick.forEach(function(label){var b=document.createElement('button');b.type='button';b.className='cng-assistant-chip';b.textContent=label;b.setAttribute('data-query',label);quick.appendChild(b)})}
   function syncLanguage(){var c=t();el('cngAssistantLauncherText').textContent=c.launch;el('cngAssistantTitle').textContent=c.title;el('cngAssistantSubtitle').textContent=c.sub;el('cngAssistantClose').setAttribute('aria-label',c.close);input.placeholder=c.placeholder;el('cngAssistantSend').textContent=c.send;panel.dir=lang()==='ar'?'rtl':'ltr';renderQuick(lang());if(started){log.innerHTML='';addMessage(c.welcome,'bot')}}
   function openAssistant(){overlay.classList.add('show');overlay.setAttribute('aria-hidden','false');if(!started){started=true;addMessage(t().welcome,'bot')}resetExpiry();setTimeout(function(){input.focus()},120)}function closeAssistant(){overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true');launcher.focus()}
