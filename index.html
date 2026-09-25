@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <!-- Cup And Go SEO START -->
-  <title>قائمة كوب أند جو | Cup And Go Menu | السعودية</title>
-  <meta name="description" content="قائمة كوب أند جو في السعودية | Cup And Go Menu — قهوة، V60، ماتشا، كركديه، حلويات، الأسعار والعروض الحالية.">
+  <title>منيو كوب أند جو | قائمة Cup And Go | السعودية</title>
+  <meta name="description" content="منيو كوب أند جو في السعودية | قائمة Cup And Go — قهوة اليوم، V60، ماتشا، كركديه، حلويات، الأسعار والعروض الحالية.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="application-name" content="Cup And Go">
@@ -13,22 +13,24 @@
   <link rel="canonical" href="https://cupandgoksa.com/menu/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Cup And Go">
-  <meta property="og:title" content="قائمة كوب أند جو | Cup And Go Menu">
-  <meta property="og:description" content="شاهد قائمة كوب أند جو: القهوة وV60 والماتشا والكركديه والحلويات والأسعار والعروض الحالية.">
+  <meta property="og:title" content="منيو كوب أند جو | Cup And Go Menu">
+  <meta property="og:description" content="شاهد منيو وقائمة كوب أند جو: قهوة اليوم وV60 والماتشا والكركديه والحلويات والأسعار والعروض الحالية.">
   <meta property="og:url" content="https://cupandgoksa.com/menu/">
   <meta property="og:locale" content="ar_SA">
   <meta property="og:locale:alternate" content="en_US">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="قائمة كوب أند جو | Cup And Go Menu">
-  <meta name="twitter:description" content="قائمة كوب أند جو في السعودية — الأصناف والأسعار والعروض الحالية.">
+  <meta name="twitter:title" content="منيو كوب أند جو | Cup And Go Menu">
+  <meta name="twitter:description" content="منيو كوب أند جو في السعودية — الأصناف والأسعار والعروض الحالية.">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Menu",
   "@id": "https://cupandgoksa.com/menu/#menu",
-  "name": "قائمة كوب أند جو | Cup And Go Menu",
+  "name": "منيو كوب أند جو | Cup And Go Menu",
   "alternateName": [
+    "قائمة كوب أند جو",
     "قائمة كوب آند جو",
+    "منيو كوب آند جو",
     "Cup And Go KSA Menu"
   ],
   "url": "https://cupandgoksa.com/menu/",
@@ -367,7 +369,7 @@
   <main class="app-shell content">
     <section id="signboard" class="signboard" aria-label="لوحة المتجر"><div class="led-window"><span id="ledText" class="led-text">☕ مرحباً بكم في كوب أند جو ☕</span></div></section>
     <section id="slider" class="slider" aria-label="العروض"><div id="sliderTrack" class="slider-track"></div><div id="sliderDots" class="dots"></div></section>
-    <div class="menu-head"><div><h2 id="menuTitle">القائمة الكاملة</h2><p id="menuSub">قهوة، V60، ماتشا، كركديه، حلويات وعروض كوب أند جو</p></div></div>
+    <div class="menu-head"><div><h2 id="menuTitle">منيو كوب أند جو</h2><p id="menuSub">قهوة، V60، ماتشا، كركديه، حلويات وعروض كوب أند جو</p></div></div>
     <nav id="categories" class="categories" aria-label="فئات القائمة"></nav>
     <section id="menuGrid" class="menu-grid"><div class="loading">جاري تحميل القائمة…</div></section>
     <footer id="menuFooter" class="footer">© كوب أند جو · المملكة العربية السعودية</footer>
@@ -463,7 +465,7 @@
       'termisu coffee day small':'A special offer with delicious tiramisu and a small Coffee Day.',
       'cake caramel coffee day small':'A special offer with delicious caramel cake and a small Coffee Day.'
     };
-    const text={en:{menu:'Full Menu',sub:'Coffee, V60, matcha, hibiscus, desserts and offers',all:'All Items',loading:'Loading menu…',empty:'No menu items found.',offline:'Connection unavailable — retrying…',lang:'عربي'},ar:{menu:'القائمة الكاملة',sub:'قهوة، V60، ماتشا، كركديه، حلويات وعروض كوب أند جو',all:'جميع الأصناف',loading:'جاري تحميل القائمة…',empty:'لا توجد أصناف في القائمة.',offline:'الاتصال غير متاح — جاري إعادة المحاولة…',lang:'English'}};
+    const text={en:{menu:'Cup And Go Menu',sub:'Coffee, V60, matcha, hibiscus, desserts and offers',all:'All Items',loading:'Loading menu…',empty:'No menu items found.',offline:'Connection unavailable — retrying…',lang:'عربي'},ar:{menu:'منيو كوب أند جو',sub:'قهوة اليوم، V60، ماتشا، كركديه، حلويات وعروض كوب أند جو',all:'جميع الأصناف',loading:'جاري تحميل القائمة…',empty:'لا توجد أصناف في القائمة.',offline:'الاتصال غير متاح — جاري إعادة المحاولة…',lang:'English'}};
     const hasArabic=value=>/[\u0600-\u06ff]/.test(String(value||''));
     function matchedProductKey(p){const key=normalizeProductKey(p?.name||p?.nameEn);if(arabicProducts[key])return key;const tokenKey=productTokenKey(key);return Object.keys(arabicProducts).find(candidate=>productTokenKey(candidate)===tokenKey)||key}
     function arabicProductOf(p){return arabicProducts[matchedProductKey(p)]||null}
@@ -473,7 +475,7 @@
     function updateClock(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString(isArabic?'ar-SA':'en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});const h=d.getHours();document.getElementById('greeting').textContent=isArabic?(h<12?'صباح الخير ☀️':h<17?'مساء الخير 🌤️':'مساء النور 🌙'):(h<12?'Good Morning ☀️':h<17?'Good Afternoon 🌤️':h<21?'Good Evening 🌙':'Have a great night ☕')}
     function syncFixedHeaderHeight(){const header=document.querySelector('.header');if(!header)return;const height=Math.ceil(header.getBoundingClientRect().height);if(height>0)document.documentElement.style.setProperty('--cng-fixed-header-h',`${height}px`)}
     function updateLedLanguage(){const el=document.getElementById('ledText');if(!el)return;const raw=el.dataset.rawText||'☕ Welcome to Cup And Go ☕',plain=normalizeProductKey(raw);if(isArabic&&plain.includes('welcome to cup and go'))el.textContent='☕ مرحباً بكم في كوب أند جو ☕';else if(isArabic&&plain.includes('get 1 free')&&plain.includes('cup and go'))el.textContent='☕ احصل على كوب مجاني من كوب أند جو ☕';else el.textContent=raw}
-    function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'قائمة كوب أند جو | Cup And Go Menu | السعودية':'Cup And Go Menu | قائمة كوب أند جو | Saudi Arabia';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;document.getElementById('menuSub').textContent=t.sub;document.getElementById('shopName').textContent=isArabic?'كوب أند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب أند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب أند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu();requestAnimationFrame(syncFixedHeaderHeight)}
+    function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'منيو كوب أند جو | قائمة Cup And Go | السعودية':'Cup And Go Menu | منيو كوب أند جو | Saudi Arabia';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;document.getElementById('menuSub').textContent=t.sub;document.getElementById('shopName').textContent=isArabic?'كوب أند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب أند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب أند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu();requestAnimationFrame(syncFixedHeaderHeight)}
     function toggleLanguage(){isArabic=!isArabic;localStorage.setItem('cng_lang',isArabic?'ar':'en');applyLanguage()}
     function showStatus(message){const el=document.getElementById('status');el.textContent=message;el.classList.add('show');clearTimeout(showStatus.timer);showStatus.timer=setTimeout(()=>el.classList.remove('show'),2200)}
     async function loadMenuPromoData(){
