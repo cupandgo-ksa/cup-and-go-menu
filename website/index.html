@@ -16,6 +16,9 @@
 
 </style>
   <title>Cup And Go — Cinematic Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,600&family=Great+Vibes&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -199,6 +202,165 @@ if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.ser
   }catch(e){console.warn('Website live control unavailable',e);applyConfig({});}
 })();
 
+</script>
+<style id="cng-premium-orbit-v2">
+:root{--cng-orbit-accent:#e5c158;--cng-orbit-hero:#3b1119}
+.brand-mark{overflow:hidden;background:#fff;border-color:rgba(229,193,88,.62)!important;box-shadow:0 10px 26px rgba(0,0,0,.28)!important}
+.brand-mark img.cng-live-logo{width:100%;height:100%;object-fit:contain;display:block}
+.brand-copy b{font-family:'Great Vibes','Brush Script MT',cursive!important;font-size:clamp(27px,3.2vw,39px)!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;line-height:.95!important;color:#f0ca91!important;text-shadow:0 0 26px rgba(229,193,88,.16)}
+.brand-copy small{letter-spacing:.2em!important}
+.hero{background:radial-gradient(circle at 58% 45%,color-mix(in srgb,var(--cng-orbit-hero) 78%,#fff 22%) 0,var(--cng-orbit-hero) 30%,#07130e 75%)!important;transition:background .9s cubic-bezier(.22,1,.36,1)}
+.hero-grid{grid-template-columns:minmax(275px,.9fr) minmax(440px,1.35fr) minmax(220px,.62fr)!important;gap:clamp(14px,2vw,34px)!important}
+.hero-title{font-family:'Cormorant Garamond',Georgia,serif!important;line-height:.76!important;letter-spacing:-.055em!important}
+.hero-title span:last-child{color:var(--cng-orbit-accent)!important}
+.eyebrow span{background:var(--cng-orbit-accent)!important}
+.primary-btn{background:var(--cng-orbit-accent)!important;color:#100a0b!important}
+.stage{height:min(76svh,740px)!important;min-height:540px!important;perspective:1300px!important;isolation:isolate}
+.stage::before{width:78%!important;border-color:rgba(255,255,255,.09)!important;box-shadow:inset 0 0 90px rgba(0,0,0,.15),0 0 90px rgba(0,0,0,.12)!important}
+.stage::after{content:""!important;position:absolute!important;width:55%!important;aspect-ratio:1!important;border:1px dashed rgba(255,255,255,.13)!important;border-radius:50%!important;animation:cngOrbitSpin 28s linear infinite!important;z-index:1!important}
+@keyframes cngOrbitSpin{to{transform:rotate(360deg)}}
+.float-word{font-family:'Cormorant Garamond',Georgia,serif!important;font-style:italic!important;color:rgba(255,255,255,.06)!important;font-size:clamp(82px,10vw,165px)!important;z-index:0!important}
+.product-wrap{z-index:8!important;width:min(390px,56%)!important;height:73%!important;animation:cngHeroFloat 5.5s ease-in-out infinite!important;transition:.6s cubic-bezier(.22,1,.36,1)!important}
+@keyframes cngHeroFloat{50%{transform:translateY(-13px) rotateZ(1.2deg) rotateY(-2deg)}}
+.product-wrap .hero-product-image{max-width:100%!important;max-height:100%!important;filter:drop-shadow(0 34px 30px rgba(0,0,0,.38))!important;transition:.6s cubic-bezier(.16,1,.3,1)!important}
+.product-wrap.has-real-image .cup,.product-wrap.has-real-image .bean{opacity:0!important}
+.cng-orbit-shell{position:absolute;z-index:5;width:min(91%,660px);aspect-ratio:1;border-radius:50%;pointer-events:none}
+.cng-orbit-node{--a:0deg;--r:246px;position:absolute;left:50%;top:50%;width:82px;height:82px;margin:-41px;border-radius:50%;border:1px solid rgba(255,255,255,.17);background:rgba(7,19,14,.54);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:7px;pointer-events:auto;cursor:pointer;transform:rotate(var(--a)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a)));transition:transform .86s cubic-bezier(.22,1,.36,1),width .36s,height .36s,margin .36s,border-color .3s,background .3s,box-shadow .3s;box-shadow:0 14px 30px rgba(0,0,0,.22)}
+.cng-orbit-node img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 7px 10px rgba(0,0,0,.2));transition:.35s}
+.cng-orbit-node span{display:grid;place-items:center;width:100%;height:100%;font:600 11px/1.05 'Cormorant Garamond',serif;text-align:center}
+.cng-orbit-node.active{width:104px;height:104px;margin:-52px;border-color:var(--cng-orbit-accent);background:color-mix(in srgb,var(--cng-orbit-accent) 14%,rgba(7,19,14,.8));box-shadow:0 0 0 7px color-mix(in srgb,var(--cng-orbit-accent) 9%,transparent),0 23px 44px rgba(0,0,0,.35);z-index:7}
+.cng-orbit-node.active img{transform:scale(1.08)}
+.hero-side{border-left:1px solid rgba(255,255,255,.11)!important;padding-left:22px!important}
+.product-dots{gap:0!important}
+.product-dot.cng-side-choice{grid-template-columns:18px 1fr auto!important;gap:9px!important;padding:12px 0!important;border-bottom:1px solid rgba(255,255,255,.08)!important;opacity:.38!important}
+.product-dot.cng-side-choice.active{opacity:1!important}
+.product-dot.cng-side-choice i{width:6px!important;height:6px!important}
+.product-dot.cng-side-choice.active i{background:var(--cng-orbit-accent)!important;border-color:var(--cng-orbit-accent)!important;box-shadow:0 0 0 5px color-mix(in srgb,var(--cng-orbit-accent) 12%,transparent)!important}
+.product-dot.cng-side-choice span{font-size:9px!important;white-space:normal!important}
+.product-dot.cng-side-choice b{font-size:8px!important;color:#8f8588!important}
+.hero.cng-switching .product-wrap{opacity:.04!important;transform:translateY(36px) scale(.7) rotate(7deg)!important;filter:blur(9px)!important}
+.hero.cng-switching .hero-title,.hero.cng-switching .hero-desc{opacity:.18!important;transform:translateY(12px)!important;filter:blur(5px)!important}
+.hero-title,.hero-desc{transition:.35s ease!important}
+.cng-live-filters{display:flex;gap:8px;overflow:auto;scrollbar-width:none;padding:0 0 22px;margin-top:-22px}
+.cng-live-filters::-webkit-scrollbar{display:none}
+.cng-live-filter{white-space:nowrap;border:1px solid #d3ccc3;background:transparent;color:#544e49;border-radius:999px;padding:9px 13px;font-size:9px;font-weight:800;cursor:pointer}
+.cng-live-filter.active{background:#15110f;color:#fff;border-color:#15110f}
+.cards.cng-live-cards{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}
+.cng-live-card{background:#e6e0d8!important;border-radius:5px!important;overflow:hidden!important;cursor:pointer!important;transition:.42s cubic-bezier(.22,1,.36,1)!important;min-width:0!important}
+.cng-live-card:hover{transform:translateY(-9px)!important;box-shadow:0 24px 45px rgba(50,35,25,.12)!important}
+.cng-live-image{height:340px!important;position:relative!important;display:grid!important;place-items:center!important;padding:22px!important;background:linear-gradient(145deg,#eee9e3,#dbd3ca)!important;overflow:hidden!important}
+.cng-live-image::before{content:"";position:absolute;width:68%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.5);filter:blur(10px)}
+.cng-live-image img{position:relative;z-index:2;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 20px 22px rgba(53,33,24,.18));transition:.4s}
+.cng-live-card:hover .cng-live-image img{transform:scale(1.045) rotate(-1.2deg)}
+.cng-live-tags{position:absolute;left:11px;top:11px;z-index:4;display:flex;gap:5px;flex-wrap:wrap}
+.cng-live-tag{background:#15110f;color:#fff;border-radius:999px;padding:6px 8px;font-size:7px;letter-spacing:.08em}
+.cng-live-tag.offer{background:#9e2f3d}
+.cng-live-copy{padding:16px 15px 18px!important}
+.cng-live-copy h3{font:500 25px/1 'Cormorant Garamond',serif!important;margin:0 0 7px!important;color:#15110f!important}
+.cng-live-copy p{font:500 9px/1.55 Inter,Cairo,sans-serif!important;color:#6d6660!important;margin:0!important;min-height:42px!important}
+.cng-live-bottom{display:flex;justify-content:space-between;align-items:end;margin-top:16px}
+.cng-live-bottom small{font-size:7px;letter-spacing:.12em;color:#8a8179;text-transform:uppercase}
+.cng-live-price{font:600 19px 'Cormorant Garamond',serif;color:#15110f}
+.cng-loading{grid-column:1/-1;text-align:center;padding:54px 20px;color:#746b65;font:italic 24px 'Cormorant Garamond',serif}
+@media(max-width:1050px){.hero-grid{grid-template-columns:1fr 1.2fr!important}.hero-side{display:none!important}.cng-orbit-node{--r:205px}.cards.cng-live-cards{grid-template-columns:repeat(3,1fr)!important}}
+@media(max-width:720px){.brand-mark{width:42px!important;height:42px!important}.brand-copy b{font-size:30px!important}.hero-grid{display:flex!important;flex-direction:column!important;align-items:stretch!important;padding-top:100px!important}.hero-copy{order:1!important}.stage{order:2!important;height:45svh!important;min-height:340px!important;margin-top:-22px!important}.product-wrap{height:79%!important;width:47%!important;min-width:150px!important}.cng-orbit-shell{width:97%!important}.cng-orbit-node{--r:145px;width:59px;height:59px;margin:-29.5px;padding:5px}.cng-orbit-node.active{width:72px;height:72px;margin:-36px}.hero-desc{max-width:92%!important}.cards.cng-live-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}.cng-live-image{height:225px!important;padding:12px!important}.cng-live-copy{padding:12px!important}.cng-live-copy h3{font-size:20px!important}.cng-live-copy p{font-size:8px!important;min-height:36px!important}}
+@media(max-width:390px){.cng-orbit-node{--r:128px}.cng-live-image{height:190px!important}}
+</style>
+<script id="cng-premium-orbit-v2">
+(function(){
+  const cngDb=firebase.database();
+  const q=s=>document.querySelector(s), qa=s=>Array.from(document.querySelectorAll(s));
+  let cngSettings={},cngConfig={},cngProducts=[],cngFeatured=[],cngActive=0,cngTimer=null,cngCat='all',cngBusy=false;
+  const hero=q('.hero'),stage=q('.stage'),dots=q('#productDots'),cards=q('.cards');
+  if(!hero||!stage||!dots||!cards)return;
+  const orbit=document.createElement('div');orbit.className='cng-orbit-shell';stage.appendChild(orbit);
+  const filterBar=document.createElement('div');filterBar.className='cng-live-filters';cards.parentNode.insertBefore(filterBar,cards);
+  cards.classList.add('cng-live-cards');
+
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+  function idOf(p){return String(p&&(p.id!=null?p.id:(p.name||''))||'')}
+  function imageOf(p){return String(p&&(p.imageHD||p.imageHd||p.hdImage||p.icon||p.image)||'')}
+  function nameOf(p){const ar=document.documentElement.dir==='rtl';return ar?(p.nameAr||p.arName||p.name||''):(p.name||p.nameEn||p.nameAr||'')}
+  function descOf(p){const ar=document.documentElement.dir==='rtl';return ar?(p.descriptionAr||p.descAr||p.description||''):(p.description||p.desc||p.descriptionAr||'')}
+  function catOf(p){return String(p&&p.category||'Other').replace(/^\s*[^\p{L}\p{N}]+/u,'').trim()||'Other'}
+  function norm(v){return String(v||'').toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g,' ').trim()}
+  function menuUrl(){return cngConfig.menuUrl||'https://cupandgo-ksa.github.io/cup-and-go-menu/'}
+  function splitName(v){const w=String(v||'Cup And Go').trim().split(/\s+/);if(w.length<2)return[w[0]||'Cup',''];const n=Math.ceil(w.length/2);return[w.slice(0,n).join(' '),w.slice(n).join(' ')]}
+  function findProduct(s,i){
+    let p=null;
+    if(s&&s.productId)p=cngProducts.find(x=>idOf(x)===String(s.productId));
+    if(!p&&s){
+      const a=norm((s.top||'')+' '+(s.bottom||'')), first=norm(s.top||'');
+      p=cngProducts.find(x=>norm(x.name)===a||norm(x.nameAr||x.arName)===a);
+      if(!p&&first)p=cngProducts.find(x=>norm(x.name).includes(first)||norm(x.nameAr||x.arName).includes(first));
+    }
+    if(!p)p=cngProducts.filter(x=>imageOf(x))[i]||cngProducts[i]||null;
+    return p;
+  }
+  function buildFeatured(){
+    let slides=Array.isArray(cngConfig.slides)?cngConfig.slides.filter(Boolean).slice(0,6):[];
+    if(!slides.length)slides=cngProducts.filter(x=>imageOf(x)).slice(0,6).map(p=>({productId:idOf(p)}));
+    cngFeatured=slides.map((s,i)=>{
+      const p=findProduct(s,i), nm=p?nameOf(p):((s.top||'')+' '+(s.bottom||'')).trim(), parts=splitName(nm);
+      return{p:p,name:nm||'Cup And Go',parts:parts,image:s.imageUrl||imageOf(p),desc:p?descOf(p):(document.documentElement.dir==='rtl'?(s.arDesc||s.desc||''):(s.desc||s.arDesc||'')),cat:p?catOf(p):(s.type||'Signature'),temp:s.temp||(/hot/i.test(nm)?'HOT':'FRESH'),price:p?Number(p.price||0):0,hero:s.hero||['#381018','#4a2f1c','#31462a','#4d1725','#1f3c47','#4b3225'][i%6],accent:s.accent||['#e5c158','#ffc76a','#dff59b','#ff9eb5','#8fdcff','#efc595'][i%6],word:s.word||parts[0]||'CUP'};
+    });
+    if(!cngFeatured.length)cngFeatured=[{name:'Cup And Go',parts:['Cup And','Go'],image:'',desc:'Premium drinks, crafted for your moment.',cat:'Coffee',temp:'FRESH',price:0,hero:'#381018',accent:'#e5c158',word:'CUP AND GO'}];
+    cngActive=Math.min(cngActive,cngFeatured.length-1);
+    drawSelectors();applySelected(false);restart();
+  }
+  function relAngle(i){const n=Math.max(1,cngFeatured.length),step=360/n;let a=(i-cngActive)*step-90;while(a>180)a-=360;while(a<-180)a+=360;return a}
+  function radius(){return innerWidth<391?'128px':innerWidth<721?'145px':innerWidth<1051?'205px':'246px'}
+  function drawSelectors(){
+    orbit.innerHTML='';dots.innerHTML='';
+    cngFeatured.forEach((f,i)=>{
+      const b=document.createElement('button');b.className='cng-orbit-node'+(i===cngActive?' active':'');b.style.setProperty('--a',relAngle(i)+'deg');b.style.setProperty('--r',radius());b.setAttribute('aria-label',f.name);
+      b.innerHTML=f.image?'<img src="'+esc(f.image)+'" alt="" loading="'+(i<2?'eager':'lazy')+'" decoding="async">':'<span>'+esc(f.parts[0])+'</span>';
+      b.onclick=()=>select(i);orbit.appendChild(b);
+      const s=document.createElement('button');s.className='product-dot cng-side-choice'+(i===cngActive?' active':'');s.innerHTML='<i></i><span>'+esc(f.name)+'</span><b>'+String(i+1).padStart(2,'0')+'</b>';s.onclick=()=>select(i);dots.appendChild(s);
+    });
+  }
+  function applySelected(animate){
+    const f=cngFeatured[cngActive],parts=splitName(f.name);
+    document.documentElement.style.setProperty('--cng-orbit-hero',f.hero);document.documentElement.style.setProperty('--cng-orbit-accent',f.accent);
+    const top=q('#titleTop'),bottom=q('#titleBottom'),desc=q('#heroDesc'),word=q('#floatWord'),type=q('#sideType'),temp=q('#sideTemp'),kick=q('#kicker'),img=q('#heroProductImage'),wrap=q('#productWrap');
+    if(top)top.textContent=parts[0];if(bottom)bottom.textContent=parts[1];if(desc)desc.textContent=f.desc||'';if(word)word.textContent=f.word||parts[0];if(type)type.textContent=f.cat||'Signature';if(temp)temp.textContent=f.temp||'FRESH';if(kick)kick.textContent=String(cngActive+1).padStart(2,'0')+' / '+String(cngFeatured.length).padStart(2,'0');
+    if(img&&wrap){if(f.image){img.src=f.image;img.alt=f.name;img.hidden=false;wrap.classList.add('has-real-image')}else{img.removeAttribute('src');img.hidden=true;wrap.classList.remove('has-real-image')}}
+    drawSelectors();
+    if(animate){hero.classList.add('reveal');setTimeout(()=>hero.classList.remove('reveal'),720)}
+  }
+  function select(i){if(cngBusy||!cngFeatured.length)return;i=(i+cngFeatured.length)%cngFeatured.length;if(i===cngActive)return;cngBusy=true;hero.classList.add('cng-switching');setTimeout(()=>{cngActive=i;applySelected(true);hero.classList.remove('cng-switching');cngBusy=false;restart()},280)}
+  function restart(){clearInterval(cngTimer);if(cngFeatured.length>1)cngTimer=setInterval(()=>select(cngActive+1),Math.max(4200,Number(cngConfig.autoSlideMs)||6500))}
+  function applyBrand(){
+    const logo=cngSettings.shopLogo||'',name=cngSettings.shopName||cngConfig.brandName||'Cup And Go',mark=q('.brand-mark'),copy=q('.brand-copy b');
+    if(mark){let im=mark.querySelector('.cng-live-logo');if(!im){mark.innerHTML='<img class="cng-live-logo" alt="">';im=mark.querySelector('img')}if(logo){im.src=logo;im.style.display='block'}else{im.removeAttribute('src');im.style.display='none';mark.textContent='C&G'}}
+    if(copy)copy.textContent=name;
+    const footer=q('.footer-brand');if(footer)footer.textContent=name;
+    qa('a[href*="cup-and-go-menu"]').forEach(a=>a.href=menuUrl());
+  }
+  function categories(){const out=[];cngProducts.forEach(p=>{const c=catOf(p);if(c&&!out.includes(c))out.push(c)});return out}
+  function drawFilters(){
+    const ar=document.documentElement.dir==='rtl';filterBar.innerHTML='';
+    [{k:'all',n:ar?'الكل':'All'}].concat(categories().map(c=>({k:c,n:c}))).forEach(x=>{const b=document.createElement('button');b.className='cng-live-filter'+(cngCat===x.k?' active':'');b.textContent=x.n;b.onclick=()=>{cngCat=x.k;drawFilters();drawCards()};filterBar.appendChild(b)});
+  }
+  function drawCards(){
+    const ar=document.documentElement.dir==='rtl',list=cngProducts.filter(p=>cngCat==='all'||catOf(p)===cngCat);
+    if(!list.length){cards.innerHTML='<div class="cng-loading">'+(ar?'لا توجد أصناف':'No items yet')+'</div>';return}
+    cards.innerHTML=list.map((p,i)=>{
+      const im=imageOf(p),nm=nameOf(p),ds=descOf(p),tags=[];
+      if(p.isOffer)tags.push('<span class="cng-live-tag offer">'+(ar?'عرض':'OFFER')+'</span>');if(p.isNew)tags.push('<span class="cng-live-tag">'+(ar?'جديد':'NEW')+'</span>');if(p.isPopular)tags.push('<span class="cng-live-tag">★ '+(ar?'الأكثر طلباً':'POPULAR')+'</span>');
+      return '<article class="cng-live-card"><div class="cng-live-image"><div class="cng-live-tags">'+tags.join('')+'</div>'+(im?'<img src="'+esc(im)+'" alt="'+esc(nm)+'" loading="'+(i<4?'eager':'lazy')+'" decoding="async">':'')+'</div><div class="cng-live-copy"><h3>'+esc(nm)+'</h3><p>'+esc(ds)+'</p><div class="cng-live-bottom"><small>'+esc(catOf(p))+'</small><strong class="cng-live-price">'+Number(p.price||0).toFixed(2)+' ﷼</strong></div></div></article>';
+    }).join('');
+    qa('.cng-live-card').forEach(c=>c.onclick=()=>window.open(menuUrl(),'_blank','noopener'));
+  }
+  function refreshAll(){applyBrand();buildFeatured();drawFilters();drawCards()}
+  Promise.all([cngDb.ref('/settings').once('value'),cngDb.ref('/products').once('value'),cngDb.ref('/website/config').once('value')]).then(r=>{cngSettings=r[0].val()||{};const d=r[1].val();cngProducts=d?Object.values(d).filter(Boolean):[];cngConfig=r[2].val()||{};refreshAll()});
+  cngDb.ref('/settings').on('value',s=>{cngSettings=s.val()||{};applyBrand()});
+  cngDb.ref('/products').on('value',s=>{const d=s.val();cngProducts=d?Object.values(d).filter(Boolean):[];buildFeatured();drawFilters();drawCards()});
+  cngDb.ref('/website/config').on('value',s=>{cngConfig=s.val()||{};if(cngConfig.enabled===false){location.replace(menuUrl());return}applyBrand();buildFeatured()});
+  const oldLang=q('#langBtn');if(oldLang)oldLang.addEventListener('click',()=>setTimeout(()=>{buildFeatured();drawFilters();drawCards()},30));
+  let sx=0;stage.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});stage.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>45)select(cngActive+(dx<0?1:-1))},{passive:true});
+  addEventListener('resize',drawSelectors,{passive:true});
+})();
 </script>
 </body>
 </html>
