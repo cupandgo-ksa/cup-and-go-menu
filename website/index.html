@@ -203,163 +203,242 @@ if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.ser
 })();
 
 </script>
-<style id="cng-premium-orbit-v2">
-:root{--cng-orbit-accent:#e5c158;--cng-orbit-hero:#3b1119}
-.brand-mark{overflow:hidden;background:#fff;border-color:rgba(229,193,88,.62)!important;box-shadow:0 10px 26px rgba(0,0,0,.28)!important}
-.brand-mark img.cng-live-logo{width:100%;height:100%;object-fit:contain;display:block}
-.brand-copy b{font-family:'Great Vibes','Brush Script MT',cursive!important;font-size:clamp(27px,3.2vw,39px)!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;line-height:.95!important;color:#f0ca91!important;text-shadow:0 0 26px rgba(229,193,88,.16)}
-.brand-copy small{letter-spacing:.2em!important}
-.hero{background:radial-gradient(circle at 58% 45%,color-mix(in srgb,var(--cng-orbit-hero) 78%,#fff 22%) 0,var(--cng-orbit-hero) 30%,#07130e 75%)!important;transition:background .9s cubic-bezier(.22,1,.36,1)}
-.hero-grid{grid-template-columns:minmax(275px,.9fr) minmax(440px,1.35fr) minmax(220px,.62fr)!important;gap:clamp(14px,2vw,34px)!important}
-.hero-title{font-family:'Cormorant Garamond',Georgia,serif!important;line-height:.76!important;letter-spacing:-.055em!important}
-.hero-title span:last-child{color:var(--cng-orbit-accent)!important}
-.eyebrow span{background:var(--cng-orbit-accent)!important}
-.primary-btn{background:var(--cng-orbit-accent)!important;color:#100a0b!important}
-.stage{height:min(76svh,740px)!important;min-height:540px!important;perspective:1300px!important;isolation:isolate}
-.stage::before{width:78%!important;border-color:rgba(255,255,255,.09)!important;box-shadow:inset 0 0 90px rgba(0,0,0,.15),0 0 90px rgba(0,0,0,.12)!important}
-.stage::after{content:""!important;position:absolute!important;width:55%!important;aspect-ratio:1!important;border:1px dashed rgba(255,255,255,.13)!important;border-radius:50%!important;animation:cngOrbitSpin 28s linear infinite!important;z-index:1!important}
+<style id="cng-premium-orbit-v3">
+:root{--cng-gold:#e5c158;--cng-scene:#351018;--cng-ink:#0b1510}
+.brand-mark{overflow:hidden;background:#fff!important;border:1px solid rgba(229,193,88,.65)!important;box-shadow:0 10px 28px rgba(0,0,0,.28)!important}
+.brand-mark img{width:100%;height:100%;display:block;object-fit:contain}
+.brand-copy b{font-family:'Great Vibes','Brush Script MT',cursive!important;font-size:clamp(30px,3.4vw,42px)!important;font-weight:400!important;line-height:.92!important;letter-spacing:0!important;text-transform:none!important;color:#f1cb91!important;text-shadow:0 0 25px rgba(229,193,88,.15)}
+.hero{background:radial-gradient(circle at 58% 43%,color-mix(in srgb,var(--cng-scene) 72%,#fff 28%) 0,var(--cng-scene) 28%,#07130e 75%)!important;transition:background .8s cubic-bezier(.22,1,.36,1)}
+.hero-grid{grid-template-columns:minmax(260px,.82fr) minmax(430px,1.18fr) minmax(260px,.78fr)!important;gap:clamp(18px,2.4vw,42px)!important}
+.hero-copy{align-self:center}
+.hero-title{font-family:'Cormorant Garamond',Georgia,serif!important;line-height:.8!important;letter-spacing:-.055em!important}
+.hero-title span:last-child{color:var(--cng-gold)!important}
+.hero-desc{max-width:430px!important;color:#c7bebd!important}
+.primary-btn{background:var(--cng-gold)!important;color:#111!important}
+.stage{height:min(76svh,720px)!important;min-height:520px!important;display:grid!important;place-items:center!important;perspective:1200px!important;isolation:isolate}
+.stage::before{width:72%!important;aspect-ratio:1!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:inset 0 0 80px rgba(0,0,0,.15),0 0 80px rgba(0,0,0,.18)!important}
+.stage::after{content:""!important;position:absolute!important;width:52%!important;aspect-ratio:1!important;border-radius:50%!important;border:1px dashed rgba(229,193,88,.2)!important;animation:cngInnerSpin 18s linear infinite!important;z-index:0!important}
+@keyframes cngInnerSpin{to{transform:rotate(360deg)}}
+.product-wrap,.float-word,.micro-tag{display:none!important}
+.cng-orbit{position:relative;width:min(88%,620px);aspect-ratio:1;border-radius:50%;z-index:3;animation:cngOrbitSpin 28s linear infinite;will-change:transform}
+.cng-orbit::before{content:"";position:absolute;inset:9%;border-radius:50%;border:1px solid rgba(255,255,255,.11);box-shadow:0 0 45px rgba(229,193,88,.05),inset 0 0 50px rgba(255,255,255,.02)}
+.cng-orbit::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px;border-radius:50%;background:var(--cng-gold);box-shadow:0 0 0 10px rgba(229,193,88,.07),0 0 30px rgba(229,193,88,.22)}
 @keyframes cngOrbitSpin{to{transform:rotate(360deg)}}
-.float-word{font-family:'Cormorant Garamond',Georgia,serif!important;font-style:italic!important;color:rgba(255,255,255,.06)!important;font-size:clamp(82px,10vw,165px)!important;z-index:0!important}
-.product-wrap{z-index:8!important;width:min(390px,56%)!important;height:73%!important;animation:cngHeroFloat 5.5s ease-in-out infinite!important;transition:.6s cubic-bezier(.22,1,.36,1)!important}
-@keyframes cngHeroFloat{50%{transform:translateY(-13px) rotateZ(1.2deg) rotateY(-2deg)}}
-.product-wrap .hero-product-image{max-width:100%!important;max-height:100%!important;filter:drop-shadow(0 34px 30px rgba(0,0,0,.38))!important;transition:.6s cubic-bezier(.16,1,.3,1)!important}
-.product-wrap.has-real-image .cup,.product-wrap.has-real-image .bean{opacity:0!important}
-.cng-orbit-shell{position:absolute;z-index:5;width:min(91%,660px);aspect-ratio:1;border-radius:50%;pointer-events:none}
-.cng-orbit-node{--a:0deg;--r:246px;position:absolute;left:50%;top:50%;width:82px;height:82px;margin:-41px;border-radius:50%;border:1px solid rgba(255,255,255,.17);background:rgba(7,19,14,.54);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:7px;pointer-events:auto;cursor:pointer;transform:rotate(var(--a)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a)));transition:transform .86s cubic-bezier(.22,1,.36,1),width .36s,height .36s,margin .36s,border-color .3s,background .3s,box-shadow .3s;box-shadow:0 14px 30px rgba(0,0,0,.22)}
-.cng-orbit-node img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 7px 10px rgba(0,0,0,.2));transition:.35s}
-.cng-orbit-node span{display:grid;place-items:center;width:100%;height:100%;font:600 11px/1.05 'Cormorant Garamond',serif;text-align:center}
-.cng-orbit-node.active{width:104px;height:104px;margin:-52px;border-color:var(--cng-orbit-accent);background:color-mix(in srgb,var(--cng-orbit-accent) 14%,rgba(7,19,14,.8));box-shadow:0 0 0 7px color-mix(in srgb,var(--cng-orbit-accent) 9%,transparent),0 23px 44px rgba(0,0,0,.35);z-index:7}
+.cng-orbit:hover,.cng-orbit.paused{animation-play-state:paused}
+.cng-orbit-node{--a:0deg;--r:245px;position:absolute;left:50%;top:50%;width:80px;height:80px;margin:-40px;border:1px solid rgba(255,255,255,.18);border-radius:20px;background:rgba(10,21,15,.58);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:7px;cursor:pointer;overflow:hidden;box-shadow:0 18px 34px rgba(0,0,0,.27);transform:rotate(var(--a)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a)));transition:width .32s,height .32s,margin .32s,border-color .32s,background .32s,box-shadow .32s;animation:cngCounterSpin 28s linear infinite reverse;will-change:transform}
+@keyframes cngCounterSpin{to{transform:rotate(calc(var(--a) - 360deg)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a) + 360deg))}}
+.cng-orbit:hover .cng-orbit-node,.cng-orbit.paused .cng-orbit-node{animation-play-state:paused}
+.cng-orbit-node img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 9px 11px rgba(0,0,0,.22));transition:transform .3s}
+.cng-orbit-node span{display:grid;place-items:center;width:100%;height:100%;font:600 12px/1.05 'Cormorant Garamond',serif;text-align:center}
+.cng-orbit-node.active{width:98px;height:98px;margin:-49px;border-color:var(--cng-gold);background:color-mix(in srgb,var(--cng-gold) 13%,rgba(8,18,13,.78));box-shadow:0 0 0 7px color-mix(in srgb,var(--cng-gold) 9%,transparent),0 24px 50px rgba(0,0,0,.36);z-index:8}
 .cng-orbit-node.active img{transform:scale(1.08)}
-.hero-side{border-left:1px solid rgba(255,255,255,.11)!important;padding-left:22px!important}
-.product-dots{gap:0!important}
-.product-dot.cng-side-choice{grid-template-columns:18px 1fr auto!important;gap:9px!important;padding:12px 0!important;border-bottom:1px solid rgba(255,255,255,.08)!important;opacity:.38!important}
-.product-dot.cng-side-choice.active{opacity:1!important}
-.product-dot.cng-side-choice i{width:6px!important;height:6px!important}
-.product-dot.cng-side-choice.active i{background:var(--cng-orbit-accent)!important;border-color:var(--cng-orbit-accent)!important;box-shadow:0 0 0 5px color-mix(in srgb,var(--cng-orbit-accent) 12%,transparent)!important}
-.product-dot.cng-side-choice span{font-size:9px!important;white-space:normal!important}
-.product-dot.cng-side-choice b{font-size:8px!important;color:#8f8588!important}
-.hero.cng-switching .product-wrap{opacity:.04!important;transform:translateY(36px) scale(.7) rotate(7deg)!important;filter:blur(9px)!important}
-.hero.cng-switching .hero-title,.hero.cng-switching .hero-desc{opacity:.18!important;transform:translateY(12px)!important;filter:blur(5px)!important}
-.hero-title,.hero-desc{transition:.35s ease!important}
-.cng-live-filters{display:flex;gap:8px;overflow:auto;scrollbar-width:none;padding:0 0 22px;margin-top:-22px}
-.cng-live-filters::-webkit-scrollbar{display:none}
-.cng-live-filter{white-space:nowrap;border:1px solid #d3ccc3;background:transparent;color:#544e49;border-radius:999px;padding:9px 13px;font-size:9px;font-weight:800;cursor:pointer}
-.cng-live-filter.active{background:#15110f;color:#fff;border-color:#15110f}
-.cards.cng-live-cards{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}
-.cng-live-card{background:#e6e0d8!important;border-radius:5px!important;overflow:hidden!important;cursor:pointer!important;transition:.42s cubic-bezier(.22,1,.36,1)!important;min-width:0!important}
-.cng-live-card:hover{transform:translateY(-9px)!important;box-shadow:0 24px 45px rgba(50,35,25,.12)!important}
-.cng-live-image{height:340px!important;position:relative!important;display:grid!important;place-items:center!important;padding:22px!important;background:linear-gradient(145deg,#eee9e3,#dbd3ca)!important;overflow:hidden!important}
-.cng-live-image::before{content:"";position:absolute;width:68%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.5);filter:blur(10px)}
-.cng-live-image img{position:relative;z-index:2;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 20px 22px rgba(53,33,24,.18));transition:.4s}
-.cng-live-card:hover .cng-live-image img{transform:scale(1.045) rotate(-1.2deg)}
-.cng-live-tags{position:absolute;left:11px;top:11px;z-index:4;display:flex;gap:5px;flex-wrap:wrap}
-.cng-live-tag{background:#15110f;color:#fff;border-radius:999px;padding:6px 8px;font-size:7px;letter-spacing:.08em}
-.cng-live-tag.offer{background:#9e2f3d}
-.cng-live-copy{padding:16px 15px 18px!important}
-.cng-live-copy h3{font:500 25px/1 'Cormorant Garamond',serif!important;margin:0 0 7px!important;color:#15110f!important}
-.cng-live-copy p{font:500 9px/1.55 Inter,Cairo,sans-serif!important;color:#6d6660!important;margin:0!important;min-height:42px!important}
-.cng-live-bottom{display:flex;justify-content:space-between;align-items:end;margin-top:16px}
-.cng-live-bottom small{font-size:7px;letter-spacing:.12em;color:#8a8179;text-transform:uppercase}
-.cng-live-price{font:600 19px 'Cormorant Garamond',serif;color:#15110f}
-.cng-loading{grid-column:1/-1;text-align:center;padding:54px 20px;color:#746b65;font:italic 24px 'Cormorant Garamond',serif}
-@media(max-width:1050px){.hero-grid{grid-template-columns:1fr 1.2fr!important}.hero-side{display:none!important}.cng-orbit-node{--r:205px}.cards.cng-live-cards{grid-template-columns:repeat(3,1fr)!important}}
-@media(max-width:720px){.brand-mark{width:42px!important;height:42px!important}.brand-copy b{font-size:30px!important}.hero-grid{display:flex!important;flex-direction:column!important;align-items:stretch!important;padding-top:100px!important}.hero-copy{order:1!important}.stage{order:2!important;height:45svh!important;min-height:340px!important;margin-top:-22px!important}.product-wrap{height:79%!important;width:47%!important;min-width:150px!important}.cng-orbit-shell{width:97%!important}.cng-orbit-node{--r:145px;width:59px;height:59px;margin:-29.5px;padding:5px}.cng-orbit-node.active{width:72px;height:72px;margin:-36px}.hero-desc{max-width:92%!important}.cards.cng-live-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}.cng-live-image{height:225px!important;padding:12px!important}.cng-live-copy{padding:12px!important}.cng-live-copy h3{font-size:20px!important}.cng-live-copy p{font-size:8px!important;min-height:36px!important}}
-@media(max-width:390px){.cng-orbit-node{--r:128px}.cng-live-image{height:190px!important}}
+.cng-orbit-center{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:34%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-align:center;background:rgba(5,14,10,.72);border:1px solid rgba(229,193,88,.18);box-shadow:0 0 65px rgba(0,0,0,.22);backdrop-filter:blur(15px)}
+.cng-orbit-center b{font:400 clamp(34px,4vw,60px)/.8 'Great Vibes',cursive;color:#f0ca91}
+.cng-orbit-center small{display:block;margin-top:10px;font-size:7px;letter-spacing:.28em;color:#8e9b92;text-transform:uppercase}
+.hero-side{display:block!important;align-self:center!important;border-left:0!important;padding-left:0!important;max-width:330px!important}
+.cng-detail{background:linear-gradient(155deg,rgba(255,255,255,.095),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.16);border-radius:24px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.2);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:.42s cubic-bezier(.22,1,.36,1)}
+.cng-detail.switching{opacity:.15;transform:translateX(20px) scale(.95);filter:blur(7px)}
+.cng-detail-image{height:290px;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.15),transparent 52%);position:relative;overflow:hidden}
+.cng-detail-image::before{content:"";position:absolute;inset:auto 10% 8%;height:20px;border-radius:50%;background:rgba(0,0,0,.34);filter:blur(15px)}
+.cng-detail-image img{position:relative;z-index:2;max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 24px 22px rgba(0,0,0,.34));animation:cngDetailFloat 4.8s ease-in-out infinite}
+@keyframes cngDetailFloat{50%{transform:translateY(-9px) rotate(1.1deg)}}
+.cng-detail-body{padding:20px 20px 22px;border-top:1px solid rgba(255,255,255,.08)}
+.cng-detail-kicker{font-size:7px;letter-spacing:.24em;color:#8e9b92;text-transform:uppercase}
+.cng-detail h3{font:500 36px/.92 'Cormorant Garamond',serif;margin:10px 0 10px;color:#fff}
+.cng-detail p{font:500 11px/1.65 Inter,Cairo,sans-serif;color:#bbb5b4;margin:0}
+.cng-detail-meta{display:flex;justify-content:space-between;align-items:end;margin-top:18px}
+.cng-detail-meta span{font-size:8px;letter-spacing:.12em;color:#8b9690;text-transform:uppercase}
+.cng-detail-price{font:600 23px 'Cormorant Garamond',serif;color:var(--cng-gold)}
+.cng-detail .cng-open-menu{display:inline-flex;margin-top:17px;border-bottom:1px solid rgba(229,193,88,.55);padding-bottom:5px;font-size:8px;letter-spacing:.17em;color:#e8c788;text-transform:uppercase}
+.product-dots,.side-meta,.swipe-hint,.side-label{display:none!important}
+.collection{padding-bottom:80px!important}
+.section-heading{margin-bottom:34px!important}
+.section-heading p{letter-spacing:.24em!important}
+.cng-popular-sub{color:#6d756d;font-size:11px;line-height:1.6;margin-top:10px;max-width:520px}
+.cng-popular-count{font:italic 18px 'Cormorant Garamond',serif;color:#81776e}
+.cards.cng-popular-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+.cng-pop-card{background:#e4ddd4;border-radius:5px;overflow:hidden;cursor:pointer;transition:.4s cubic-bezier(.22,1,.36,1)}
+.cng-pop-card:hover{transform:translateY(-9px);box-shadow:0 25px 46px rgba(45,32,23,.12)}
+.cng-pop-image{height:360px;position:relative;display:grid;place-items:center;padding:24px;background:linear-gradient(145deg,#eee9e2,#d8cfc5);overflow:hidden}
+.cng-pop-image::before{content:"";position:absolute;width:68%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.5);filter:blur(12px)}
+.cng-pop-image img{position:relative;z-index:2;max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 20px 22px rgba(54,36,27,.18));transition:.4s}
+.cng-pop-card:hover img{transform:scale(1.05) rotate(-1.2deg)}
+.cng-pop-copy{padding:17px}
+.cng-pop-copy h3{font:500 28px/.95 'Cormorant Garamond',serif;margin:0 0 8px;color:#17120f}
+.cng-pop-copy p{font-size:9px;line-height:1.6;color:#6c645f;margin:0;min-height:42px}
+.cng-pop-meta{display:flex;justify-content:space-between;align-items:end;margin-top:16px}
+.cng-pop-meta span{font-size:7px;letter-spacing:.12em;color:#8a817a;text-transform:uppercase}
+.cng-pop-price{font:600 20px 'Cormorant Garamond',serif;color:#17120f}
+.experience,.final-cta{display:none!important}
+.cng-about{background:#0a1710;color:#f3eee7;position:relative;overflow:hidden}
+.cng-about::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(229,193,88,.13),transparent 67%);right:-170px;top:-180px;pointer-events:none}
+.cng-about-inner{padding:clamp(80px,10vw,145px) clamp(20px,6vw,90px);display:grid;grid-template-columns:.72fr 1.28fr;gap:8vw;position:relative}
+.cng-about-index{font:italic 20px 'Cormorant Garamond',serif;color:#b0a99f}
+.cng-about-copy .ey{font-size:8px;letter-spacing:.25em;color:#998f86;text-transform:uppercase}
+.cng-about-copy h2{font:400 clamp(54px,7vw,105px)/.82 'Cormorant Garamond',serif;letter-spacing:-.055em;margin:18px 0 30px;max-width:900px}
+.cng-about-copy h2 em{font-weight:400;color:#e9c88b}
+.cng-about-copy p{max-width:760px;font-size:14px;line-height:1.9;color:#aeb7af;white-space:pre-line}
+.cng-about-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+.cng-contact-btn{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:12px 15px;font-size:8px;letter-spacing:.14em;color:#eee6db;text-transform:uppercase;transition:.25s}
+.cng-contact-btn:hover{background:#e5c158;color:#0b1510;border-color:#e5c158;transform:translateY(-2px)}
+.cng-contact-btn[hidden]{display:none}
+footer{padding-top:44px!important}
+.cng-footer-links{display:flex!important;flex-wrap:wrap;gap:14px!important;justify-content:flex-end}
+.cng-footer-links a{font-size:8px!important;letter-spacing:.13em!important}
+@media(max-width:1080px){.hero-grid{grid-template-columns:1fr 1.15fr!important}.hero-side{grid-column:1/-1!important;max-width:none!important;width:min(700px,100%)!important;justify-self:center!important}.cng-detail{display:grid;grid-template-columns:240px 1fr}.cng-detail-image{height:250px}.cards.cng-popular-grid{grid-template-columns:repeat(3,1fr)!important}.cng-orbit-node{--r:205px}}
+@media(max-width:720px){
+ .brand-copy b{font-size:31px!important}.hero-grid{display:flex!important;flex-direction:column!important;padding:96px 18px 48px!important}.hero-copy{order:1}.stage{order:2;height:48svh!important;min-height:370px!important;margin-top:-12px}.hero-side{order:3!important;width:100%!important}.cng-orbit{width:min(94%,390px)}.cng-orbit-node{--r:145px;width:58px;height:58px;margin:-29px;border-radius:15px;padding:5px}.cng-orbit-node.active{width:70px;height:70px;margin:-35px}.cng-detail{display:block!important;border-radius:20px}.cng-detail-image{height:310px}.cng-detail h3{font-size:32px}.cards.cng-popular-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}.cng-pop-image{height:225px!important;padding:12px}.cng-pop-copy{padding:12px}.cng-pop-copy h3{font-size:21px}.cng-pop-copy p{font-size:8px;min-height:36px}.cng-about-inner{grid-template-columns:1fr;padding:78px 20px;gap:24px}.cng-about-copy h2{font-size:58px}.cng-about-copy p{font-size:12px}.cng-footer-links{justify-content:flex-start}}
+@media(max-width:390px){.cng-orbit-node{--r:128px}.cng-pop-image{height:195px!important}.cng-detail-image{height:270px}}
 </style>
-<script id="cng-premium-orbit-v2">
+<script id="cng-premium-orbit-v3">
 (function(){
-  const cngDb=firebase.database();
-  const q=s=>document.querySelector(s), qa=s=>Array.from(document.querySelectorAll(s));
-  let cngSettings={},cngConfig={},cngProducts=[],cngFeatured=[],cngActive=0,cngTimer=null,cngCat='all',cngBusy=false;
-  const hero=q('.hero'),stage=q('.stage'),dots=q('#productDots'),cards=q('.cards');
-  if(!hero||!stage||!dots||!cards)return;
-  const orbit=document.createElement('div');orbit.className='cng-orbit-shell';stage.appendChild(orbit);
-  const filterBar=document.createElement('div');filterBar.className='cng-live-filters';cards.parentNode.insertBefore(filterBar,cards);
-  cards.classList.add('cng-live-cards');
+  const dbx=firebase.database(), q=s=>document.querySelector(s), qa=s=>Array.from(document.querySelectorAll(s));
+  const hero=q('.hero'),stage=q('.stage'),side=q('.hero-side'),cards=q('.cards'),collection=q('.collection');
+  if(!hero||!stage||!side||!cards||!collection)return;
+
+  // Stop the old demo auto-rotation so it cannot fight the live product selector.
+  try{clearInterval(autoTimer)}catch(e){}
+  try{if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>{if((r.scope||'').includes('/website/'))r.unregister()})).catch(()=>{})}}catch(e){}
+
+  let settings={},cfg={},products=[],featured=[],active=0,timer=null,pausedUntil=0,lastSig={settings:'',cfg:'',products:''},renderQueued=false;
+  const orbit=document.createElement('div');orbit.className='cng-orbit';stage.appendChild(orbit);
+  orbit.innerHTML='<div class="cng-orbit-center"><div><b>Cup And Go</b><small>signature selection</small></div></div>';
+  const center=orbit.firstElementChild;
+
+  side.innerHTML='<article class="cng-detail" id="cngDetail"><div class="cng-detail-image"><img id="cngDetailImg" alt="" decoding="async"></div><div class="cng-detail-body"><div class="cng-detail-kicker" id="cngDetailKicker"></div><h3 id="cngDetailName"></h3><p id="cngDetailDesc"></p><div class="cng-detail-meta"><span id="cngDetailCat"></span><strong class="cng-detail-price" id="cngDetailPrice"></strong></div><a class="cng-open-menu" id="cngOpenMenu" target="_blank" rel="noopener">OPEN FULL MENU ↗</a></div></article>';
+
+  const about=document.createElement('section');about.className='cng-about';about.id='about';
+  about.innerHTML='<div class="cng-about-inner"><div class="cng-about-index">02</div><div class="cng-about-copy"><div class="ey" id="cngAboutEy">ABOUT CUP AND GO</div><h2 id="cngAboutTitle">Coffee for the <em>moment.</em></h2><p id="cngAboutText"></p><div class="cng-about-actions"><a class="cng-contact-btn" id="cngLocation" target="_blank" rel="noopener" hidden>LOCATION ↗</a><a class="cng-contact-btn" id="cngWhatsApp" target="_blank" rel="noopener" hidden>WHATSAPP ↗</a><a class="cng-contact-btn" id="cngInstagram" target="_blank" rel="noopener" hidden>INSTAGRAM ↗</a><a class="cng-contact-btn" id="cngTikTok" target="_blank" rel="noopener" hidden>TIKTOK ↗</a></div></div></div>';
+  collection.insertAdjacentElement('afterend',about);
+
+  const heading=collection.querySelector('.section-heading');
+  if(heading){
+    const p=heading.querySelector('p'); if(p)p.textContent='POPULAR SELECTION';
+    const h=heading.querySelector('h2'); if(h)h.textContent='Most loved right now.';
+    const a=heading.querySelector('a'); if(a){a.textContent='Full menu ↗';a.href='https://cupandgo-ksa.github.io/cup-and-go-menu/'}
+    const sub=document.createElement('div');sub.className='cng-popular-sub';sub.id='cngPopularSub';sub.textContent='A small selection of the drinks and sweets your guests choose most.';heading.querySelector('div')?.appendChild(sub);
+    const count=document.createElement('div');count.className='cng-popular-count';count.id='cngPopularCount';heading.appendChild(count);
+  }
+  cards.classList.add('cng-popular-grid');
 
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-  function idOf(p){return String(p&&(p.id!=null?p.id:(p.name||''))||'')}
-  function imageOf(p){return String(p&&(p.imageHD||p.imageHd||p.hdImage||p.icon||p.image)||'')}
-  function nameOf(p){const ar=document.documentElement.dir==='rtl';return ar?(p.nameAr||p.arName||p.name||''):(p.name||p.nameEn||p.nameAr||'')}
-  function descOf(p){const ar=document.documentElement.dir==='rtl';return ar?(p.descriptionAr||p.descAr||p.description||''):(p.description||p.desc||p.descriptionAr||'')}
-  function catOf(p){return String(p&&p.category||'Other').replace(/^\s*[^\p{L}\p{N}]+/u,'').trim()||'Other'}
+  function pid(p){return String(p&&(p.id!=null?p.id:(p.name||''))||'')}
+  function img(p){return String(p&&(p.imageHD||p.imageHd||p.hdImage||p.icon||p.image)||'')}
+  function ar(){return document.documentElement.dir==='rtl'}
+  function name(p){return String(p&&(ar()?(p.nameAr||p.arName||p.name):(p.name||p.nameEn||p.nameAr))||'')}
+  function desc(p){return String(p&&(ar()?(p.descriptionAr||p.descAr||p.description):(p.description||p.desc||p.descriptionAr))||'')}
+  function cat(p){return String(p&&p.category||'Other').replace(/^\s*[^\p{L}\p{N}]+/u,'').trim()||'Other'}
   function norm(v){return String(v||'').toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g,' ').trim()}
-  function menuUrl(){return cngConfig.menuUrl||'https://cupandgo-ksa.github.io/cup-and-go-menu/'}
-  function splitName(v){const w=String(v||'Cup And Go').trim().split(/\s+/);if(w.length<2)return[w[0]||'Cup',''];const n=Math.ceil(w.length/2);return[w.slice(0,n).join(' '),w.slice(n).join(' ')]}
-  function findProduct(s,i){
+  function menuUrl(){return cfg.menuUrl||'https://cupandgo-ksa.github.io/cup-and-go-menu/'}
+  function split(v){const w=String(v||'').trim().split(/\s+/);if(w.length<2)return[w[0]||'',''];const n=Math.ceil(w.length/2);return[w.slice(0,n).join(' '),w.slice(n).join(' ')]}
+  function validUrl(v){return /^https?:\/\//i.test(String(v||'').trim())}
+  function socialUrl(v,base){v=String(v||'').trim();if(!v)return'';if(validUrl(v))return v;return base+v.replace(/^@/,'')}
+  function whatsappUrl(v){const digits=String(v||'').replace(/\D/g,'');return digits?'https://wa.me/'+digits:''}
+  function signature(v){try{return JSON.stringify(v)}catch(e){return String(v)}}
+
+  function productForSlide(s,i){
     let p=null;
-    if(s&&s.productId)p=cngProducts.find(x=>idOf(x)===String(s.productId));
+    if(s&&s.productId)p=products.find(x=>pid(x)===String(s.productId));
     if(!p&&s){
-      const a=norm((s.top||'')+' '+(s.bottom||'')), first=norm(s.top||'');
-      p=cngProducts.find(x=>norm(x.name)===a||norm(x.nameAr||x.arName)===a);
-      if(!p&&first)p=cngProducts.find(x=>norm(x.name).includes(first)||norm(x.nameAr||x.arName).includes(first));
+      const key=norm((s.top||'')+' '+(s.bottom||''));
+      if(key)p=products.find(x=>norm(x.name)===key||norm(x.nameAr||x.arName)===key);
     }
-    if(!p)p=cngProducts.filter(x=>imageOf(x))[i]||cngProducts[i]||null;
+    if(!p)p=products.filter(x=>img(x))[i]||products[i]||null;
     return p;
   }
-  function buildFeatured(){
-    let slides=Array.isArray(cngConfig.slides)?cngConfig.slides.filter(Boolean).slice(0,6):[];
-    if(!slides.length)slides=cngProducts.filter(x=>imageOf(x)).slice(0,6).map(p=>({productId:idOf(p)}));
-    cngFeatured=slides.map((s,i)=>{
-      const p=findProduct(s,i), nm=p?nameOf(p):((s.top||'')+' '+(s.bottom||'')).trim(), parts=splitName(nm);
-      return{p:p,name:nm||'Cup And Go',parts:parts,image:s.imageUrl||imageOf(p),desc:p?descOf(p):(document.documentElement.dir==='rtl'?(s.arDesc||s.desc||''):(s.desc||s.arDesc||'')),cat:p?catOf(p):(s.type||'Signature'),temp:s.temp||(/hot/i.test(nm)?'HOT':'FRESH'),price:p?Number(p.price||0):0,hero:s.hero||['#381018','#4a2f1c','#31462a','#4d1725','#1f3c47','#4b3225'][i%6],accent:s.accent||['#e5c158','#ffc76a','#dff59b','#ff9eb5','#8fdcff','#efc595'][i%6],word:s.word||parts[0]||'CUP'};
+  function makeFeatured(){
+    const slides=Array.isArray(cfg.slides)?cfg.slides.filter(Boolean).slice(0,6):[];
+    featured=(slides.length?slides:products.filter(x=>img(x)).slice(0,6).map(p=>({productId:pid(p)}))).map((s,i)=>{
+      const p=productForSlide(s,i),nm=p?name(p):((s.top||'')+' '+(s.bottom||'')).trim(),parts=split(nm);
+      return{p,name:nm||'Cup And Go',parts,image:String(s.imageUrl||img(p)||''),description:p?desc(p):(ar()?(s.arDesc||s.desc||''):(s.desc||s.arDesc||'')),category:p?cat(p):(s.type||'Signature'),price:p?Number(p.price||0):0,scene:s.hero||['#351018','#4a2f1c','#31462a','#4d1725','#1f3c47','#483125'][i%6],accent:s.accent||['#e5c158','#ffc76a','#dff59b','#ff9eb5','#8fdcff','#efc595'][i%6]};
     });
-    if(!cngFeatured.length)cngFeatured=[{name:'Cup And Go',parts:['Cup And','Go'],image:'',desc:'Premium drinks, crafted for your moment.',cat:'Coffee',temp:'FRESH',price:0,hero:'#381018',accent:'#e5c158',word:'CUP AND GO'}];
-    cngActive=Math.min(cngActive,cngFeatured.length-1);
-    drawSelectors();applySelected(false);restart();
+    if(!featured.length)featured=[{name:'Cup And Go',parts:['Cup And','Go'],image:'',description:'Premium coffee, matcha and fresh drinks.',category:'Signature',price:0,scene:'#351018',accent:'#e5c158'}];
+    active=Math.min(active,featured.length-1);
   }
-  function relAngle(i){const n=Math.max(1,cngFeatured.length),step=360/n;let a=(i-cngActive)*step-90;while(a>180)a-=360;while(a<-180)a+=360;return a}
-  function radius(){return innerWidth<391?'128px':innerWidth<721?'145px':innerWidth<1051?'205px':'246px'}
-  function drawSelectors(){
-    orbit.innerHTML='';dots.innerHTML='';
-    cngFeatured.forEach((f,i)=>{
-      const b=document.createElement('button');b.className='cng-orbit-node'+(i===cngActive?' active':'');b.style.setProperty('--a',relAngle(i)+'deg');b.style.setProperty('--r',radius());b.setAttribute('aria-label',f.name);
+  function orbitRadius(){return innerWidth<391?'128px':innerWidth<721?'145px':innerWidth<1081?'205px':'245px'}
+  function drawOrbit(){
+    qa('.cng-orbit-node').forEach(n=>n.remove());
+    const n=Math.max(1,featured.length),step=360/n;
+    featured.forEach((f,i)=>{
+      const b=document.createElement('button');b.className='cng-orbit-node'+(i===active?' active':'');b.style.setProperty('--a',(i*step)+'deg');b.style.setProperty('--r',orbitRadius());b.setAttribute('aria-label',f.name);
       b.innerHTML=f.image?'<img src="'+esc(f.image)+'" alt="" loading="'+(i<2?'eager':'lazy')+'" decoding="async">':'<span>'+esc(f.parts[0])+'</span>';
-      b.onclick=()=>select(i);orbit.appendChild(b);
-      const s=document.createElement('button');s.className='product-dot cng-side-choice'+(i===cngActive?' active':'');s.innerHTML='<i></i><span>'+esc(f.name)+'</span><b>'+String(i+1).padStart(2,'0')+'</b>';s.onclick=()=>select(i);dots.appendChild(s);
+      b.onclick=()=>select(i,true);orbit.appendChild(b);
     });
+    const brand=settings.shopName||cfg.brandName||'Cup And Go';center.querySelector('b').textContent=brand;
   }
-  function applySelected(animate){
-    const f=cngFeatured[cngActive],parts=splitName(f.name);
-    document.documentElement.style.setProperty('--cng-orbit-hero',f.hero);document.documentElement.style.setProperty('--cng-orbit-accent',f.accent);
-    const top=q('#titleTop'),bottom=q('#titleBottom'),desc=q('#heroDesc'),word=q('#floatWord'),type=q('#sideType'),temp=q('#sideTemp'),kick=q('#kicker'),img=q('#heroProductImage'),wrap=q('#productWrap');
-    if(top)top.textContent=parts[0];if(bottom)bottom.textContent=parts[1];if(desc)desc.textContent=f.desc||'';if(word)word.textContent=f.word||parts[0];if(type)type.textContent=f.cat||'Signature';if(temp)temp.textContent=f.temp||'FRESH';if(kick)kick.textContent=String(cngActive+1).padStart(2,'0')+' / '+String(cngFeatured.length).padStart(2,'0');
-    if(img&&wrap){if(f.image){img.src=f.image;img.alt=f.name;img.hidden=false;wrap.classList.add('has-real-image')}else{img.removeAttribute('src');img.hidden=true;wrap.classList.remove('has-real-image')}}
-    drawSelectors();
-    if(animate){hero.classList.add('reveal');setTimeout(()=>hero.classList.remove('reveal'),720)}
+  function showDetail(animate){
+    const f=featured[active],detail=q('#cngDetail');
+    if(!f)return;
+    document.documentElement.style.setProperty('--cng-scene',f.scene);document.documentElement.style.setProperty('--cng-gold',f.accent);
+    const im=q('#cngDetailImg');if(f.image){im.src=f.image;im.style.display='block'}else{im.removeAttribute('src');im.style.display='none'}
+    q('#cngDetailKicker').textContent=String(active+1).padStart(2,'0')+' / '+String(featured.length).padStart(2,'0')+' · '+f.category;
+    q('#cngDetailName').textContent=f.name;q('#cngDetailDesc').textContent=f.description||'';
+    q('#cngDetailCat').textContent=f.category;q('#cngDetailPrice').textContent=f.price?f.price.toFixed(2)+' ﷼':'';
+    q('#cngOpenMenu').href=menuUrl();
+    const tt=q('#titleTop'),tb=q('#titleBottom'),hd=q('#heroDesc'),kick=q('#kicker');
+    if(tt)tt.textContent=f.parts[0];if(tb)tb.textContent=f.parts[1];if(hd)hd.textContent=f.description||'';if(kick)kick.textContent='0'+(active+1)+' / 0'+featured.length;
+    drawOrbit();
+    if(animate){detail.classList.add('switching');setTimeout(()=>detail.classList.remove('switching'),40)}
   }
-  function select(i){if(cngBusy||!cngFeatured.length)return;i=(i+cngFeatured.length)%cngFeatured.length;if(i===cngActive)return;cngBusy=true;hero.classList.add('cng-switching');setTimeout(()=>{cngActive=i;applySelected(true);hero.classList.remove('cng-switching');cngBusy=false;restart()},280)}
-  function restart(){clearInterval(cngTimer);if(cngFeatured.length>1)cngTimer=setInterval(()=>select(cngActive+1),Math.max(4200,Number(cngConfig.autoSlideMs)||6500))}
+  function select(i,user){
+    if(!featured.length)return;active=(i+featured.length)%featured.length;
+    if(user){pausedUntil=Date.now()+7000;orbit.classList.add('paused');setTimeout(()=>{if(Date.now()>=pausedUntil)orbit.classList.remove('paused')},7000)}
+    const detail=q('#cngDetail');detail.classList.add('switching');setTimeout(()=>{showDetail(false);detail.classList.remove('switching')},230);
+    restartTimer();
+  }
+  function restartTimer(){clearInterval(timer);if(featured.length>1)timer=setInterval(()=>{if(Date.now()<pausedUntil)return;select(active+1,false)},7000)}
+
+  function popular(){
+    const limit=Math.min(6,Math.max(1,Number(cfg.popularLimit)||6));
+    return products.filter(p=>p&&p.isPopular).slice(0,limit);
+  }
+  function drawPopular(){
+    const list=popular(),isAr=ar(),count=q('#cngPopularCount');
+    if(count)count.textContent=(isAr?'الأكثر طلباً ':'POPULAR ')+'0'+list.length;
+    const h=heading&&heading.querySelector('h2'),p=heading&&heading.querySelector('p'),sub=q('#cngPopularSub');
+    if(h)h.textContent=isAr?'الأكثر طلباً الآن.':'Most loved right now.';
+    if(p)p.textContent=isAr?'اختيارات الزبائن':'POPULAR SELECTION';
+    if(sub)sub.textContent=isAr?'مجموعة صغيرة من أكثر المشروبات والحلويات طلباً عند زبائننا.':'A small selection of the drinks and sweets your guests choose most.';
+    if(!list.length){cards.innerHTML='<div style="grid-column:1/-1;padding:50px 15px;text-align:center;color:#756c66;font:italic 24px Cormorant Garamond,serif">'+(isAr?'حدد الأصناف كـ Popular من لوحة الإدارة.':'Mark items as Popular in Admin to show them here.')+'</div>';return}
+    cards.innerHTML=list.map((p,i)=>'<article class="cng-pop-card"><div class="cng-pop-image">'+(img(p)?'<img src="'+esc(img(p))+'" alt="'+esc(name(p))+'" loading="'+(i<3?'eager':'lazy')+'" decoding="async">':'')+'</div><div class="cng-pop-copy"><h3>'+esc(name(p))+'</h3><p>'+esc(desc(p))+'</p><div class="cng-pop-meta"><span>'+esc(cat(p))+'</span><strong class="cng-pop-price">'+Number(p.price||0).toFixed(2)+' ﷼</strong></div></div></article>').join('');
+    qa('.cng-pop-card').forEach(el=>el.onclick=()=>window.open(menuUrl(),'_blank','noopener'));
+  }
   function applyBrand(){
-    const logo=cngSettings.shopLogo||'',name=cngSettings.shopName||cngConfig.brandName||'Cup And Go',mark=q('.brand-mark'),copy=q('.brand-copy b');
-    if(mark){let im=mark.querySelector('.cng-live-logo');if(!im){mark.innerHTML='<img class="cng-live-logo" alt="">';im=mark.querySelector('img')}if(logo){im.src=logo;im.style.display='block'}else{im.removeAttribute('src');im.style.display='none';mark.textContent='C&G'}}
-    if(copy)copy.textContent=name;
-    const footer=q('.footer-brand');if(footer)footer.textContent=name;
+    const mark=q('.brand-mark'),copy=q('.brand-copy b'),brand=settings.shopName||cfg.brandName||'Cup And Go',logo=settings.shopLogo||'';
+    if(mark){if(logo){mark.innerHTML='<img src="'+esc(logo)+'" alt="'+esc(brand)+'">'}else mark.textContent='C&G'}
+    if(copy)copy.textContent=brand;
+    const fb=q('.footer-brand');if(fb)fb.textContent=brand;
     qa('a[href*="cup-and-go-menu"]').forEach(a=>a.href=menuUrl());
   }
-  function categories(){const out=[];cngProducts.forEach(p=>{const c=catOf(p);if(c&&!out.includes(c))out.push(c)});return out}
-  function drawFilters(){
-    const ar=document.documentElement.dir==='rtl';filterBar.innerHTML='';
-    [{k:'all',n:ar?'الكل':'All'}].concat(categories().map(c=>({k:c,n:c}))).forEach(x=>{const b=document.createElement('button');b.className='cng-live-filter'+(cngCat===x.k?' active':'');b.textContent=x.n;b.onclick=()=>{cngCat=x.k;drawFilters();drawCards()};filterBar.appendChild(b)});
+  function applyAbout(){
+    const isAr=ar(),brand=settings.shopName||cfg.brandName||'Cup And Go';
+    const title=isAr?(cfg.aboutTitleAr||('عن '+brand)):(cfg.aboutTitleEn||('About '+brand));
+    const text=isAr?(cfg.aboutTextAr||'نقدّم القهوة والمشروبات والحلويات بعناية، مع تجربة بسيطة وسريعة وجودة تليق بكل لحظة.'):(cfg.aboutTextEn||'We serve coffee, drinks and sweets with care — a simple, fast experience built around quality, freshness and the little moments that make a visit worth remembering.');
+    q('#cngAboutEy').textContent=isAr?'عن المتجر':'ABOUT THE STORE';
+    q('#cngAboutTitle').innerHTML=esc(title);
+    q('#cngAboutText').textContent=text;
+    const setLink=(id,url,label)=>{const a=q(id);if(!a)return;if(url){a.href=url;a.textContent=label+' ↗';a.hidden=false}else a.hidden=true};
+    setLink('#cngLocation',String(cfg.locationUrl||''),isAr?'الموقع':'Location');
+    setLink('#cngWhatsApp',whatsappUrl(cfg.whatsapp||''),isAr?'واتساب':'WhatsApp');
+    setLink('#cngInstagram',socialUrl(cfg.instagram||'','https://instagram.com/'),isAr?'إنستغرام':'Instagram');
+    setLink('#cngTikTok',socialUrl(cfg.tiktok||'','https://www.tiktok.com/@'),isAr?'تيك توك':'TikTok');
+    const footerLast=document.querySelector('footer>div:last-child');
+    if(footerLast){footerLast.className='cng-footer-links';footerLast.innerHTML='';[['#cngLocation',isAr?'الموقع':'Location'],['#cngWhatsApp','WhatsApp'],['#cngInstagram','Instagram'],['#cngTikTok','TikTok']].forEach(([id,label])=>{const src=q(id);if(src&&!src.hidden){const a=document.createElement('a');a.href=src.href;a.target='_blank';a.rel='noopener';a.textContent=label+' ↗';footerLast.appendChild(a)}})}
   }
-  function drawCards(){
-    const ar=document.documentElement.dir==='rtl',list=cngProducts.filter(p=>cngCat==='all'||catOf(p)===cngCat);
-    if(!list.length){cards.innerHTML='<div class="cng-loading">'+(ar?'لا توجد أصناف':'No items yet')+'</div>';return}
-    cards.innerHTML=list.map((p,i)=>{
-      const im=imageOf(p),nm=nameOf(p),ds=descOf(p),tags=[];
-      if(p.isOffer)tags.push('<span class="cng-live-tag offer">'+(ar?'عرض':'OFFER')+'</span>');if(p.isNew)tags.push('<span class="cng-live-tag">'+(ar?'جديد':'NEW')+'</span>');if(p.isPopular)tags.push('<span class="cng-live-tag">★ '+(ar?'الأكثر طلباً':'POPULAR')+'</span>');
-      return '<article class="cng-live-card"><div class="cng-live-image"><div class="cng-live-tags">'+tags.join('')+'</div>'+(im?'<img src="'+esc(im)+'" alt="'+esc(nm)+'" loading="'+(i<4?'eager':'lazy')+'" decoding="async">':'')+'</div><div class="cng-live-copy"><h3>'+esc(nm)+'</h3><p>'+esc(ds)+'</p><div class="cng-live-bottom"><small>'+esc(catOf(p))+'</small><strong class="cng-live-price">'+Number(p.price||0).toFixed(2)+' ﷼</strong></div></div></article>';
-    }).join('');
-    qa('.cng-live-card').forEach(c=>c.onclick=()=>window.open(menuUrl(),'_blank','noopener'));
-  }
-  function refreshAll(){applyBrand();buildFeatured();drawFilters();drawCards()}
-  Promise.all([cngDb.ref('/settings').once('value'),cngDb.ref('/products').once('value'),cngDb.ref('/website/config').once('value')]).then(r=>{cngSettings=r[0].val()||{};const d=r[1].val();cngProducts=d?Object.values(d).filter(Boolean):[];cngConfig=r[2].val()||{};refreshAll()});
-  cngDb.ref('/settings').on('value',s=>{cngSettings=s.val()||{};applyBrand()});
-  cngDb.ref('/products').on('value',s=>{const d=s.val();cngProducts=d?Object.values(d).filter(Boolean):[];buildFeatured();drawFilters();drawCards()});
-  cngDb.ref('/website/config').on('value',s=>{cngConfig=s.val()||{};if(cngConfig.enabled===false){location.replace(menuUrl());return}applyBrand();buildFeatured()});
-  const oldLang=q('#langBtn');if(oldLang)oldLang.addEventListener('click',()=>setTimeout(()=>{buildFeatured();drawFilters();drawCards()},30));
-  let sx=0;stage.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});stage.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>45)select(cngActive+(dx<0?1:-1))},{passive:true});
-  addEventListener('resize',drawSelectors,{passive:true});
+  function renderAll(){makeFeatured();applyBrand();drawOrbit();showDetail(false);drawPopular();applyAbout();restartTimer()}
+  function queueRender(){if(renderQueued)return;renderQueued=true;requestAnimationFrame(()=>{renderQueued=false;renderAll()})}
+
+  Promise.all([dbx.ref('/settings').once('value'),dbx.ref('/products').once('value'),dbx.ref('/website/config').once('value')]).then(([s,p,c])=>{
+    settings=s.val()||{};const d=p.val();products=d?Object.values(d).filter(Boolean):[];cfg=c.val()||{};
+    lastSig.settings=signature(settings);lastSig.products=signature(products);lastSig.cfg=signature(cfg);renderAll();
+    dbx.ref('/settings').on('value',snap=>{const v=snap.val()||{},sig=signature(v);if(sig===lastSig.settings)return;lastSig.settings=sig;settings=v;queueRender()});
+    dbx.ref('/products').on('value',snap=>{const d=snap.val(),v=d?Object.values(d).filter(Boolean):[],sig=signature(v);if(sig===lastSig.products)return;lastSig.products=sig;products=v;queueRender()});
+    dbx.ref('/website/config').on('value',snap=>{const v=snap.val()||{},sig=signature(v);if(sig===lastSig.cfg)return;lastSig.cfg=sig;cfg=v;if(cfg.enabled===false)return;queueRender()});
+  }).catch(()=>renderAll());
+
+  let sx=0;stage.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});stage.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>45)select(active+(dx<0?1:-1),true)},{passive:true});
+  const lang=q('#langBtn');if(lang)lang.addEventListener('click',()=>setTimeout(()=>queueRender(),60));
+  addEventListener('resize',()=>drawOrbit(),{passive:true});
 })();
 </script>
 </body>
