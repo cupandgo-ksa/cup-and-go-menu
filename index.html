@@ -3129,6 +3129,109 @@ html[lang="ar"] .contacts h3.headline-slide{
   }
 }
 /* CNG RTL SAFE TEXT + CONTACT REFINEMENT END */
+
+/* CNG HERO RTL SAFE + MOBILE SMOOTH 20260926U */
+/* HERO RTL FIX
+   Older CSS reserved ~150px on the left and also slid the Arabic kicker right.
+   On narrow phones that combination pushed the small label through the viewport edge. */
+html[lang="ar"] .hero-copy{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0 24px 0 76px!important;
+  box-sizing:border-box!important;
+  direction:rtl!important;
+  text-align:right!important;
+  overflow:visible!important;
+}
+html[lang="ar"] .hero .kicker{
+  display:flex!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  justify-content:flex-start!important;
+  align-items:center!important;
+  gap:9px!important;
+  direction:rtl!important;
+  text-align:right!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  transform:none!important;
+}
+html[lang="ar"] .hero .kicker.txt-anim,
+html[lang="ar"] .hero .kicker.txt-anim.txt-in{
+  transform:none!important;
+}
+html[lang="ar"] .hero .kicker::before{
+  order:2!important;
+  flex:0 0 28px!important;
+}
+html[lang="ar"] .hero h1{
+  width:100%!important;
+  max-width:100%!important;
+  margin-right:0!important;
+  overflow:visible!important;
+}
+
+/* Safe phone gutters from 320px through large phones. */
+@media(max-width:480px){
+  html[lang="ar"] .hero-copy{
+    padding-right:22px!important;
+    padding-left:64px!important;
+  }
+  html[lang="ar"] .hero .kicker{
+    font-size:clamp(6.5px,2.25vw,8px)!important;
+    line-height:1.55!important;
+  }
+
+  /* Reduce mobile repaint/GPU pressure while keeping transform animations smooth. */
+  .hero,.gallery,.popular-strip,.signboard,.baristas,.about,.contacts,.brand-footer{
+    transition:none!important;
+  }
+  .motion-frame,
+  .scroll-section{
+    filter:none!important;
+    will-change:transform,opacity!important;
+  }
+  .header{
+    backdrop-filter:blur(12px)!important;
+    -webkit-backdrop-filter:blur(12px)!important;
+  }
+  .noise{opacity:.018!important}
+}
+@media(max-width:360px){
+  html[lang="ar"] .hero-copy{
+    padding-right:18px!important;
+    padding-left:52px!important;
+  }
+  html[lang="ar"] .hero .kicker{
+    font-size:6.4px!important;
+    gap:7px!important;
+  }
+  html[lang="ar"] .hero .kicker::before{
+    flex-basis:22px!important;
+    width:22px!important;
+  }
+}
+
+/* Safari/iPhone: avoid persistent expensive filters/3D on the primary mobile path. */
+@supports (-webkit-touch-callout:none){
+  .motion-frame,
+  .scroll-section{
+    filter:none!important;
+    -webkit-backface-visibility:hidden!important;
+    backface-visibility:hidden!important;
+  }
+  .popular-run,.gallery-track,.wheel{
+    -webkit-transform:translateZ(0);
+    backface-visibility:hidden;
+  }
+}
+/* CNG HERO RTL SAFE + MOBILE SMOOTH END */
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="popular-strip" id="popularStrip" hidden><div class="popular-head"><div class="ey" id="popularK">POPULAR PICKS</div><h2 id="popularT">Customer favorites.</h2></div><div class="popular-marquee" aria-label="Popular items"><div class="popular-run" id="popularRun"></div></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><section class="brand-footer" id="brandFooter"><div class="brand-footer-inner"><div class="brand-footer-kicker" id="footerKicker">CUP AND GO · OUR STORY</div><h3 class="brand-footer-title" id="footerTitle">Coffee starts with a small seed.</h3><div class="brand-footer-grid"><div class="brand-footer-col"><p id="footerLine1">Then it is made into a cup.</p><p id="footerLine2">Accompanying you all the time.</p></div><div class="brand-footer-col"><p id="footerLine3">From Cup And Go.</p><p id="footerLine4">Since 2025 · Saudi Arabia.</p></div></div><div class="brand-footer-copy" id="footerCopyright">© Cup And Go · All rights reserved.</div><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></div></section></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
@@ -3176,8 +3279,9 @@ function info(){const it=items[active],t=T[lang];q('#infoMini').textContent=t.de
 function hideInfo(){q('#info').classList.remove('show')}
 function closest(anim){let best=0,d=1e9;items.forEach((_,i)=>{const x=Math.abs(norm(turn+angle(i)-FOCUS));if(x<d){d=x;best=i}});if(best!==active){active=best;mark();preview(anim);hideInfo()}}
 function pAng(e){const r=q('#wheel').getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;return Math.atan2(e.clientY-cy,e.clientX-cx)*180/Math.PI}
+let heroInView=true;
 function wheelEvents(){const w=q('#wheel');w.onpointerdown=e=>{drag=true;pauseUntil=performance.now()+2500;lastAng=pAng(e);w.setPointerCapture?.(e.pointerId);e.preventDefault()};w.onpointermove=e=>{if(!drag)return;const a=pAng(e);turn+=norm(a-lastAng);lastAng=a;w.style.setProperty('--turn',turn+'deg');closest(true);e.preventDefault()};const end=e=>{if(!drag)return;drag=false;pauseUntil=performance.now()+2200;w.releasePointerCapture?.(e.pointerId)};w.onpointerup=end;w.onpointercancel=end}
-function auto(ts){if(!lastTs)lastTs=ts;const dt=Math.min(40,ts-lastTs);lastTs=ts;if(!drag&&ts>pauseUntil&&items.length>1){turn+=dt*.0035;q('#wheel').style.setProperty('--turn',turn+'deg');closest(false)}raf=requestAnimationFrame(auto)}
+function auto(ts){if(!lastTs)lastTs=ts;const dt=Math.min(40,ts-lastTs);lastTs=ts;if(heroInView&&!drag&&ts>pauseUntil&&items.length>1){turn+=dt*.0035;q('#wheel').style.setProperty('--turn',turn+'deg');closest(false)}raf=requestAnimationFrame(auto)}
 function gallery(){
   const t=T[lang],pics=(Array.isArray(cfg.storeGallery)?cfg.storeGallery:[]).filter(Boolean).slice(0,3),arr=pics.length?pics:[null],track=q('#galleryTrack'),dots=q('#galleryDots');
   gIndex=Math.min(gIndex,arr.length-1);
@@ -3437,7 +3541,7 @@ function setupLayerBridges(){
 }
 function themeStart(){clearInterval(themeTimer);themeApply();themeTimer=setInterval(()=>{theme=(theme+1)%THEMES.length;themeApply()},8000)}
 function render(){build();brand();text();contacts();renderBaristas();drawWheel();preview(false);gallery();renderPopular();setTimeout(()=>{animateEveryText();setupRepeatMotion()},40)}
-function init(){if(initialized)return;initialized=true;wheelEvents();q('#preview').onclick=info;q('#infoClose').onclick=hideInfo;q('#langBtn').onclick=()=>{lang=lang==='en'?'ar':'en';localStorage.setItem('cng_website_lang',lang);document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';render();window.scrollBy(0,1);window.scrollBy(0,-1)};let sx=0;const gv=q('#galleryView');gv.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});gv.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,n=Math.max(1,(Array.isArray(cfg.storeGallery)?cfg.storeGallery.filter(Boolean).slice(0,3).length:0));if(Math.abs(dx)>40&&n>1){const dir=dx<0?1:-1;gIndex=(gIndex+dir+n)%n;moveGallery()}},{passive:true});setupRepeatMotion();cancelAnimationFrame(raf);raf=requestAnimationFrame(auto);themeStart();setupLayerBridges();animateEveryText();
+function init(){if(initialized)return;initialized=true;const hero=q('.hero');if(hero){window.__cngHeroObserver?.disconnect?.();window.__cngHeroObserver=new IntersectionObserver(es=>{heroInView=!!(es[0]&&es[0].isIntersecting)},{rootMargin:'80px 0px 80px 0px',threshold:0});window.__cngHeroObserver.observe(hero)}wheelEvents();q('#preview').onclick=info;q('#infoClose').onclick=hideInfo;q('#langBtn').onclick=()=>{lang=lang==='en'?'ar':'en';localStorage.setItem('cng_website_lang',lang);document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';render();window.scrollBy(0,1);window.scrollBy(0,-1)};let sx=0;const gv=q('#galleryView');gv.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});gv.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,n=Math.max(1,(Array.isArray(cfg.storeGallery)?cfg.storeGallery.filter(Boolean).slice(0,3).length:0));if(Math.abs(dx)>40&&n>1){const dir=dx<0?1:-1;gIndex=(gIndex+dir+n)%n;moveGallery()}},{passive:true});setupRepeatMotion();cancelAnimationFrame(raf);raf=requestAnimationFrame(auto);themeStart();setupLayerBridges();animateEveryText();
 let __cngLastWidth=window.innerWidth,__cngResizeTimer=0;
 addEventListener('resize',()=>{
   const w=window.innerWidth;
