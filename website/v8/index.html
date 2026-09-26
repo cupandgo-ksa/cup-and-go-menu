@@ -1,4 +1,4 @@
-<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07130e"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>Cup And Go · v16</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,600&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>:root{--bg:#07130e;--glow:#35572d;--gold:#e5c158;--text:#f5efe7;--muted:#9aa79e;--safe:env(safe-area-inset-top,0px)}
+<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07130e"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>Cup And Go · v17</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,600&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>:root{--bg:#07130e;--glow:#35572d;--gold:#e5c158;--text:#f5efe7;--muted:#9aa79e;--safe:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Cairo,system-ui,-apple-system,sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit}.noise{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .header{position:fixed;z-index:90;top:0;left:0;right:0;height:78px;padding:calc(12px + var(--safe)) 16px 10px;display:flex;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:background 1.8s ease}
 .brand{display:flex;align-items:center;gap:9px;min-width:0;max-width:78%}.brand-logo{width:42px;height:42px;border-radius:50%;overflow:hidden;background:#fff;border:1px solid color-mix(in srgb,var(--gold) 75%,#fff 25%);box-shadow:0 0 0 3px rgba(229,193,88,.06),0 10px 22px rgba(0,0,0,.28);flex:none}.brand-logo img{width:100%;height:100%;object-fit:contain}.brand-wordmark img{display:block;max-width:175px;max-height:42px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 4px 10px rgba(0,0,0,.3))}.brand-wordmark span{font:400 30px/.9 'Great Vibes',cursive;color:#fff;text-shadow:0 3px 14px rgba(0,0,0,.3);white-space:nowrap}.header-tools{display:flex;gap:8px}.round{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.045);display:grid;place-items:center;color:#fff;font-size:10px;font-weight:800}
@@ -226,6 +226,93 @@ html[lang="ar"] .gallery-card+ .gallery-card{margin-right:0!important}
 .icon-row{overflow:visible!important}
 .developer-strip{display:block!important;position:relative!important;z-index:2!important}
 
+
+/* v17 Arabic geometry fix + directional premium motion */
+html,body{width:100%;max-width:100%;overflow-x:hidden!important}
+main,.hero,.gallery,.signboard,.about,.baristas,.contacts{width:100%;max-width:100%;min-width:0}
+.section-head,.gallery-view,.signboard,.about,.baristas,.contacts{box-sizing:border-box;min-width:0}
+.gallery{overflow:hidden!important}
+.gallery-view{width:100%!important;max-width:100%!important;overflow:hidden!important;padding:0 18px!important}
+.gallery-track{display:flex!important;direction:ltr!important;width:100%!important;max-width:none!important;gap:0!important;will-change:transform;transform-style:preserve-3d}
+.gallery-card{flex:0 0 100%!important;width:100%!important;min-width:100%!important;max-width:100%!important;margin:0!important;box-sizing:border-box!important}
+.gallery-label{max-width:calc(100% - 36px)!important}
+.signboard,.about,.baristas,.contacts{overflow:hidden!important}
+.sign-wall{width:100%!important;max-width:100%!important}
+.hero{max-width:calc(100% - 28px)!important;width:calc(100% - 28px)!important;margin-left:14px!important;margin-right:14px!important}
+html[lang="ar"] .hero{margin-left:14px!important;margin-right:14px!important}
+html[lang="ar"] .hero-copy{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+html[lang="ar"] .section-head,
+html[lang="ar"] .signboard,
+html[lang="ar"] .about,
+html[lang="ar"] .baristas,
+html[lang="ar"] .contacts{direction:rtl!important;text-align:right!important}
+html[lang="ar"] .gallery-view{direction:ltr!important}
+html[lang="ar"] .gallery-track{direction:ltr!important}
+html[lang="ar"] .gallery-card{direction:rtl!important;text-align:right!important}
+html[lang="ar"] .gallery-label{right:18px!important;left:auto!important;text-align:right!important}
+
+/* no heavy blur: cleaner motion */
+.txt-anim{filter:none!important;opacity:0;transform:translate3d(0,18px,0) scale(.992)!important;
+ transition:opacity .68s cubic-bezier(.16,1,.3,1) var(--txt-delay,0ms),
+ transform .82s cubic-bezier(.16,1,.3,1) var(--txt-delay,0ms)!important}
+.txt-anim.txt-in{opacity:1!important;transform:none!important}
+.scroll-section:not(.section-in){opacity:.18!important;transform:translate3d(0,30px,0) scale(.992)!important;filter:none!important}
+.motion-frame:not(.motion-in){filter:none!important}
+
+/* Headlines physically enter from the side they belong to */
+.headline-slide.txt-anim{opacity:0!important;transform:translate3d(-64px,0,0) scale(.985)!important}
+.headline-slide.txt-anim.txt-in{opacity:1!important;transform:none!important}
+html[lang="ar"] .headline-slide.txt-anim{transform:translate3d(64px,0,0) scale(.985)!important}
+html[lang="ar"] .headline-slide.txt-anim.txt-in{transform:none!important}
+
+/* subheads follow with a shorter side motion */
+.ey.txt-anim,.kicker.txt-anim{transform:translate3d(-24px,0,0)!important}
+html[lang="ar"] .ey.txt-anim,html[lang="ar"] .kicker.txt-anim{transform:translate3d(24px,0,0)!important}
+.ey.txt-in,.kicker.txt-in{transform:none!important}
+
+/* premium card depth without clipping */
+.gallery-card,.preview,.sign-frame,.owner-card,.barista-card,.social{
+ backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-style:preserve-3d}
+.gallery-card.motion-frame:not(.motion-in){opacity:.08!important;transform:translate3d(0,36px,0) scale(.94) rotateX(5deg)!important}
+.gallery-card.motion-frame.motion-in{opacity:1!important;transform:translate3d(0,0,0) scale(1)!important}
+.preview.motion-frame:not(.motion-in){opacity:.08!important;transform:translate3d(34px,18px,0) scale(.9) rotateY(-7deg)!important}
+html[lang="ar"] .preview.motion-frame:not(.motion-in){transform:translate3d(-34px,18px,0) scale(.9) rotateY(7deg)!important}
+.sign-frame.motion-frame:not(.motion-in){opacity:.1!important;transform:translate3d(0,38px,0) rotateY(-10deg) scale(.94)!important}
+.owner-card.motion-frame:not(.motion-in),.barista-card.motion-frame:not(.motion-in){opacity:.08!important;transform:translate3d(0,28px,0) scale(.9)!important}
+.social.motion-frame:not(.motion-in){opacity:.08!important;transform:translate3d(0,22px,0) scale(.91)!important}
+
+/* finer premium spacing */
+.section-head{padding:0 18px 24px!important}
+.section-head h2,.signboard h2,.about h2,.baristas h2{max-width:100%!important}
+.gallery{padding-top:34px!important}
+.signboard,.about,.baristas{padding-left:18px!important;padding-right:18px!important}
+.contacts{padding-left:18px!important;padding-right:18px!important}
+.gallery-dots{margin-top:17px!important}
+
+/* Arabic text safety */
+html[lang="ar"] .hero h1,
+html[lang="ar"] .section-head h2,
+html[lang="ar"] .signboard h2,
+html[lang="ar"] .about h2,
+html[lang="ar"] .baristas h2,
+html[lang="ar"] .contacts h3{
+ width:100%!important;max-width:100%!important;white-space:normal!important;
+ overflow-wrap:normal!important;word-break:normal!important;text-wrap:balance;
+ padding-left:0!important;padding-right:0!important
+}
+html[lang="ar"] .section-head h2{font-size:clamp(30px,8.4vw,38px)!important;line-height:1.35!important}
+html[lang="ar"] .signboard h2{font-size:clamp(29px,8vw,37px)!important;line-height:1.35!important}
+html[lang="ar"] .about h2{font-size:clamp(34px,9.2vw,42px)!important;line-height:1.35!important}
+html[lang="ar"] .baristas h2{font-size:clamp(30px,8.3vw,38px)!important;line-height:1.35!important}
+
+@media(max-width:390px){
+ .hero{max-width:calc(100% - 20px)!important;width:calc(100% - 20px)!important;margin-left:10px!important;margin-right:10px!important}
+ html[lang="ar"] .hero{margin-left:10px!important;margin-right:10px!important}
+ .gallery-view{padding:0 14px!important}
+ .section-head{padding-left:14px!important;padding-right:14px!important}
+ .signboard,.about,.baristas,.contacts{padding-left:14px!important;padding-right:14px!important}
+}
+
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>firebase.initializeApp({apiKey:"AIzaSyAoYsT80oNc505TgobYwTv0T7YfUF_fWRs",authDomain:"cup-and-go-pos-e0ad1.firebaseapp.com",databaseURL:"https://cup-and-go-pos-e0ad1-default-rtdb.firebaseio.com",projectId:"cup-and-go-pos-e0ad1"});(()=>{const db=firebase.database(),q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)],FOCUS=78;
 const T={en:{heroK:'SIGNATURE SELECTION',heroT:'Choose your <em>moment.</em>',heroL:'Let the circle glide, or move it with your finger. Tap the large image to see the item name, price and description.',hint:'DRAG · TAP AN ITEM',tap:'TAP FOR DETAILS',menu:'Open Menu',galleryK:'OUR PLACE',galleryT:'Recognize Cup And Go.',photo:'Cup And Go · Store view',signK:'OUR IDENTITY',signT:'The sign you remember.',signEmpty:'Upload your signboard image from Admin',aboutK:'ABOUT CUP AND GO',aboutT:'Coffee made <em>simple.</em>',about:'Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. We also have coffee boxes, sweet boxes and special offers. Our goal is simple: good taste, fast service and a comfortable experience. Tap Open Menu anytime to see all current items and offers.',details:'ITEM DETAILS',baristaK:'OUR TEAM',baristaT:'Meet the people behind your cup.',ownerRole:'Owner',ownerPlaceholder:'Owner name',baristaRole:'Barista',baristaPlaceholder:'Barista name',contacts:'Visit & Contact Cup And Go',loc:'Location',wa:'WhatsApp',ig:'Instagram',tk:'TikTok',dev:'Developer: Mohammed Ashik'},ar:{heroK:'اختيارات كوب أند جو',heroT:'اختر <em>مزاجك.</em>',heroL:'اترك الدائرة تتحرك بهدوء أو حرّكها بإصبعك. اضغط على الصورة الكبيرة لعرض اسم الصنف والسعر والوصف.',hint:'حرّك · اختر الصنف',tap:'اضغط للتفاصيل',menu:'افتح المنيو',galleryK:'مكاننا',galleryT:'تعرّف على كوب أند جو.',photo:'كوب أند جو · صورة المتجر',signK:'هويتنا',signT:'علامة تتذكرها.',signEmpty:'ارفع صورة لوحة المتجر من لوحة الإدارة',aboutK:'عن كوب أند جو',aboutT:'قهوة <em>ببساطة.</em>',about:'مرحباً بكم في كوب أند جو. نقدم قهوة اليوم، V60، الماتشا، الكركديه، المشروبات الباردة والحلويات. كما نقدم بوكسات القهوة والحلويات والعروض الخاصة. هدفنا بسيط: طعم جميل، خدمة سريعة وتجربة مريحة. اضغط على زر المنيو في أي وقت لمشاهدة جميع الأصناف والعروض الحالية.',details:'تفاصيل الصنف',baristaK:'فريقنا',baristaT:'تعرّف على من يصنع لك كوبك.',ownerRole:'المالك',ownerPlaceholder:'اسم المالك',baristaRole:'باريستا',baristaPlaceholder:'اسم الباريستا',contacts:'زورونا وتواصلوا معنا',loc:'الموقع',wa:'واتساب',ig:'إنستغرام',tk:'تيك توك',dev:'المطور: Mohammed Ashik'}};
 const CAT_AR={'Coffee':'قهوة','Sweet':'حلويات','Coffee Box':'بوكس القهوة','Sweet Box':'بوكس الحلويات','Cold Drink':'مشروبات باردة','Cold Drinks':'مشروبات باردة','Special Offer':'العروض الخاصة'};
@@ -248,7 +335,7 @@ function pAng(e){const r=q('#wheel').getBoundingClientRect(),cx=r.left+r.width/2
 function wheelEvents(){const w=q('#wheel');w.onpointerdown=e=>{drag=true;pauseUntil=performance.now()+2500;lastAng=pAng(e);w.setPointerCapture?.(e.pointerId);e.preventDefault()};w.onpointermove=e=>{if(!drag)return;const a=pAng(e);turn+=norm(a-lastAng);lastAng=a;w.style.setProperty('--turn',turn+'deg');closest(true);e.preventDefault()};const end=e=>{if(!drag)return;drag=false;pauseUntil=performance.now()+2200;w.releasePointerCapture?.(e.pointerId)};w.onpointerup=end;w.onpointercancel=end}
 function auto(ts){if(!lastTs)lastTs=ts;const dt=Math.min(40,ts-lastTs);lastTs=ts;if(!drag&&ts>pauseUntil&&items.length>1){turn+=dt*.0035;q('#wheel').style.setProperty('--turn',turn+'deg');closest(false)}raf=requestAnimationFrame(auto)}
 function gallery(){const t=T[lang],pics=(Array.isArray(cfg.storeGallery)?cfg.storeGallery:[]).filter(Boolean).slice(0,3),arr=pics.length?pics:[null,null,null],track=q('#galleryTrack'),dots=q('#galleryDots');gIndex=Math.min(gIndex,arr.length-1);track.innerHTML=arr.map((u,i)=>'<article class="gallery-card'+(i===gIndex?' active':'')+'">'+(u?'<img src="'+esc(u)+'" alt="'+esc(t.photo)+' '+(i+1)+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async">':'<div style="height:100%;display:grid;place-items:center;padding:25px;text-align:center;color:#65756b;font:italic 20px Cormorant Garamond,serif;">'+(lang==='ar'?'ارفع صورة المتجر من لوحة الإدارة':'Upload store photo from Admin')+'</div>')+'<div class="gallery-label"><b>'+esc(settings.shopName||'Cup And Go')+'</b><small>'+esc(t.photo)+'</small></div></article>').join('');dots.innerHTML=arr.map((_,i)=>'<button class="gallery-dot'+(i===gIndex?' active':'')+'" data-i="'+i+'"></button>').join('');qa('.gallery-dot').forEach(b=>b.onclick=()=>{gIndex=+b.dataset.i;moveGallery()});clearInterval(gTimer);gTimer=setInterval(()=>{gIndex=(gIndex+1)%arr.length;moveGallery()},4400);moveGallery()}
-function moveGallery(){const cs=qa('.gallery-card'),tr=q('#galleryTrack');if(!cs.length)return;const dir=lang==='ar'?1:-1;tr.style.transform='translateX('+(dir*gIndex*cs[0].getBoundingClientRect().width)+'px)';cs.forEach((c,i)=>c.classList.toggle('active',i===gIndex));qa('.gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===gIndex))}
+function moveGallery(){const cs=qa('.gallery-card'),tr=q('#galleryTrack');if(!cs.length)return;const step=cs[0].getBoundingClientRect().width;tr.style.transform='translate3d('+(-gIndex*step)+'px,0,0)';cs.forEach((c,i)=>c.classList.toggle('active',i===gIndex));qa('.gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===gIndex))}
 function sign(){const t=T[lang],im=q('#signImg'),ph=q('#signEmpty');q('#signK').textContent=t.signK;q('#signT').textContent=t.signT;if(cfg.signboardImageUrl){im.src=cfg.signboardImageUrl;im.hidden=false;ph.hidden=true}else{im.removeAttribute('src');im.hidden=true;ph.hidden=false;ph.textContent=t.signEmpty}}
 function text(){const t=T[lang],ar=lang==='ar';document.documentElement.lang=lang;document.documentElement.dir=ar?'rtl':'ltr';q('#heroK').textContent=t.heroK;q('#heroT').innerHTML=t.heroT;q('#heroL').textContent=t.heroL;q('#hint').textContent=t.hint;q('#tapLabel').textContent=t.tap;q('#menuText').textContent=t.menu;q('#menuCta').href=menuUrl();q('#headerMenu').href=menuUrl();q('#galleryK').textContent=t.galleryK;q('#galleryT').textContent=t.galleryT;q('#aboutK').textContent=t.aboutK;q('#aboutT').innerHTML=ar?(cfg.aboutTitleAr||t.aboutT):(cfg.aboutTitleEn||t.aboutT);q('#aboutText').textContent=ar?(cfg.aboutTextAr||t.about):(cfg.aboutTextEn||t.about);q('#contactTitle').textContent=t.contacts;q('#dev').innerHTML='<b>'+esc(t.dev)+'</b>';q('#langBtn').textContent=ar?'EN':'AR';sign()}
 function link(id,url,label){
@@ -297,7 +384,7 @@ function themeApply(){const p=THEMES[theme%THEMES.length];document.documentEleme
 
 function animateEveryText(){
   const selectors=['.kicker','.hero h1','.lead','.menu-cta','.section-head .ey','.section-head h2','.gallery-label b','.gallery-label small','.signboard .ey','.signboard h2','.sign-placeholder','.about .ey','.about h2','.about-text','.baristas .ey','.baristas h2','.owner-card h3','.owner-card small','.barista-card h3','.barista-card small','.contacts h3','.social span','.dev','.info .mini','.info h2','.info-price','.info p','.hint','.tap-label'];
-  const els=qa(selectors.join(',')).filter(Boolean);
+  const els=qa(selectors.join(',')).filter(Boolean);qa('.hero h1,.section-head h2,.signboard h2,.about h2,.baristas h2,.contacts h3').forEach(el=>el.classList.add('headline-slide'));
   els.forEach((el,i)=>{
     el.classList.add('txt-anim');
     el.style.setProperty('--txt-delay',Math.min((i%7)*65,390)+'ms');
