@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ar" dir="rtl" class="notranslate" translate="no">
-<head>
+<head><meta name="google" content="notranslate">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <!-- Cup And Go SEO START -->
@@ -468,15 +468,39 @@
     };
     const text={en:{menu:'Cup And Go Menu',sub:'Coffee, V60, matcha, hibiscus, desserts and offers',all:'All Items',loading:'Loading menu…',empty:'No menu items found.',offline:'Connection unavailable — retrying…',lang:'عربي'},ar:{menu:'منيو كوب أند جو',sub:'قهوة اليوم، V60، ماتشا، كركديه، حلويات وعروض كوب أند جو',all:'جميع الأصناف',loading:'جاري تحميل القائمة…',empty:'لا توجد أصناف في القائمة.',offline:'الاتصال غير متاح — جاري إعادة المحاولة…',lang:'English'}};
     const hasArabic=value=>/[\u0600-\u06ff]/.test(String(value||''));
-    function matchedProductKey(p){const key=normalizeProductKey(p?.name||p?.nameEn);if(arabicProducts[key])return key;const tokenKey=productTokenKey(key);return Object.keys(arabicProducts).find(candidate=>productTokenKey(candidate)===tokenKey)||key}
+    function matchedProductKey(p){
+      const direct=normalizeProductKey(p?.nameEn||(!hasArabic(p?.name)?p?.name:''));
+      if(arabicProducts[direct])return direct;
+      const tokenKey=productTokenKey(direct);
+      const tokenMatch=Object.keys(arabicProducts).find(candidate=>productTokenKey(candidate)===tokenKey);
+      if(tokenMatch)return tokenMatch;
+      const ar=String(p?.nameAr||(hasArabic(p?.name)?p?.name:'')||'').trim();
+      const arMatch=Object.entries(arabicProducts).find(entry=>String(entry[1]?.name||'').trim()===ar);
+      return arMatch?arMatch[0]:direct;
+    }
     function arabicProductOf(p){return arabicProducts[matchedProductKey(p)]||null}
-    function nameOf(p){const translated=arabicProductOf(p),arabicSaved=[p.nameAr,p.name].find(hasArabic);return isArabic?(arabicSaved||translated?.name||'صنف'):(p.name||p.nameEn||p.nameAr||'Item')}
-    function descOf(p){const translated=arabicProductOf(p),key=matchedProductKey(p),fallbackEn=englishDescriptions[key]||'',englishCandidates=[p.descriptionEn,p.description].filter(v=>v&&!hasArabic(v)),arabicSaved=[p.descriptionAr,p.description].find(hasArabic);return isArabic?(arabicSaved||translated?.description||''):(englishCandidates[0]||fallbackEn||'')}
-    function categoryName(c){if(!isArabic)return c;const raw=String(c||''),clean=normalizeProductKey(raw),aliases=[['special offer','Special Offer'],['coffee box','Coffee Box'],['sweet box','Sweet Box'],['cold drinks','Cold Drinks'],['cold drink','Cold Drink'],['coffee','Coffee'],['sweet','Sweet'],['dessert','Dessert'],['breakfast','Breakfast'],['matcha','Matcha'],['tea','Tea'],['offers','Offers'],['other','Other']],matched=aliases.find(([needle])=>clean===needle||clean.includes(needle)),icons=[...new Set(raw.match(/\p{Extended_Pictographic}/gu)||[])].join(' ');return matched?`${catAr[matched[1]]}${icons?' '+icons:''}`:raw}
+    function englishProductName(p){
+      const direct=[p?.nameEn,p?.name].find(v=>v&&!hasArabic(v)&&String(v).trim());
+      if(direct)return String(direct).trim();
+      const key=matchedProductKey(p);
+      if(!key)return'Item';
+      return key.split(/\s+/).map(w=>w.toLowerCase()==='v60'?'V60':w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+    }
+    function nameOf(p){const translated=arabicProductOf(p),arabicSaved=[p?.nameAr,p?.name].find(v=>hasArabic(v));return isArabic?(arabicSaved||translated?.name||'صنف'):englishProductName(p)}
+    function descOf(p){const translated=arabicProductOf(p),key=matchedProductKey(p),fallbackEn=englishDescriptions[key]||'',englishCandidates=[p?.descriptionEn,p?.description].filter(v=>v&&!hasArabic(v)),arabicSaved=[p?.descriptionAr,p?.description].find(v=>hasArabic(v));return isArabic?(arabicSaved||translated?.description||''):(englishCandidates[0]||fallbackEn||'')}
+    function categoryName(c){
+      const raw=String(c||''),icons=[...new Set(raw.match(/\p{Extended_Pictographic}/gu)||[])].join(' '),clean=normalizeProductKey(raw);
+      const aliases=[['special offer','Special Offer'],['coffee box','Coffee Box'],['sweet box','Sweet Box'],['cold drinks','Cold Drinks'],['cold drink','Cold Drink'],['coffee','Coffee'],['sweet','Sweet'],['dessert','Dessert'],['breakfast','Breakfast'],['matcha','Matcha'],['tea','Tea'],['offers','Offers'],['other','Other']];
+      const arAliases=[['العروض الخاصة','Special Offer'],['العروض','Offers'],['بوكس القهوة','Coffee Box'],['بوكس الحلويات','Sweet Box'],['مشروبات باردة','Cold Drinks'],['قهوة','Coffee'],['حلويات','Sweet'],['ماتشا','Matcha'],['شاي','Tea'],['فطور','Breakfast'],['أخرى','Other']];
+      let key=(aliases.find(x=>clean===x[0]||clean.includes(x[0]))||[])[1];
+      if(!key)key=(arAliases.find(x=>raw.includes(x[0]))||[])[1];
+      if(isArabic)return key?(catAr[key]||raw)+(icons?' '+icons:''):raw;
+      return key?key+(icons?' '+icons:''):raw;
+    }
     function updateClock(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString(isArabic?'ar-SA':'en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});const h=d.getHours();document.getElementById('greeting').textContent=isArabic?(h<12?'صباح الخير ☀️':h<17?'مساء الخير 🌤️':'مساء النور 🌙'):(h<12?'Good Morning ☀️':h<17?'Good Afternoon 🌤️':h<21?'Good Evening 🌙':'Have a great night ☕')}
     function syncFixedHeaderHeight(){const header=document.querySelector('.header');if(!header)return;const height=Math.ceil(header.getBoundingClientRect().height);if(height>0)document.documentElement.style.setProperty('--cng-fixed-header-h',`${height}px`)}
     function updateLedLanguage(){const el=document.getElementById('ledText');if(!el)return;const raw=el.dataset.rawText||'☕ Welcome to Cup And Go ☕',plain=normalizeProductKey(raw);if(isArabic&&plain.includes('welcome to cup and go'))el.textContent='☕ مرحباً بكم في كوب أند جو ☕';else if(isArabic&&plain.includes('get 1 free')&&plain.includes('cup and go'))el.textContent='☕ احصل على كوب مجاني من كوب أند جو ☕';else el.textContent=raw}
-    function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'منيو كوب أند جو | قائمة Cup And Go | السعودية':'Cup And Go Menu | منيو كوب أند جو | Saudi Arabia';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;document.getElementById('menuSub').textContent=t.sub;document.getElementById('shopName').textContent=isArabic?'كوب أند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب أند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب أند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu();requestAnimationFrame(syncFixedHeaderHeight)}
+    function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.setAttribute('translate','no');document.documentElement.classList.add('notranslate');document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'منيو كوب أند جو | قائمة Cup And Go | السعودية':'Cup And Go Menu | منيو كوب أند جو | Saudi Arabia';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;document.getElementById('menuSub').textContent=t.sub;document.getElementById('shopName').textContent=isArabic?'كوب أند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب أند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب أند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu();requestAnimationFrame(syncFixedHeaderHeight)}
     function toggleLanguage(){
   isArabic=!isArabic;
   localStorage.setItem('cng_lang',isArabic?'ar':'en');
