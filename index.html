@@ -829,4 +829,4 @@ Promise.all([db.ref('/settings').once('value'),db.ref('/products').once('value')
   db.ref('/products').on('value',x=>{const d=x.val(),v=d?Object.values(d).filter(Boolean):[],z=sig(v);if(z===sP)return;sP=z;products=v;try{localStorage.setItem('cng_products',JSON.stringify(v))}catch(e){}render()});
   db.ref('/website/config').on('value',x=>{const v=x.val()||{},z=sig(v);if(z===sC)return;sC=z;cfg=v;try{localStorage.setItem('cng_website_config',JSON.stringify(v))}catch(e){}render()})
 }).catch(()=>{});
-})();</script></body></html>
+})();</script><!-- DOMAIN_OWNER_RECLAIM_20260926 --></body></html>
