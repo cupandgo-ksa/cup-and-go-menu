@@ -1235,6 +1235,118 @@ html[lang="ar"] .bridge-2.layer-bridge-bottom{right:-76px!important;left:auto!im
   .sign-wall:after{width:224px!important;height:292px!important;opacity:.54!important}
 }
 
+
+/* CNG signboard no-crop final — natural image ratio + slide only */
+.sign-wall{
+  width:100%!important;
+  max-width:390px!important;
+  height:auto!important;
+  min-height:470px!important;
+  margin:0 auto!important;
+  padding:54px 18px 28px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.signboard.has-image .sign-frame,
+.signboard.has-image .signboard.reveal .sign-frame{
+  width:min(64vw,240px)!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+}
+.sign-frame,
+.signboard.reveal .sign-frame{
+  position:relative!important;
+  z-index:3!important;
+  padding:7px!important;
+  border-radius:7px!important;
+  animation:none!important;
+  filter:none!important;
+  will-change:transform,opacity!important;
+}
+.signboard.has-image .sign-frame-inner{
+  width:100%!important;
+  height:auto!important;
+  display:block!important;
+  overflow:visible!important;
+  background:#180c10!important;
+}
+.signboard.has-image .sign-frame img,
+.signboard.has-image #signImg{
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:none!important;
+  display:block!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#180c10!important;
+  transform:none!important;
+  animation:none!important;
+  filter:none!important;
+}
+
+/* no image placeholder keeps a predictable poster shape */
+.signboard:not(.has-image) .sign-frame{
+  width:min(61vw,230px)!important;
+  aspect-ratio:9/16!important;
+  height:auto!important;
+}
+.signboard:not(.has-image) .sign-frame-inner{
+  width:100%!important;
+  height:100%!important;
+  overflow:hidden!important;
+}
+
+/* slide only — NO scale / zoom / tilt */
+.sign-frame.motion-frame:not(.motion-in){
+  opacity:0!important;
+  transform:translate3d(0,26px,0)!important;
+  transition:opacity .62s ease,transform .82s cubic-bezier(.16,1,.3,1)!important;
+}
+.sign-frame.motion-frame.motion-in{
+  opacity:1!important;
+  transform:translate3d(0,0,0)!important;
+  transition:opacity .62s ease,transform .82s cubic-bezier(.16,1,.3,1)!important;
+}
+.signboard.reveal .sign-frame:not(.motion-frame){
+  opacity:1!important;
+  transform:none!important;
+}
+
+/* lamp + light remain static behind full poster */
+.sign-wall:before{
+  top:20px!important;
+  z-index:5!important;
+}
+.sign-wall:after{
+  top:29px!important;
+  width:252px!important;
+  height:330px!important;
+  z-index:1!important;
+  opacity:.52!important;
+  filter:blur(11px)!important;
+  pointer-events:none!important;
+}
+.sign-shadow{bottom:14px!important;opacity:.48!important}
+
+@media(max-width:390px){
+  .sign-wall{
+    max-width:355px!important;
+    min-height:455px!important;
+    padding:52px 16px 26px!important;
+  }
+  .signboard.has-image .sign-frame{
+    width:min(63vw,232px)!important;
+  }
+  .signboard:not(.has-image) .sign-frame{
+    width:min(59vw,218px)!important;
+  }
+}
+
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
