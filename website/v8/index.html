@@ -1,4 +1,4 @@
-<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07130e"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>Cup And Go · Premium Live</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,600&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>:root{--bg:#07130e;--glow:#35572d;--gold:#e5c158;--text:#f5efe7;--muted:#9aa79e;--safe:env(safe-area-inset-top,0px)}
+<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07130e"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>Cup And Go · Premium</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,600&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>:root{--bg:#07130e;--glow:#35572d;--gold:#e5c158;--text:#f5efe7;--muted:#9aa79e;--safe:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Cairo,system-ui,-apple-system,sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit}.noise{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .header{position:fixed;z-index:90;top:0;left:0;right:0;height:78px;padding:calc(12px + var(--safe)) 16px 10px;display:flex;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:background 1.8s ease}
 .brand{display:flex;align-items:center;gap:9px;min-width:0;max-width:78%}.brand-logo{width:42px;height:42px;border-radius:50%;overflow:hidden;background:#fff;border:1px solid color-mix(in srgb,var(--gold) 75%,#fff 25%);box-shadow:0 0 0 3px rgba(229,193,88,.06),0 10px 22px rgba(0,0,0,.28);flex:none}.brand-logo img{width:100%;height:100%;object-fit:contain}.brand-wordmark img{display:block;max-width:175px;max-height:42px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 4px 10px rgba(0,0,0,.3))}.brand-wordmark span{font:400 30px/.9 'Great Vibes',cursive;color:#fff;text-shadow:0 3px 14px rgba(0,0,0,.3);white-space:nowrap}.header-tools{display:flex;gap:8px}.round{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.045);display:grid;place-items:center;color:#fff;font-size:10px;font-weight:800}
@@ -678,6 +678,204 @@ html[lang="ar"] .bridge-1.layer-bridge-top{right:-92px!important;left:auto!impor
 html[lang="ar"] .bridge-1.layer-bridge-bottom{left:-86px!important;right:auto!important}
 html[lang="ar"] .bridge-2.layer-bridge-top{left:-104px!important;right:auto!important}
 html[lang="ar"] .bridge-2.layer-bridge-bottom{right:-104px!important;left:auto!important}
+
+
+/* PREMIUM_LAYOUT_V21 — mobile-first visual polish */
+:root{--page-pad:clamp(18px,5vw,24px);--section-y:clamp(50px,8vw,66px)}
+html,body{background:var(--bg)!important}
+body{min-height:100dvh}
+main{padding-top:78px!important}
+
+/* one consistent rhythm across the whole site */
+.gallery,.signboard,.about,.baristas,.contacts{
+  padding-left:var(--page-pad)!important;
+  padding-right:var(--page-pad)!important;
+  padding-top:var(--section-y)!important;
+  padding-bottom:var(--section-y)!important;
+  margin:0!important;
+}
+.gallery-view,.section-head{padding-left:0!important;padding-right:0!important}
+.section-head{padding-bottom:24px!important}
+.section-head h2,.signboard h2,.about h2,.baristas h2,.contacts h3{
+  text-wrap:balance;
+  max-width:100%!important;
+}
+
+/* cleaner section boundaries — blended, never hard-cut */
+.gallery,.signboard,.about,.baristas,.contacts{position:relative!important}
+.gallery:before,.signboard:before,.about:before,.baristas:before,.contacts:before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:-1px;
+  height:46px;
+  pointer-events:none;
+  z-index:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.018),transparent);
+}
+.gallery:after,.signboard:after,.about:after,.baristas:after,.contacts:after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:-1px;
+  height:54px;
+  pointer-events:none;
+  z-index:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.08),transparent);
+}
+
+/* decorative rings: small seam detail, never a giant background object */
+.layer-bridge{
+  width:150px!important;
+  height:150px!important;
+  opacity:.09!important;
+  border-color:color-mix(in srgb,var(--gold) 14%,rgba(255,255,255,.04))!important;
+  box-shadow:
+    0 0 0 22px rgba(255,255,255,.010),
+    0 0 0 45px color-mix(in srgb,var(--glow) 3%,transparent)!important;
+}
+.layer-bridge:before{inset:22px!important;border-color:rgba(255,255,255,.03)!important}
+.layer-bridge:after{inset:48px!important;border-color:color-mix(in srgb,var(--gold) 10%,transparent)!important}
+.layer-bridge-top{top:-106px!important;right:-55px!important}
+.layer-bridge-bottom{bottom:-108px!important;left:-56px!important}
+.bridge-1.layer-bridge-top{left:-56px!important;right:auto!important}
+.bridge-1.layer-bridge-bottom{right:-55px!important;left:auto!important}
+.bridge-2.layer-bridge-top{right:-70px!important;left:auto!important;transform:scale(.88)!important}
+.bridge-2.layer-bridge-bottom{left:-70px!important;right:auto!important;transform:scale(.88)!important}
+.scroll-section.section-in .layer-bridge-top{transform:translate3d(0,3px,0) rotate(3deg)!important}
+.scroll-section.section-in .layer-bridge-bottom{transform:translate3d(0,-3px,0) rotate(-3deg)!important}
+html[lang="ar"] .layer-bridge-top{left:-55px!important;right:auto!important}
+html[lang="ar"] .layer-bridge-bottom{right:-56px!important;left:auto!important}
+html[lang="ar"] .bridge-1.layer-bridge-top{right:-56px!important;left:auto!important}
+html[lang="ar"] .bridge-1.layer-bridge-bottom{left:-55px!important;right:auto!important}
+
+/* signboard: more realistic, compact and centered */
+.signboard{color:#f5efe7!important}
+.signboard .ey{margin-bottom:8px!important}
+.signboard h2{margin:8px 0 26px!important}
+.sign-wall{
+  width:100%!important;
+  height:clamp(390px,70dvh,445px)!important;
+  max-height:445px!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(circle at 50% 16%,rgba(255,235,191,.10),transparent 34%),
+    linear-gradient(160deg,color-mix(in srgb,var(--bg) 72%,#fff 28%),color-mix(in srgb,var(--bg) 92%,#fff 8%))!important;
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,.18),
+    0 22px 44px rgba(0,0,0,.18)!important;
+}
+.sign-wall:before{
+  width:92px!important;height:8px!important;top:16px!important;
+  background:linear-gradient(#201d1a,#080706)!important;
+}
+.sign-wall:after{width:205px!important;height:170px!important;top:23px!important;opacity:.58!important}
+.sign-frame{
+  width:clamp(188px,57vw,230px)!important;
+  height:auto!important;
+  aspect-ratio:9/16!important;
+  max-height:365px!important;
+  padding:7px!important;
+  box-shadow:
+    14px 19px 36px rgba(0,0,0,.28),
+    -5px 7px 12px rgba(255,255,255,.08),
+    inset 0 0 0 1px rgba(255,255,255,.10)!important;
+}
+.sign-shadow{bottom:26px!important;width:42%!important;opacity:.72!important}
+
+/* About: premium editorial spacing */
+.about{min-height:auto!important}
+.about .ey{margin-bottom:10px!important}
+.about h2{
+  font-size:clamp(40px,11vw,50px)!important;
+  line-height:.92!important;
+  margin:10px 0 24px!important;
+  max-width:340px!important;
+}
+.about-text{
+  max-width:40ch!important;
+  font-size:clamp(13px,3.7vw,15px)!important;
+  line-height:1.82!important;
+  color:rgba(245,239,231,.72)!important;
+}
+
+/* Team: less empty space, better proportions */
+.baristas{min-height:auto!important}
+.baristas h2{
+  margin:10px 0 28px!important;
+  max-width:340px!important;
+}
+.team-owner{margin:0 0 30px!important}
+.owner-card{width:clamp(142px,42vw,170px)!important}
+.owner-card h3{margin-top:11px!important}
+.barista-grid{gap:clamp(8px,2.6vw,12px)!important}
+.barista-photo{padding:4px!important}
+.barista-card h3{
+  font-size:clamp(13px,3.8vw,16px)!important;
+  line-height:1.14!important;
+  margin-top:9px!important;
+}
+.barista-card small{margin-top:2px!important}
+
+/* Contact: lighter, cleaner hierarchy */
+.contacts{padding-bottom:34px!important}
+.contacts h3{
+  font-family:'Cormorant Garamond',serif!important;
+  font-size:clamp(29px,8.6vw,37px)!important;
+  line-height:1!important;
+  font-weight:500!important;
+  letter-spacing:-.035em!important;
+  margin:0 0 22px!important;
+  max-width:330px!important;
+}
+html[lang="ar"] .contacts h3{
+  font-family:Cairo,Inter,sans-serif!important;
+  font-size:clamp(27px,7.8vw,34px)!important;
+  line-height:1.35!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+}
+.icon-row{
+  max-width:330px!important;
+  margin:0 auto!important;
+  grid-template-columns:repeat(4,1fr)!important;
+  gap:18px!important;
+}
+.social,.social[hidden]{
+  min-height:48px!important;
+  padding:4px!important;
+  opacity:.68;
+}
+.social:not(.no-link){opacity:.92}
+.social svg{width:24px!important;height:24px!important}
+.developer-strip{
+  padding:20px 16px calc(20px + env(safe-area-inset-bottom))!important;
+  border-top:1px solid rgba(255,255,255,.035)!important;
+}
+
+/* gallery cards aligned to mobile viewport */
+.gallery-card{
+  border-radius:24px!important;
+  height:clamp(250px,66vw,300px)!important;
+  box-shadow:0 18px 38px rgba(0,0,0,.20)!important;
+}
+.gallery-label{left:16px!important;bottom:15px!important}
+html[lang="ar"] .gallery-label{left:auto!important;right:16px!important}
+
+/* tighter header on small phones */
+@media(max-width:390px){
+  .header{height:74px!important;padding-left:14px!important;padding-right:14px!important}
+  main{padding-top:74px!important}
+  .brand-logo{width:40px!important;height:40px!important}
+  .brand-wordmark img{max-width:150px!important}
+  .round{width:40px!important;height:40px!important}
+  .gallery,.signboard,.about,.baristas,.contacts{
+    padding-left:16px!important;padding-right:16px!important;
+    padding-top:52px!important;padding-bottom:52px!important
+  }
+  .sign-wall{height:400px!important}
+  .sign-frame{width:min(58vw,210px)!important}
+  .owner-card{width:min(43vw,160px)!important}
+  .icon-row{gap:14px!important}
+}
 
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>firebase.initializeApp({apiKey:"AIzaSyAoYsT80oNc505TgobYwTv0T7YfUF_fWRs",authDomain:"cup-and-go-pos-e0ad1.firebaseapp.com",databaseURL:"https://cup-and-go-pos-e0ad1-default-rtdb.firebaseio.com",projectId:"cup-and-go-pos-e0ad1"});(()=>{const db=firebase.database(),q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)],FOCUS=78;
 const T={en:{heroK:'SIGNATURE SELECTION',heroT:'Choose your <em>moment.</em>',heroL:'Let the circle glide, or move it with your finger. Tap the large image to see the item name, price and description.',hint:'DRAG · TAP AN ITEM',tap:'TAP FOR DETAILS',menu:'Open Menu',galleryK:'OUR PLACE',galleryT:'Recognize Cup And Go.',photo:'Cup And Go · Store view',signK:'OUR IDENTITY',signT:'The sign you remember.',signEmpty:'Upload your signboard image from Admin',aboutK:'ABOUT CUP AND GO',aboutT:'Coffee made <em>simple.</em>',about:'Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. We also have coffee boxes, sweet boxes and special offers. Our goal is simple: good taste, fast service and a comfortable experience. Tap Open Menu anytime to see all current items and offers.',details:'ITEM DETAILS',baristaK:'OUR TEAM',baristaT:'Meet the people behind your cup.',ownerRole:'Owner',ownerPlaceholder:'Owner name',baristaRole:'Barista',baristaPlaceholder:'Barista name',contacts:'Visit & Contact Cup And Go',loc:'Location',wa:'WhatsApp',ig:'Instagram',tk:'TikTok',dev:'Developer: Mohammed Ashik'},ar:{heroK:'اختيارات كوب أند جو',heroT:'اختر <em>مزاجك.</em>',heroL:'اترك الدائرة تتحرك بهدوء أو حرّكها بإصبعك. اضغط على الصورة الكبيرة لعرض اسم الصنف والسعر والوصف.',hint:'حرّك · اختر الصنف',tap:'اضغط للتفاصيل',menu:'افتح المنيو',galleryK:'مكاننا',galleryT:'تعرّف على كوب أند جو.',photo:'كوب أند جو · صورة المتجر',signK:'هويتنا',signT:'علامة تتذكرها.',signEmpty:'ارفع صورة لوحة المتجر من لوحة الإدارة',aboutK:'عن كوب أند جو',aboutT:'قهوة <em>ببساطة.</em>',about:'مرحباً بكم في كوب أند جو. نقدم قهوة اليوم، V60، الماتشا، الكركديه، المشروبات الباردة والحلويات. كما نقدم بوكسات القهوة والحلويات والعروض الخاصة. هدفنا بسيط: طعم جميل، خدمة سريعة وتجربة مريحة. اضغط على زر المنيو في أي وقت لمشاهدة جميع الأصناف والعروض الحالية.',details:'تفاصيل الصنف',baristaK:'فريقنا',baristaT:'تعرّف على من يصنع لك كوبك.',ownerRole:'المالك',ownerPlaceholder:'اسم المالك',baristaRole:'باريستا',baristaPlaceholder:'اسم الباريستا',contacts:'زورونا وتواصلوا معنا',loc:'الموقع',wa:'واتساب',ig:'إنستغرام',tk:'تيك توك',dev:'المطور: Mohammed Ashik'}};
