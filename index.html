@@ -2075,6 +2075,227 @@ main > .developer-strip{
   }
 }
 /* CNG FINAL MASTER END */
+
+/* CNG PREMIUM MOTION POLISH 20260926E */
+/* Premium store slideshow: contained 3D slide, never shows cut neighbour cards. */
+#gallery .gallery-view{
+  overflow:hidden!important;
+  perspective:1000px!important;
+}
+#gallery .gallery-track{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  aspect-ratio:3/4!important;
+  overflow:visible!important;
+}
+#gallery .gallery-card{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  aspect-ratio:auto!important;
+  border-radius:24px!important;
+  overflow:hidden!important;
+  opacity:1!important;
+  visibility:visible!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+  transform-origin:50% 50%!important;
+  box-shadow:0 28px 58px rgba(0,0,0,.26)!important;
+  will-change:transform,opacity!important;
+}
+#gallery .gallery-card::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-30% auto -30% -42%!important;
+  width:28%!important;
+  z-index:4!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent)!important;
+  transform:skewX(-18deg)!important;
+  opacity:0!important;
+}
+#gallery .gallery-card.is-current::before{
+  animation:cngGalleryShine 4.8s 1.1s ease-in-out infinite!important;
+}
+@keyframes cngGalleryShine{
+  0%,72%{left:-42%;opacity:0}
+  78%{opacity:.5}
+  94%,100%{left:125%;opacity:0}
+}
+#gallery .gallery-card.gallery-enter-right{
+  opacity:0!important;
+  transform:translate3d(15%,0,0) scale(.93) rotateY(-5deg)!important;
+}
+#gallery .gallery-card.gallery-enter-left{
+  opacity:0!important;
+  transform:translate3d(-15%,0,0) scale(.93) rotateY(5deg)!important;
+}
+#gallery .gallery-card.gallery-enter-right,
+#gallery .gallery-card.gallery-enter-left{
+  transition:
+    opacity .68s cubic-bezier(.16,1,.3,1),
+    transform .82s cubic-bezier(.16,1,.3,1)!important;
+}
+#gallery .gallery-card.is-current{
+  opacity:1!important;
+  transform:translate3d(0,0,0) scale(1) rotateY(0)!important;
+  transition:
+    opacity .68s cubic-bezier(.16,1,.3,1),
+    transform .82s cubic-bezier(.16,1,.3,1)!important;
+  z-index:3!important;
+}
+#gallery .gallery-card.gallery-leave-left{
+  opacity:0!important;
+  transform:translate3d(-12%,0,0) scale(.96) rotateY(4deg)!important;
+  transition:
+    opacity .56s cubic-bezier(.16,1,.3,1),
+    transform .72s cubic-bezier(.16,1,.3,1)!important;
+  z-index:2!important;
+}
+#gallery .gallery-card.gallery-leave-right{
+  opacity:0!important;
+  transform:translate3d(12%,0,0) scale(.96) rotateY(-4deg)!important;
+  transition:
+    opacity .56s cubic-bezier(.16,1,.3,1),
+    transform .72s cubic-bezier(.16,1,.3,1)!important;
+  z-index:2!important;
+}
+#gallery .gallery-card img{
+  transform:scale(1.015)!important;
+  transition:transform 5.5s ease!important;
+}
+#gallery .gallery-card.is-current img{
+  transform:scale(1.055)!important;
+}
+
+/* Smaller, more refined owner profile card — visual hierarchy instead of plain large text. */
+#baristas .owner-bio{
+  position:relative!important;
+  width:min(88vw,340px)!important;
+  max-width:340px!important;
+  margin:0 auto!important;
+  padding:13px 14px 14px!important;
+  border-radius:18px!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 92% 0%,rgba(229,193,88,.08),transparent 30%),
+    linear-gradient(145deg,rgba(255,255,255,.047),rgba(255,255,255,.016))!important;
+  border:1px solid rgba(229,193,88,.11)!important;
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.17),
+    inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+#baristas .owner-bio::before{
+  content:""!important;
+  position:absolute!important;
+  left:14px!important;
+  top:0!important;
+  width:44px!important;
+  height:1px!important;
+  display:block!important;
+  background:linear-gradient(90deg,var(--gold),transparent)!important;
+  opacity:.72!important;
+}
+html[lang="ar"] #baristas .owner-bio::before{
+  left:auto!important;
+  right:14px!important;
+  background:linear-gradient(270deg,var(--gold),transparent)!important;
+}
+#baristas .owner-bio-lang{
+  margin:0 0 6px!important;
+  font-size:6px!important;
+  line-height:1.2!important;
+  font-weight:800!important;
+  letter-spacing:.18em!important;
+  color:color-mix(in srgb,var(--gold) 88%,#fff 12%)!important;
+}
+#baristas .owner-bio-title{
+  margin:0 0 5px!important;
+  font:600 20px/1.05 'Cormorant Garamond',Cairo,serif!important;
+  letter-spacing:-.02em!important;
+  color:#f5efe7!important;
+}
+#baristas .owner-bio-text{
+  margin:0!important;
+  font-size:11.5px!important;
+  line-height:1.62!important;
+  font-weight:500!important;
+  color:rgba(245,239,231,.66)!important;
+}
+html[lang="ar"] #baristas .owner-bio-title,
+html[lang="ar"] #baristas .owner-bio-text{
+  letter-spacing:0!important;
+}
+
+/* Premium micro-motion for owner profile and card. */
+#baristas .owner-card{
+  animation:cngOwnerFloat 5.8s ease-in-out infinite!important;
+}
+@keyframes cngOwnerFloat{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(0,-5px,0)}
+}
+#baristas .owner-bio.motion-frame{
+  transition:
+    opacity .75s cubic-bezier(.16,1,.3,1),
+    transform .9s cubic-bezier(.16,1,.3,1)!important;
+}
+#baristas .owner-bio.motion-frame:not(.motion-in){
+  opacity:.08!important;
+  transform:translate3d(0,22px,0) scale(.95)!important;
+}
+#baristas .owner-bio.motion-frame.motion-in{
+  opacity:1!important;
+  transform:none!important;
+}
+
+/* Sections remain one background, but their CONTENT reveals with premium motion. */
+.scroll-section > :not(.layer-bridge){
+  transition:
+    opacity .72s cubic-bezier(.16,1,.3,1),
+    transform .88s cubic-bezier(.16,1,.3,1)!important;
+}
+.scroll-section:not(.section-in) > :not(.layer-bridge){
+  opacity:.12!important;
+  transform:translate3d(0,24px,0) scale(.992)!important;
+}
+.scroll-section.section-in > :not(.layer-bridge){
+  opacity:1!important;
+  transform:none!important;
+}
+
+/* Dots feel alive with the slideshow. */
+.gallery-dot{
+  transition:width .35s cubic-bezier(.16,1,.3,1),background .35s ease,transform .35s ease!important;
+}
+.gallery-dot.active{
+  transform:scaleX(1.04)!important;
+  box-shadow:0 0 16px color-mix(in srgb,var(--gold) 30%,transparent)!important;
+}
+
+@media(max-width:390px){
+  #baristas .owner-bio{
+    width:min(90vw,326px)!important;
+    max-width:326px!important;
+    padding:12px 13px 13px!important;
+  }
+  #baristas .owner-bio-title{font-size:19px!important}
+  #baristas .owner-bio-text{font-size:11px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #gallery .gallery-card,
+  #gallery .gallery-card img,
+  #baristas .owner-card,
+  #baristas .owner-bio,
+  .scroll-section > :not(.layer-bridge){
+    animation:none!important;
+    transition:none!important;
+    transform:none!important;
+  }
+}
+/* CNG PREMIUM MOTION POLISH END */
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
@@ -2103,27 +2324,54 @@ function pAng(e){const r=q('#wheel').getBoundingClientRect(),cx=r.left+r.width/2
 function wheelEvents(){const w=q('#wheel');w.onpointerdown=e=>{drag=true;pauseUntil=performance.now()+2500;lastAng=pAng(e);w.setPointerCapture?.(e.pointerId);e.preventDefault()};w.onpointermove=e=>{if(!drag)return;const a=pAng(e);turn+=norm(a-lastAng);lastAng=a;w.style.setProperty('--turn',turn+'deg');closest(true);e.preventDefault()};const end=e=>{if(!drag)return;drag=false;pauseUntil=performance.now()+2200;w.releasePointerCapture?.(e.pointerId)};w.onpointerup=end;w.onpointercancel=end}
 function auto(ts){if(!lastTs)lastTs=ts;const dt=Math.min(40,ts-lastTs);lastTs=ts;if(!drag&&ts>pauseUntil&&items.length>1){turn+=dt*.0035;q('#wheel').style.setProperty('--turn',turn+'deg');closest(false)}raf=requestAnimationFrame(auto)}
 function gallery(){
-  const pics=(Array.isArray(cfg.storeGallery)?cfg.storeGallery:[]).filter(Boolean).slice(0,3);
-  const arr=pics.length?pics:[null];
+  const t=T[lang],pics=(Array.isArray(cfg.storeGallery)?cfg.storeGallery:[]).filter(Boolean).slice(0,3),arr=pics.length?pics:[null],track=q('#galleryTrack'),dots=q('#galleryDots');
   gIndex=Math.min(gIndex,arr.length-1);
-  const dots=q('#galleryDots');
+  if(track){
+    track.innerHTML=arr.map((u,i)=>'<article class="gallery-card'+(i===gIndex?' is-current':'')+'" data-i="'+i+'">'+
+      (u
+        ? '<img src="'+esc(u)+'" alt="'+esc(t.photo)+' '+(i+1)+'" loading="'+(i===gIndex?'eager':'lazy')+'" decoding="async">'
+        : '<div style="height:100%;display:grid;place-items:center;padding:25px;text-align:center;color:#65756b;font:italic 20px Cormorant Garamond,serif;">'+(lang==='ar'?'ارفع صورة المتجر من لوحة الإدارة':'Upload store photo from Admin')+'</div>')+
+      '<div class="gallery-label"><b>'+esc(settings.shopName||'Cup And Go')+'</b><small>'+esc(t.photo)+'</small></div>'+
+    '</article>').join('');
+  }
   dots.innerHTML=arr.map((_,i)=>'<button class="gallery-dot'+(i===gIndex?' active':'')+'" data-i="'+i+'"></button>').join('');
-  qa('.gallery-dot').forEach(b=>b.onclick=()=>{gIndex=+b.dataset.i;moveGallery()});
+  qa('.gallery-dot').forEach(b=>b.onclick=()=>{
+    const next=+b.dataset.i;
+    if(next===gIndex)return;
+    const dir=next>gIndex?1:-1;
+    gIndex=next;
+    moveGallery(dir);
+  });
   clearInterval(gTimer);
-  if(arr.length>1)gTimer=setInterval(()=>{gIndex=(gIndex+1)%arr.length;moveGallery()},4400);
-  moveGallery();
+  if(arr.length>1)gTimer=setInterval(()=>{gIndex=(gIndex+1)%arr.length;moveGallery(1)},4400);
 }
-function moveGallery(){
-  const t=T[lang],pics=(Array.isArray(cfg.storeGallery)?cfg.storeGallery:[]).filter(Boolean).slice(0,3),arr=pics.length?pics:[null],track=q('#galleryTrack');
-  if(!track)return;
-  gIndex=(gIndex+arr.length)%arr.length;
-  const u=arr[gIndex];
-  track.innerHTML='<article class="gallery-card active">'+
-    (u
-      ? '<img src="'+esc(u)+'" alt="'+esc(t.photo)+' '+(gIndex+1)+'" loading="eager" decoding="async">'
-      : '<div style="height:100%;display:grid;place-items:center;padding:25px;text-align:center;color:#65756b;font:italic 20px Cormorant Garamond,serif;">'+(lang==='ar'?'ارفع صورة المتجر من لوحة الإدارة':'Upload store photo from Admin')+'</div>')+
-    '<div class="gallery-label"><b>'+esc(settings.shopName||'Cup And Go')+'</b><small>'+esc(t.photo)+'</small></div>'+
-  '</article>';
+function moveGallery(dir=1){
+  const cards=qa('#galleryTrack .gallery-card');
+  if(!cards.length)return;
+  const next=cards.find(card=>+card.dataset.i===gIndex);
+  const current=cards.find(card=>card.classList.contains('is-current'));
+  if(!next||next===current){
+    qa('.gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===gIndex));
+    return;
+  }
+  cards.forEach(card=>card.classList.remove('gallery-enter-right','gallery-enter-left','gallery-leave-left','gallery-leave-right'));
+  next.classList.add(dir>=0?'gallery-enter-right':'gallery-enter-left');
+  next.style.zIndex='3';
+  void next.offsetWidth;
+  if(current){
+    current.classList.remove('is-current');
+    current.classList.add(dir>=0?'gallery-leave-left':'gallery-leave-right');
+  }
+  next.classList.remove('gallery-enter-right','gallery-enter-left');
+  next.classList.add('is-current');
+  setTimeout(()=>{
+    cards.forEach(card=>{
+      if(card!==next){
+        card.classList.remove('gallery-leave-left','gallery-leave-right','is-current');
+        card.style.zIndex='';
+      }
+    });
+  },760);
   qa('.gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===gIndex));
 }
 function sign(){const t=T[lang],im=q('#signImg'),ph=q('#signEmpty'),sec=q('#signboard'),has=!!cfg.signboardImageUrl;q('#signK').textContent=t.signK;q('#signT').textContent=t.signT;if(sec)sec.classList.toggle('has-image',has);if(has){im.src=cfg.signboardImageUrl;im.hidden=false;ph.hidden=true}else{im.removeAttribute('src');im.hidden=true;ph.hidden=false;ph.textContent=t.signEmpty}}
@@ -2223,7 +2471,7 @@ function animateEveryText(){
   });
 }
 function setupRepeatMotion(){
-  const frames=qa('.preview,.gallery-card,.sign-frame,.owner-card,.barista-card,.social,.menu-cta');
+  const frames=qa('.preview,.gallery-card,.sign-frame,.owner-card,.owner-bio,.barista-card,.social,.menu-cta');
   frames.forEach((el,i)=>{
     el.classList.add('motion-frame');
     el.style.transitionDelay=((i%5)*70)+'ms';
@@ -2257,14 +2505,14 @@ function setupLayerBridges(){
 }
 function themeStart(){clearInterval(themeTimer);themeApply();themeTimer=setInterval(()=>{theme=(theme+1)%THEMES.length;themeApply()},8000)}
 function render(){build();brand();text();contacts();renderBaristas();drawWheel();preview(false);gallery();setTimeout(()=>{animateEveryText();setupRepeatMotion()},40)}
-function init(){if(initialized)return;initialized=true;wheelEvents();q('#preview').onclick=info;q('#infoClose').onclick=hideInfo;q('#langBtn').onclick=()=>{lang=lang==='en'?'ar':'en';localStorage.setItem('cng_website_lang',lang);document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';render();window.scrollBy(0,1);window.scrollBy(0,-1)};let sx=0;const gv=q('#galleryView');gv.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});gv.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,n=Math.max(1,(Array.isArray(cfg.storeGallery)?cfg.storeGallery.filter(Boolean).slice(0,3).length:0));if(Math.abs(dx)>40&&n>1){gIndex=(gIndex+(dx<0?1:-1)+n)%n;moveGallery()}},{passive:true});setupRepeatMotion();cancelAnimationFrame(raf);raf=requestAnimationFrame(auto);themeStart();setupLayerBridges();animateEveryText();
+function init(){if(initialized)return;initialized=true;wheelEvents();q('#preview').onclick=info;q('#infoClose').onclick=hideInfo;q('#langBtn').onclick=()=>{lang=lang==='en'?'ar':'en';localStorage.setItem('cng_website_lang',lang);document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';render();window.scrollBy(0,1);window.scrollBy(0,-1)};let sx=0;const gv=q('#galleryView');gv.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});gv.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,n=Math.max(1,(Array.isArray(cfg.storeGallery)?cfg.storeGallery.filter(Boolean).slice(0,3).length:0));if(Math.abs(dx)>40&&n>1){const dir=dx<0?1:-1;gIndex=(gIndex+dir+n)%n;moveGallery(dir)}},{passive:true});setupRepeatMotion();cancelAnimationFrame(raf);raf=requestAnimationFrame(auto);themeStart();setupLayerBridges();animateEveryText();
 let __cngLastWidth=window.innerWidth,__cngResizeTimer=0;
 addEventListener('resize',()=>{
   const w=window.innerWidth;
   if(Math.abs(w-__cngLastWidth)<2)return;
   __cngLastWidth=w;
   clearTimeout(__cngResizeTimer);
-  __cngResizeTimer=setTimeout(()=>{drawWheel();moveGallery()},120);
+  __cngResizeTimer=setTimeout(()=>{drawWheel()},120);
 },{passive:true})}
 try{if('serviceWorker'in navigator)navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>{if((r.scope||'').includes('/website/'))r.unregister()}))}catch(e){}
 try{
