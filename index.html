@@ -2380,6 +2380,139 @@ html[lang="ar"] .hero::before{
   }
 }
 /* CNG ROUND SEAM FINAL END */
+
+/* CNG SIDE ROUND + HERO FULL WIDTH 20260926I */
+/* Fix the remaining hero side gap from older mobile rules. */
+.hero,
+html[lang="ar"] .hero{
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  border-radius:0!important;
+  box-sizing:border-box!important;
+}
+
+/* Replace the large centered oval seams with small side round details. */
+.gallery::before,
+.signboard::before,
+.baristas::before,
+.about::before,
+.contacts::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  top:-34px!important;
+  bottom:auto!important;
+  left:auto!important;
+  right:-34px!important;
+  width:92px!important;
+  height:92px!important;
+  transform:none!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  border:1px solid rgba(229,193,88,.10)!important;
+  box-shadow:
+    0 0 0 18px rgba(255,255,255,.009),
+    0 0 0 36px rgba(229,193,88,.012)!important;
+  opacity:.64!important;
+  filter:none!important;
+  pointer-events:none!important;
+  z-index:1!important;
+}
+
+/* Matching small round at the bottom, on the opposite side. */
+.hero::after,
+.gallery::after,
+.signboard::after,
+.baristas::after,
+.about::after,
+.contacts::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  top:auto!important;
+  bottom:-34px!important;
+  left:-34px!important;
+  right:auto!important;
+  width:92px!important;
+  height:92px!important;
+  transform:none!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  border:1px solid rgba(229,193,88,.10)!important;
+  box-shadow:
+    0 0 0 18px rgba(255,255,255,.009),
+    0 0 0 36px rgba(229,193,88,.012)!important;
+  opacity:.64!important;
+  pointer-events:none!important;
+  z-index:1!important;
+}
+
+/* Keep the hero's decorative side ring small as well. */
+.hero::before{
+  width:132px!important;
+  height:132px!important;
+  right:-74px!important;
+  left:auto!important;
+  top:92px!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  border:1px solid rgba(229,193,88,.07)!important;
+  box-shadow:
+    0 0 0 22px rgba(255,255,255,.008),
+    0 0 0 44px rgba(229,193,88,.010)!important;
+  opacity:.42!important;
+  filter:none!important;
+}
+html[lang="ar"] .hero::before{
+  right:auto!important;
+  left:-74px!important;
+}
+
+/* Mirror the seam direction in Arabic, preserving the same visual language. */
+html[lang="ar"] .gallery::before,
+html[lang="ar"] .signboard::before,
+html[lang="ar"] .baristas::before,
+html[lang="ar"] .about::before,
+html[lang="ar"] .contacts::before{
+  right:auto!important;
+  left:-34px!important;
+}
+html[lang="ar"] .hero::after,
+html[lang="ar"] .gallery::after,
+html[lang="ar"] .signboard::after,
+html[lang="ar"] .baristas::after,
+html[lang="ar"] .about::after,
+html[lang="ar"] .contacts::after{
+  left:auto!important;
+  right:-34px!important;
+}
+
+@media(max-width:390px){
+  .hero,
+  html[lang="ar"] .hero{
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  .gallery::before,
+  .signboard::before,
+  .baristas::before,
+  .about::before,
+  .contacts::before,
+  .hero::after,
+  .gallery::after,
+  .signboard::after,
+  .baristas::after,
+  .about::after,
+  .contacts::after{
+    width:82px!important;
+    height:82px!important;
+  }
+}
+/* CNG SIDE ROUND + HERO FULL WIDTH END */
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
