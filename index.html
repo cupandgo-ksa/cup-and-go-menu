@@ -2697,7 +2697,136 @@ html[lang="ar"] .popular-group{
   padding-left:0!important;
 }
 /* CNG POPULAR SEAMLESS LOOP FIX END */
-</style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="popular-strip" id="popularStrip" hidden><div class="popular-head"><div class="ey" id="popularK">POPULAR PICKS</div><h2 id="popularT">Customer favorites.</h2></div><div class="popular-marquee" aria-label="Popular items"><div class="popular-run" id="popularRun"></div></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>
+
+/* CNG BRAND STORY FOOTER 20260926P */
+.brand-footer{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:46px 18px 26px!important;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 97%,#000 3%),
+      color-mix(in srgb,var(--bg) 91%,#1b0d0e 9%))!important;
+  border-top:1px solid rgba(229,193,88,.055)!important;
+}
+.brand-footer::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,transparent 0,rgba(229,193,88,.025) 50%,transparent 100%),
+    repeating-linear-gradient(90deg,transparent 0 11px,rgba(255,255,255,.012) 12px 13px)!important;
+  opacity:.55!important;
+}
+.brand-footer-inner{
+  position:relative!important;
+  z-index:1!important;
+  width:min(100%,620px)!important;
+  margin:0 auto!important;
+}
+.brand-footer-kicker{
+  margin:0 0 10px!important;
+  color:rgba(245,239,231,.46)!important;
+  font-size:7px!important;
+  line-height:1.2!important;
+  font-weight:800!important;
+  letter-spacing:.23em!important;
+}
+.brand-footer-title{
+  margin:0 0 26px!important;
+  color:#f5efe7!important;
+  font:500 clamp(26px,7vw,36px)/1.04 'Cormorant Garamond',Cairo,serif!important;
+  letter-spacing:-.025em!important;
+}
+.brand-footer-grid{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:18px 24px!important;
+  padding:18px 0!important;
+  border-top:1px solid rgba(229,193,88,.08)!important;
+  border-bottom:1px solid rgba(229,193,88,.08)!important;
+}
+.brand-footer-col{
+  min-width:0!important;
+}
+.brand-footer-col p{
+  position:relative!important;
+  margin:0 0 9px!important;
+  padding-left:13px!important;
+  color:rgba(245,239,231,.66)!important;
+  font-size:10.5px!important;
+  line-height:1.55!important;
+  font-weight:600!important;
+}
+.brand-footer-col p:last-child{margin-bottom:0!important}
+.brand-footer-col p::before{
+  content:"—"!important;
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  color:var(--gold)!important;
+}
+.brand-footer-copy{
+  margin-top:18px!important;
+  text-align:center!important;
+  color:rgba(245,239,231,.42)!important;
+  font-size:7.5px!important;
+  line-height:1.4!important;
+  font-weight:700!important;
+  letter-spacing:.10em!important;
+}
+.developer-strip{
+  padding-top:16px!important;
+  padding-bottom:calc(20px + env(safe-area-inset-bottom))!important;
+  border-top:0!important;
+  background:color-mix(in srgb,var(--bg) 92%,#000 8%)!important;
+  color:rgba(245,239,231,.50)!important;
+}
+html[lang="ar"] .brand-footer{
+  direction:rtl!important;
+  text-align:right!important;
+}
+html[lang="ar"] .brand-footer-kicker{
+  font-family:Cairo,Inter,sans-serif!important;
+  letter-spacing:0!important;
+}
+html[lang="ar"] .brand-footer-title{
+  font-family:Cairo,Inter,sans-serif!important;
+  letter-spacing:0!important;
+  line-height:1.45!important;
+}
+html[lang="ar"] .brand-footer-col p{
+  padding-left:0!important;
+  padding-right:13px!important;
+  font-family:Cairo,Inter,sans-serif!important;
+}
+html[lang="ar"] .brand-footer-col p::before{
+  left:auto!important;
+  right:0!important;
+}
+html[lang="ar"] .brand-footer-copy{
+  font-family:Cairo,Inter,sans-serif!important;
+  letter-spacing:0!important;
+}
+@media(max-width:390px){
+  .brand-footer{
+    padding:40px 16px 24px!important;
+  }
+  .brand-footer-title{
+    margin-bottom:22px!important;
+    font-size:clamp(25px,7.4vw,32px)!important;
+  }
+  .brand-footer-grid{
+    gap:16px 18px!important;
+  }
+  .brand-footer-col p{
+    font-size:9.7px!important;
+    line-height:1.5!important;
+  }
+}
+/* CNG BRAND STORY FOOTER END */
+</style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="popular-strip" id="popularStrip" hidden><div class="popular-head"><div class="ey" id="popularK">POPULAR PICKS</div><h2 id="popularT">Customer favorites.</h2></div><div class="popular-marquee" aria-label="Popular items"><div class="popular-run" id="popularRun"></div></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><section class="brand-footer" id="brandFooter"><div class="brand-footer-inner"><div class="brand-footer-kicker" id="footerKicker">CUP AND GO · OUR STORY</div><h3 class="brand-footer-title" id="footerTitle">Coffee starts with a small seed.</h3><div class="brand-footer-grid"><div class="brand-footer-col"><p id="footerLine1">Then it is made into a cup.</p><p id="footerLine2">Accompanying you all the time.</p></div><div class="brand-footer-col"><p id="footerLine3">From Cup And Go.</p><p id="footerLine4">Since 2025 · Saudi Arabia.</p></div></div><div class="brand-footer-copy" id="footerCopyright">© Cup And Go · All rights reserved.</div></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
  if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>Promise.all(rs.map(r=>r.unregister()))).catch(()=>{});}
@@ -2839,7 +2968,34 @@ function renderPopular(){
   run.innerHTML='<div class="popular-group">'+loopCards+'</div><div class="popular-group" aria-hidden="true">'+loopCards+'</div>';
 }
 function sign(){const t=T[lang],im=q('#signImg'),ph=q('#signEmpty'),sec=q('#signboard'),has=!!cfg.signboardImageUrl;q('#signK').textContent=t.signK;q('#signT').textContent=t.signT;if(sec)sec.classList.toggle('has-image',has);if(has){im.src=cfg.signboardImageUrl;im.hidden=false;ph.hidden=true}else{im.removeAttribute('src');im.hidden=true;ph.hidden=false;ph.textContent=t.signEmpty}}
-function text(){const t=T[lang],ar=lang==='ar';document.documentElement.lang=lang;document.documentElement.dir=ar?'rtl':'ltr';q('#heroK').textContent=t.heroK;q('#heroT').innerHTML=t.heroT;q('#heroL').textContent=t.heroL;q('#hint').textContent=t.hint;q('#tapLabel').textContent=t.tap;q('#menuText').textContent=t.menu;q('#menuCta').href=menuUrl();q('#headerMenu').href=menuUrl();q('#galleryK').textContent=t.galleryK;q('#galleryT').textContent=t.galleryT;q('#aboutK').textContent=t.aboutK;q('#aboutT').innerHTML=ar?(cfg.aboutTitleAr||t.aboutT):(cfg.aboutTitleEn||t.aboutT);q('#aboutText').textContent=ar?(cfg.aboutTextAr||t.about):(cfg.aboutTextEn||t.about);q('#contactTitle').textContent=t.contacts;q('#dev').innerHTML='<b>'+esc(t.dev)+'</b>';q('#langBtn').textContent=ar?'EN':'AR';sign()}
+function text(){const t=T[lang],ar=lang==='ar';document.documentElement.lang=lang;document.documentElement.dir=ar?'rtl':'ltr';q('#heroK').textContent=t.heroK;q('#heroT').innerHTML=t.heroT;q('#heroL').textContent=t.heroL;q('#hint').textContent=t.hint;q('#tapLabel').textContent=t.tap;q('#menuText').textContent=t.menu;q('#menuCta').href=menuUrl();q('#headerMenu').href=menuUrl();q('#galleryK').textContent=t.galleryK;q('#galleryT').textContent=t.galleryT;q('#aboutK').textContent=t.aboutK;q('#aboutT').innerHTML=ar?(cfg.aboutTitleAr||t.aboutT):(cfg.aboutTitleEn||t.aboutT);q('#aboutText').textContent=ar?(cfg.aboutTextAr||t.about):(cfg.aboutTextEn||t.about);q('#contactTitle').textContent=t.contacts;q('#dev').innerHTML='<b>'+esc(t.dev)+'</b>';q('#langBtn').textContent=ar?'EN':'AR';footerStory();sign()}
+function footerStory(){
+  const ar=lang==='ar',year=new Date().getFullYear();
+  const data=ar?{
+    kicker:'كوب أند جو · قصتنا',
+    title:'القهوة تبدأ من بذرة صغيرة.',
+    l1:'ثم تتحول إلى كوب.',
+    l2:'نرافقك في كل وقت.',
+    l3:'من كوب أند جو.',
+    l4:'منذ ٢٠٢٥ · المملكة العربية السعودية.',
+    copy:'© '+year.toLocaleString('ar-SA',{useGrouping:false})+' كوب أند جو · جميع الحقوق محفوظة.'
+  }:{
+    kicker:'CUP AND GO · OUR STORY',
+    title:'Coffee starts with a small seed.',
+    l1:'Then it is made into a cup.',
+    l2:'Accompanying you all the time.',
+    l3:'From Cup And Go.',
+    l4:'Since 2025 · Saudi Arabia.',
+    copy:'© '+year+' Cup And Go · All rights reserved.'
+  };
+  q('#footerKicker').textContent=data.kicker;
+  q('#footerTitle').textContent=data.title;
+  q('#footerLine1').textContent=data.l1;
+  q('#footerLine2').textContent=data.l2;
+  q('#footerLine3').textContent=data.l3;
+  q('#footerLine4').textContent=data.l4;
+  q('#footerCopyright').textContent=data.copy;
+}
 function link(id,url,label){
   const a=q(id);if(!a)return;
   a.hidden=false;
@@ -2913,7 +3069,7 @@ function contacts(){const t=T[lang];link('#loc',String(cfg.locationUrl||''),t.lo
 function themeApply(){const p=THEMES[theme%THEMES.length];document.documentElement.style.setProperty('--bg',p[0]);document.documentElement.style.setProperty('--glow',p[1]);document.documentElement.style.setProperty('--gold',p[2])}
 
 function animateEveryText(){
-  const selectors=['.kicker','.hero h1','.lead','.menu-cta','.section-head .ey','.section-head h2','.gallery-label b','.gallery-label small','.signboard .ey','.signboard h2','.sign-placeholder','.about .ey','.about h2','.about-text','.baristas .ey','.baristas h2','.owner-card h3','.owner-card small','.owner-bio-lang','.owner-bio-title','.owner-bio-text','.contacts h3','.social span','.dev','.info .mini','.info h2','.info-price','.info p','.hint','.tap-label'];
+  const selectors=['.kicker','.hero h1','.lead','.menu-cta','.section-head .ey','.section-head h2','.gallery-label b','.gallery-label small','.signboard .ey','.signboard h2','.sign-placeholder','.about .ey','.about h2','.about-text','.baristas .ey','.baristas h2','.owner-card h3','.owner-card small','.owner-bio-lang','.owner-bio-title','.owner-bio-text','.contacts h3','.social span','.brand-footer-kicker','.brand-footer-title','.brand-footer-col p','.brand-footer-copy','.dev','.info .mini','.info h2','.info-price','.info p','.hint','.tap-label'];
   const els=qa(selectors.join(',')).filter(Boolean);qa('.hero h1,.section-head h2,.signboard h2,.about h2,.baristas h2,.contacts h3').forEach(el=>el.classList.add('headline-slide'));
   els.forEach((el,i)=>{
     el.classList.add('txt-anim');
