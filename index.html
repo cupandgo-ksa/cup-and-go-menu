@@ -2976,6 +2976,159 @@ html[lang="ar"] #footerCopyright{
   #footerCopyright{font-size:7px!important}
 }
 /* CNG COPYRIGHT VISIBILITY FIX END */
+
+/* CNG RTL SAFE TEXT + CONTACT REFINEMENT 20260926T */
+/* Arabic text safety: keep labels/headings fully inside their sections. */
+html[lang="ar"] .section-head,
+html[lang="ar"] .signboard,
+html[lang="ar"] .baristas,
+html[lang="ar"] .about,
+html[lang="ar"] .contacts{
+  direction:rtl!important;
+  text-align:right!important;
+}
+
+html[lang="ar"] .section-head .ey,
+html[lang="ar"] .section-head h2,
+html[lang="ar"] .signboard > .ey,
+html[lang="ar"] .signboard > h2,
+html[lang="ar"] .baristas > .ey,
+html[lang="ar"] .baristas > h2,
+html[lang="ar"] .about > .ey,
+html[lang="ar"] .about > h2,
+html[lang="ar"] .owner-bio-lang,
+html[lang="ar"] .owner-bio-title,
+html[lang="ar"] .owner-bio-text{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  transform:none!important;
+}
+
+/* Arabic labels/headlines should fade only — never slide beyond the right edge. */
+html[lang="ar"] .section-head .ey.txt-anim,
+html[lang="ar"] .section-head h2.txt-anim,
+html[lang="ar"] .signboard > .ey.txt-anim,
+html[lang="ar"] .signboard > h2.txt-anim,
+html[lang="ar"] .baristas > .ey.txt-anim,
+html[lang="ar"] .baristas > h2.txt-anim,
+html[lang="ar"] .about > .ey.txt-anim,
+html[lang="ar"] .about > h2.txt-anim{
+  transform:none!important;
+}
+
+/* Give Arabic section headings a clean safe gutter on mobile. */
+html[lang="ar"] #gallery .section-head{
+  padding-left:20px!important;
+  padding-right:20px!important;
+}
+html[lang="ar"] .signboard,
+html[lang="ar"] .baristas,
+html[lang="ar"] .about{
+  padding-left:20px!important;
+  padding-right:20px!important;
+}
+html[lang="ar"] .section-head h2,
+html[lang="ar"] .signboard > h2,
+html[lang="ar"] .baristas > h2,
+html[lang="ar"] .about > h2{
+  font-family:Cairo,Inter,sans-serif!important;
+  line-height:1.34!important;
+  letter-spacing:0!important;
+  text-wrap:pretty!important;
+}
+html[lang="ar"] .section-head .ey,
+html[lang="ar"] .signboard > .ey,
+html[lang="ar"] .baristas > .ey,
+html[lang="ar"] .about > .ey{
+  font-family:Cairo,Inter,sans-serif!important;
+  line-height:1.5!important;
+  letter-spacing:0!important;
+}
+
+/* Contact area: move the title into a compact elegant position directly above the icons. */
+.contacts{
+  padding-top:42px!important;
+  padding-bottom:30px!important;
+}
+.contacts h3{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0 auto 18px!important;
+  padding:0 8px!important;
+  text-align:center!important;
+  font:500 clamp(23px,6vw,31px)/1.08 'Cormorant Garamond',Cairo,serif!important;
+  letter-spacing:-.02em!important;
+  color:rgba(245,239,231,.90)!important;
+  transform:none!important;
+}
+.contacts h3::before{
+  content:""!important;
+  display:block!important;
+  width:34px!important;
+  height:1px!important;
+  margin:0 auto 12px!important;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)!important;
+  opacity:.72!important;
+}
+.icon-row{
+  margin-top:0!important;
+}
+html[lang="ar"] .contacts{
+  direction:rtl!important;
+  text-align:center!important;
+  padding-left:18px!important;
+  padding-right:18px!important;
+}
+html[lang="ar"] .contacts h3{
+  direction:rtl!important;
+  text-align:center!important;
+  font-family:Cairo,Inter,sans-serif!important;
+  font-size:clamp(19px,5.5vw,25px)!important;
+  line-height:1.5!important;
+  letter-spacing:0!important;
+  transform:none!important;
+}
+html[lang="ar"] .contacts h3.txt-anim,
+html[lang="ar"] .contacts h3.headline-slide{
+  transform:none!important;
+}
+
+@media(max-width:390px){
+  html[lang="ar"] #gallery .section-head{
+    padding-left:18px!important;
+    padding-right:18px!important;
+  }
+  html[lang="ar"] .signboard,
+  html[lang="ar"] .baristas,
+  html[lang="ar"] .about{
+    padding-left:18px!important;
+    padding-right:18px!important;
+  }
+  .contacts{
+    padding-top:36px!important;
+    padding-bottom:26px!important;
+  }
+  .contacts h3{
+    margin-bottom:15px!important;
+    font-size:clamp(22px,6.2vw,27px)!important;
+  }
+  html[lang="ar"] .contacts h3{
+    font-size:clamp(18px,5.4vw,23px)!important;
+  }
+}
+/* CNG RTL SAFE TEXT + CONTACT REFINEMENT END */
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="popular-strip" id="popularStrip" hidden><div class="popular-head"><div class="ey" id="popularK">POPULAR PICKS</div><h2 id="popularT">Customer favorites.</h2></div><div class="popular-marquee" aria-label="Popular items"><div class="popular-run" id="popularRun"></div></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><section class="brand-footer" id="brandFooter"><div class="brand-footer-inner"><div class="brand-footer-kicker" id="footerKicker">CUP AND GO · OUR STORY</div><h3 class="brand-footer-title" id="footerTitle">Coffee starts with a small seed.</h3><div class="brand-footer-grid"><div class="brand-footer-col"><p id="footerLine1">Then it is made into a cup.</p><p id="footerLine2">Accompanying you all the time.</p></div><div class="brand-footer-col"><p id="footerLine3">From Cup And Go.</p><p id="footerLine4">Since 2025 · Saudi Arabia.</p></div></div><div class="brand-footer-copy" id="footerCopyright">© Cup And Go · All rights reserved.</div><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></div></section></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
@@ -3229,7 +3382,7 @@ function themeApply(){const p=THEMES[theme%THEMES.length];document.documentEleme
 
 function animateEveryText(){
   const selectors=['.kicker','.hero h1','.lead','.menu-cta','.section-head .ey','.section-head h2','.gallery-label b','.gallery-label small','.signboard .ey','.signboard h2','.sign-placeholder','.about .ey','.about h2','.about-text','.baristas .ey','.baristas h2','.owner-card h3','.owner-card small','.owner-bio-lang','.owner-bio-title','.owner-bio-text','.contacts h3','.social span','.brand-footer-kicker','.brand-footer-title','.brand-footer-col p','.dev','.info .mini','.info h2','.info-price','.info p','.hint','.tap-label'];
-  const els=qa(selectors.join(',')).filter(Boolean);qa('.hero h1,.section-head h2,.signboard h2,.about h2,.baristas h2,.contacts h3').forEach(el=>el.classList.add('headline-slide'));
+  const els=qa(selectors.join(',')).filter(Boolean);qa('.hero h1,.section-head h2,.signboard h2,.about h2,.baristas h2').forEach(el=>el.classList.add('headline-slide'));
   els.forEach((el,i)=>{
     el.classList.add('txt-anim');
     el.style.setProperty('--txt-delay',Math.min((i%7)*65,390)+'ms');
