@@ -2645,6 +2645,40 @@ html[lang="ar"] #gallery .section-head h2{
   }
 }
 /* CNG GALLERY HEADING ALIGN FIX END */
+
+/* CNG POPULAR ARABIC + PRICE FIX 20260926N */
+/* Keep the marquee geometry LTR in both languages so cards never start off-screen. */
+html[lang="ar"] .popular-run{
+  direction:ltr!important;
+  animation-name:cngPopularFlow!important;
+}
+html[lang="ar"] .popular-group{
+  direction:ltr!important;
+}
+html[lang="ar"] .popular-card{
+  direction:rtl!important;
+  text-align:right!important;
+}
+.popular-price{
+  display:block!important;
+  margin-top:5px!important;
+  font-size:9.5px!important;
+  line-height:1.1!important;
+  font-weight:800!important;
+  color:var(--gold)!important;
+  direction:ltr!important;
+}
+html[lang="ar"] .popular-price{
+  direction:rtl!important;
+  font-family:Cairo,Inter,sans-serif!important;
+}
+.popular-stars{
+  margin-top:5px!important;
+}
+@media(max-width:390px){
+  .popular-price{font-size:9px!important}
+}
+/* CNG POPULAR ARABIC + PRICE FIX END */
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="popular-strip" id="popularStrip" hidden><div class="popular-head"><div class="ey" id="popularK">POPULAR PICKS</div><h2 id="popularT">Customer favorites.</h2></div><div class="popular-marquee" aria-label="Popular items"><div class="popular-run" id="popularRun"></div></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
@@ -2658,6 +2692,28 @@ let lang=localStorage.getItem('cng_website_lang')||'en',settings={},cfg={},produ
 const THEMES=[['#07130e','#35572d','#e5c158'],['#190b0d','#6f2930','#efc88b'],['#160f09','#704724','#e2b565'],['#0b1518','#28515a','#d7c78f'],['#160d15','#5c3156','#e7bd92']];
 const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])),sig=v=>{try{return JSON.stringify(v)}catch(e){return String(v)}},norm=v=>{v%=360;if(v>180)v-=360;if(v<-180)v+=360;return v};
 const pid=p=>String(p&&(p.id!=null?p.id:p.name)||''),img=p=>String(p&&(p.imageHD||p.imageHd||p.hdImage||p.icon||p.image)||''),name=p=>String(p&&(lang==='ar'?(p.nameAr||p.arName||p.name):(p.name||p.nameEn||p.nameAr))||''),desc=p=>String(p&&(lang==='ar'?(p.descriptionAr||p.descAr||p.description):(p.description||p.desc||p.descriptionAr))||''),cat=p=>String(p&&p.category||'Other').replace(/^\s*[^\p{L}\p{N}]+/u,'').trim()||'Other';
+const CNG_AR_NAMES={
+'coffee day big cold':'قهوة اليوم الباردة - كبير','coffee day big hot':'قهوة اليوم الساخنة - كبير','coffee day small cold':'قهوة اليوم الباردة - صغير','coffee day small hot':'قهوة اليوم الساخنة - صغير',
+'coffee v60 cold':'قهوة V60 باردة','coffee v60 hot':'قهوة V60 ساخنة','brownies caramel':'براونيز كراميل','brownies classic':'براونيز كلاسيك','crunchy caramel':'كرانشي كراميل','marshmallow':'مارشميلو',
+'code red':'كود رِد','code rad':'كود رِد','mojito special':'موهيتو سبيشل','mojito':'موهيتو','passion fruit':'باشن فروت','fassion fruit':'باشن فروت','karkade big':'كركديه - كبير','kerkede big':'كركديه - كبير',
+'matcha vanilla':'ماتشا فانيلا','ice tea':'آيس تي','karkade small':'كركديه - صغير','kerkede small':'كركديه - صغير','coffee day cold box':'بوكس قهوة اليوم الباردة','coffee day hot box':'بوكس قهوة اليوم الساخنة',
+'karkade box':'بوكس كركديه','kerkede box':'بوكس كركديه','brownies caramel box':'بوكس براونيز كراميل','brownies classic box':'بوكس براونيز كلاسيك','crunchy caramel box':'بوكس كرانشي كراميل','marshmallow box':'بوكس مارشميلو',
+'brownies caramel 8 pcs crunchy caramel 7 pcs':'٨ قطع براونيز كراميل + ٧ قطع كرانشي كراميل','brownies classic 8 pcs marshmallow 7 pcs':'٨ قطع براونيز كلاسيك + ٧ قطع مارشميلو',
+'tiramisu coffee day small':'تيراميسو + قهوة اليوم صغير','termisu coffee day small':'تيراميسو + قهوة اليوم صغير','cake caramel coffee day small':'كيك كراميل + قهوة اليوم صغير'
+};
+const cngNormName=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().replace(/\b(?:karkede|kerkede)\b/g,'karkade').replace(/\bfassion\b/g,'passion').replace(/\btermisu\b/g,'tiramisu').replace(/\bcode rad\b/g,'code red');
+const cngDisplayName=p=>{
+  if(!p)return'';
+  if(lang!=='ar')return String(p.name||p.nameEn||p.nameAr||'');
+  const direct=[p.nameAr,p.arName].find(v=>/[\u0600-\u06ff]/.test(String(v||'')));
+  if(direct)return String(direct);
+  return CNG_AR_NAMES[cngNormName(p.name||p.nameEn)]||String(p.nameAr||p.arName||p.name||p.nameEn||'صنف');
+};
+const cngPrice=p=>{
+  const n=Number(p&&p.price||0);
+  if(!Number.isFinite(n))return'';
+  return lang==='ar'?n.toLocaleString('ar-SA',{minimumFractionDigits:2,maximumFractionDigits:2})+' ﷼':n.toFixed(2)+' ﷼';
+};
 const menuUrl=()=> 'https://cupandgoksa.com/menu/',social=(v,b)=>{v=String(v||'').trim();return !v?'':/^https?:\/\//i.test(v)?v:b+v.replace(/^@/,'')},wa=v=>{const n=String(v||'').replace(/\D/g,'');return n?'https://wa.me/'+n:''};
 function build(){let slides=Array.isArray(cfg.slides)?cfg.slides.filter(Boolean).slice(0,6):[];if(!slides.length)slides=products.filter(x=>img(x)).slice(0,6).map(p=>({productId:pid(p)}));items=slides.map((s,i)=>{let p=s.productId?products.find(x=>pid(x)===String(s.productId)):null;if(!p)p=products.filter(x=>img(x))[i]||products[i]||null;return{p,name:p?name(p):((s.top||'')+' '+(s.bottom||'')).trim()||'Cup And Go',desc:p?desc(p):(lang==='ar'?(s.arDesc||s.desc||''):(s.desc||s.arDesc||'')),image:String(s.imageUrl||img(p)||''),cat:p?cat(p):(s.type||'Signature'),price:p?Number(p.price||0):0}});if(!items.length)items=[{name:'Cup And Go',desc:'',image:'',cat:'Coffee',price:0}];active=Math.min(active,items.length-1)}
 function brand(){const l=q('#brandLogo'),w=q('#brandWordmark'),c=q('#wheelCenter'),shop=settings.shopName||cfg.brandName||'Cup And Go';const wordmark=cfg.brandImageUrl||settings.brandImageUrl||settings.shopNameImage||settings.wordmarkUrl||settings.logoTextUrl||settings.headerNameImage||'';l.innerHTML=settings.shopLogo?'<img src="'+esc(settings.shopLogo)+'" alt="">':'C&G';if(wordmark){w.innerHTML='<img src="'+esc(wordmark)+'" alt="'+esc(shop)+'">';w.classList.add('has-png')}else{w.innerHTML='<span>'+esc(shop)+'</span>';w.classList.remove('has-png')}c.innerHTML=settings.shopLogo?'<img src="'+esc(settings.shopLogo)+'" alt="">':'<span>'+esc(shop)+'</span>'}
@@ -2750,9 +2806,10 @@ function renderPopular(){
     const label=info.count
       ? (lang==='ar'?'تقييم العملاء':'Customer rating')
       : (lang==='ar'?'صنف شائع':'Popular item');
-    return '<a class="popular-card" href="'+esc(menuUrl())+'" aria-label="'+esc(name(p))+' - '+esc(label)+'">'+
-      '<div class="popular-thumb"><img src="'+esc(img(p))+'" alt="'+esc(name(p))+'" loading="lazy" decoding="async"></div>'+
-      '<div class="popular-meta"><span class="popular-name">'+esc(name(p))+'</span><span class="popular-stars" title="'+esc(label)+'">'+stars+'</span></div>'+
+    const displayName=cngDisplayName(p),price=cngPrice(p);
+    return '<a class="popular-card" href="'+esc(menuUrl())+'" aria-label="'+esc(displayName)+' - '+esc(label)+'">'+
+      '<div class="popular-thumb"><img src="'+esc(img(p))+'" alt="'+esc(displayName)+'" loading="lazy" decoding="async"></div>'+
+      '<div class="popular-meta"><span class="popular-name">'+esc(displayName)+'</span><span class="popular-price">'+esc(price)+'</span><span class="popular-stars" title="'+esc(label)+'">'+stars+'</span></div>'+
     '</a>';
   }).join('');
 
