@@ -2182,6 +2182,172 @@ html[lang="ar"] .owner-bio-text{
   .owner-bio,.owner-photo{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 }
 /* CNG OWNER-ONLY UNIFIED VISUAL END */
+
+/* CNG FINAL VISUAL FIX 20260926C */
+/* 1) Owner: restore the smaller premium size used before. */
+#baristas .team-owner{
+  margin:2px 0 18px!important;
+}
+#baristas .owner-card{
+  width:min(50vw,190px)!important;
+  max-width:190px!important;
+}
+#baristas .owner-photo{
+  width:100%!important;
+  aspect-ratio:1/1!important;
+  padding:6px!important;
+  box-shadow:
+    0 20px 42px rgba(0,0,0,.28),
+    0 0 0 6px color-mix(in srgb,var(--gold) 6%,transparent)!important;
+}
+#baristas .owner-photo img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 18%!important;
+  transform:none!important;
+}
+#baristas .owner-card.motion-in .owner-photo img{
+  transform:none!important;
+}
+#baristas .owner-card h3{
+  font-size:clamp(21px,5.8vw,26px)!important;
+  margin-top:12px!important;
+}
+
+/* 2) Store gallery: use one stacked card at a time.
+      This completely removes the sliced previous/next photo at the sides. */
+#gallery .gallery-view{
+  width:100%!important;
+  overflow:hidden!important;
+  padding-left:18px!important;
+  padding-right:18px!important;
+}
+#gallery .gallery-track{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  width:100%!important;
+  gap:0!important;
+  transform:none!important;
+  transition:none!important;
+}
+#gallery .gallery-card{
+  grid-area:1 / 1!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  flex:none!important;
+  margin:0!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  transform:translate3d(0,10px,0) scale(.985)!important;
+  transition:
+    opacity .58s cubic-bezier(.16,1,.3,1),
+    transform .72s cubic-bezier(.16,1,.3,1),
+    visibility 0s linear .58s!important;
+}
+#gallery .gallery-card.active{
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  transform:none!important;
+  transition:
+    opacity .58s cubic-bezier(.16,1,.3,1),
+    transform .72s cubic-bezier(.16,1,.3,1),
+    visibility 0s!important;
+  z-index:2!important;
+}
+#gallery .gallery-card img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  transform:scale(1.015)!important;
+}
+#gallery .gallery-card.active img{
+  transform:scale(1.035)!important;
+}
+
+/* 3) Remove the visual "empty band" between layers. */
+.hero{
+  min-height:0!important;
+  padding-bottom:8px!important;
+}
+.hero .stage{
+  margin-bottom:0!important;
+}
+.gallery{
+  margin-top:-18px!important;
+  padding-top:58px!important;
+}
+.signboard,
+.about,
+.baristas,
+.contacts{
+  margin-top:-16px!important;
+  padding-top:68px!important;
+}
+
+/* One continuous atmospheric bridge between every section. */
+.hero::after,
+.gallery::after,
+.signboard::after,
+.about::after,
+.baristas::after,
+.contacts::after{
+  height:86px!important;
+  bottom:-38px!important;
+  opacity:.82!important;
+  background:
+    linear-gradient(to bottom,
+      transparent 0%,
+      color-mix(in srgb,var(--bg) 35%,transparent) 38%,
+      color-mix(in srgb,var(--bg) 86%,transparent) 74%,
+      var(--bg) 100%)!important;
+  z-index:1!important;
+}
+.gallery::before,
+.signboard::before,
+.about::before,
+.baristas::before,
+.contacts::before{
+  top:-42px!important;
+  height:84px!important;
+  width:min(96vw,470px)!important;
+  opacity:.74!important;
+  border-top-color:rgba(229,193,88,.055)!important;
+  background:
+    radial-gradient(ellipse at 50% 100%,
+      rgba(229,193,88,.035) 0%,
+      rgba(255,255,255,.012) 40%,
+      transparent 74%)!important;
+}
+
+/* Keep the same subtle orbit language in every layer. */
+.hero .layer-bridge-top,
+.gallery .layer-bridge-top,
+.signboard .layer-bridge-top,
+.about .layer-bridge-top,
+.baristas .layer-bridge-top,
+.contacts .layer-bridge-top{
+  opacity:.055!important;
+}
+@media(max-width:390px){
+  #baristas .owner-card{
+    width:min(48vw,176px)!important;
+    max-width:176px!important;
+  }
+  #gallery .gallery-view{
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  .gallery{
+    margin-top:-16px!important;
+    padding-top:54px!important;
+  }
+}
+/* CNG FINAL VISUAL FIX END */
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
@@ -2210,7 +2376,7 @@ function pAng(e){const r=q('#wheel').getBoundingClientRect(),cx=r.left+r.width/2
 function wheelEvents(){const w=q('#wheel');w.onpointerdown=e=>{drag=true;pauseUntil=performance.now()+2500;lastAng=pAng(e);w.setPointerCapture?.(e.pointerId);e.preventDefault()};w.onpointermove=e=>{if(!drag)return;const a=pAng(e);turn+=norm(a-lastAng);lastAng=a;w.style.setProperty('--turn',turn+'deg');closest(true);e.preventDefault()};const end=e=>{if(!drag)return;drag=false;pauseUntil=performance.now()+2200;w.releasePointerCapture?.(e.pointerId)};w.onpointerup=end;w.onpointercancel=end}
 function auto(ts){if(!lastTs)lastTs=ts;const dt=Math.min(40,ts-lastTs);lastTs=ts;if(!drag&&ts>pauseUntil&&items.length>1){turn+=dt*.0035;q('#wheel').style.setProperty('--turn',turn+'deg');closest(false)}raf=requestAnimationFrame(auto)}
 function gallery(){const t=T[lang],pics=(Array.isArray(cfg.storeGallery)?cfg.storeGallery:[]).filter(Boolean).slice(0,3),arr=pics.length?pics:[null,null,null],track=q('#galleryTrack'),dots=q('#galleryDots');gIndex=Math.min(gIndex,arr.length-1);track.innerHTML=arr.map((u,i)=>'<article class="gallery-card'+(i===gIndex?' active':'')+'">'+(u?'<img src="'+esc(u)+'" alt="'+esc(t.photo)+' '+(i+1)+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async">':'<div style="height:100%;display:grid;place-items:center;padding:25px;text-align:center;color:#65756b;font:italic 20px Cormorant Garamond,serif;">'+(lang==='ar'?'ارفع صورة المتجر من لوحة الإدارة':'Upload store photo from Admin')+'</div>')+'<div class="gallery-label"><b>'+esc(settings.shopName||'Cup And Go')+'</b><small>'+esc(t.photo)+'</small></div></article>').join('');dots.innerHTML=arr.map((_,i)=>'<button class="gallery-dot'+(i===gIndex?' active':'')+'" data-i="'+i+'"></button>').join('');qa('.gallery-dot').forEach(b=>b.onclick=()=>{gIndex=+b.dataset.i;moveGallery()});clearInterval(gTimer);gTimer=setInterval(()=>{gIndex=(gIndex+1)%arr.length;moveGallery()},4400);moveGallery()}
-function moveGallery(){const cs=qa('.gallery-card'),tr=q('#galleryTrack');if(!cs.length)return;const step=cs[0].getBoundingClientRect().width;tr.style.transform='translate3d('+(-gIndex*step)+'px,0,0)';cs.forEach((c,i)=>c.classList.toggle('active',i===gIndex));qa('.gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===gIndex))}
+function moveGallery(){const cs=qa('.gallery-card'),tr=q('#galleryTrack');if(!cs.length)return;if(tr)tr.style.transform='none';cs.forEach((card,i)=>{const on=i===gIndex;card.classList.toggle('active',on);card.setAttribute('aria-hidden',on?'false':'true')});qa('.gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===gIndex))}
 function sign(){const t=T[lang],im=q('#signImg'),ph=q('#signEmpty'),sec=q('#signboard'),has=!!cfg.signboardImageUrl;q('#signK').textContent=t.signK;q('#signT').textContent=t.signT;if(sec)sec.classList.toggle('has-image',has);if(has){im.src=cfg.signboardImageUrl;im.hidden=false;ph.hidden=true}else{im.removeAttribute('src');im.hidden=true;ph.hidden=false;ph.textContent=t.signEmpty}}
 function text(){const t=T[lang],ar=lang==='ar';document.documentElement.lang=lang;document.documentElement.dir=ar?'rtl':'ltr';q('#heroK').textContent=t.heroK;q('#heroT').innerHTML=t.heroT;q('#heroL').textContent=t.heroL;q('#hint').textContent=t.hint;q('#tapLabel').textContent=t.tap;q('#menuText').textContent=t.menu;q('#menuCta').href=menuUrl();q('#headerMenu').href=menuUrl();q('#galleryK').textContent=t.galleryK;q('#galleryT').textContent=t.galleryT;q('#aboutK').textContent=t.aboutK;q('#aboutT').innerHTML=ar?(cfg.aboutTitleAr||t.aboutT):(cfg.aboutTitleEn||t.aboutT);q('#aboutText').textContent=ar?(cfg.aboutTextAr||t.about):(cfg.aboutTextEn||t.about);q('#contactTitle').textContent=t.contacts;q('#dev').innerHTML='<b>'+esc(t.dev)+'</b>';q('#langBtn').textContent=ar?'EN':'AR';sign()}
 function link(id,url,label){
