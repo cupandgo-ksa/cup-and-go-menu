@@ -1501,6 +1501,98 @@ html[lang="ar"] .bridge-2.layer-bridge-bottom{right:-76px!important;left:auto!im
   }
 }
 
+
+/* CNG FINAL 3 fixes — 3:4 store gallery, safe wheel thumbs, clean signboard sides */
+.gallery-view{
+  padding-left:18px!important;
+  padding-right:18px!important;
+}
+.gallery-track{
+  gap:0!important;
+}
+.gallery-card{
+  flex:0 0 100%!important;
+  width:100%!important;
+  min-width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  aspect-ratio:3/4!important;
+  margin:0!important;
+  border-radius:24px!important;
+}
+.gallery-card img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+}
+.gallery-card.active img{
+  transform:scale(1.025)!important;
+}
+
+/* orbital item thumbnails: keep the full PNG/image safely inside the circle */
+.node{
+  padding:4px!important;
+  overflow:visible!important;
+}
+.node-inner{
+  width:100%!important;
+  height:100%!important;
+  padding:4px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  border-radius:50%!important;
+}
+.node img{
+  width:90%!important;
+  height:90%!important;
+  max-width:90%!important;
+  max-height:90%!important;
+  object-fit:contain!important;
+  object-position:center 54%!important;
+  display:block!important;
+  margin:auto!important;
+  transform:translateY(1px)!important;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,.18))!important;
+}
+.node.active img{
+  width:88%!important;
+  height:88%!important;
+  max-width:88%!important;
+  max-height:88%!important;
+}
+
+/* signboard: preserve full poster but remove black side bars */
+.sign-frame-inner,
+.signboard.has-image .sign-frame-inner{
+  background:transparent!important;
+}
+.sign-frame img,
+#signImg,
+.signboard.has-image .sign-frame img,
+.signboard.has-image #signImg{
+  background:transparent!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+.sign-frame{
+  background:linear-gradient(145deg,#4b4540,#282522 52%,#5a514a)!important;
+}
+
+/* phone sizing */
+@media(max-width:390px){
+  .gallery-view{
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  .gallery-card{
+    aspect-ratio:3/4!important;
+    border-radius:22px!important;
+  }
+  .node-inner{padding:5px!important}
+  .node img{width:88%!important;height:88%!important;max-width:88%!important;max-height:88%!important}
+}
+
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>firebase.initializeApp({apiKey:"AIzaSyAoYsT80oNc505TgobYwTv0T7YfUF_fWRs",authDomain:"cup-and-go-pos-e0ad1.firebaseapp.com",databaseURL:"https://cup-and-go-pos-e0ad1-default-rtdb.firebaseio.com",projectId:"cup-and-go-pos-e0ad1"});(()=>{const db=firebase.database(),q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)],FOCUS=78;
 const T={en:{heroK:'SIGNATURE SELECTION',heroT:'Choose your <em>moment.</em>',heroL:'Let the circle glide, or move it with your finger. Tap the large image to see the item name, price and description.',hint:'DRAG · TAP AN ITEM',tap:'TAP FOR DETAILS',menu:'Open Menu',galleryK:'OUR PLACE',galleryT:'Recognize Cup And Go.',photo:'Cup And Go · Store view',signK:'OUR IDENTITY',signT:'The sign you remember.',signEmpty:'Upload your signboard image from Admin',aboutK:'ABOUT CUP AND GO',aboutT:'Coffee made <em>simple.</em>',about:'Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. We also have coffee boxes, sweet boxes and special offers. Our goal is simple: good taste, fast service and a comfortable experience. Tap Open Menu anytime to see all current items and offers.',details:'ITEM DETAILS',baristaK:'OUR TEAM',baristaT:'Meet the people behind your cup.',ownerRole:'Owner',ownerPlaceholder:'Owner name',baristaRole:'Barista',baristaPlaceholder:'Barista name',contacts:'Visit & Contact Cup And Go',loc:'Location',wa:'WhatsApp',ig:'Instagram',tk:'TikTok',dev:'Developer: Mohammed Ashik'},ar:{heroK:'اختيارات كوب أند جو',heroT:'اختر <em>مزاجك.</em>',heroL:'اترك الدائرة تتحرك بهدوء أو حرّكها بإصبعك. اضغط على الصورة الكبيرة لعرض اسم الصنف والسعر والوصف.',hint:'حرّك · اختر الصنف',tap:'اضغط للتفاصيل',menu:'افتح المنيو',galleryK:'مكاننا',galleryT:'تعرّف على كوب أند جو.',photo:'كوب أند جو · صورة المتجر',signK:'هويتنا',signT:'علامة تتذكرها.',signEmpty:'ارفع صورة لوحة المتجر من لوحة الإدارة',aboutK:'عن كوب أند جو',aboutT:'قهوة <em>ببساطة.</em>',about:'مرحباً بكم في كوب أند جو. نقدم قهوة اليوم، V60، الماتشا، الكركديه، المشروبات الباردة والحلويات. كما نقدم بوكسات القهوة والحلويات والعروض الخاصة. هدفنا بسيط: طعم جميل، خدمة سريعة وتجربة مريحة. اضغط على زر المنيو في أي وقت لمشاهدة جميع الأصناف والعروض الحالية.',details:'تفاصيل الصنف',baristaK:'فريقنا',baristaT:'تعرّف على من يصنع لك كوبك.',ownerRole:'المالك',ownerPlaceholder:'اسم المالك',baristaRole:'باريستا',baristaPlaceholder:'اسم الباريستا',contacts:'زورونا وتواصلوا معنا',loc:'الموقع',wa:'واتساب',ig:'إنستغرام',tk:'تيك توك',dev:'المطور: Mohammed Ashik'}};
 const CAT_AR={'Coffee':'قهوة','Sweet':'حلويات','Coffee Box':'بوكس القهوة','Sweet Box':'بوكس الحلويات','Cold Drink':'مشروبات باردة','Cold Drinks':'مشروبات باردة','Special Offer':'العروض الخاصة'};
