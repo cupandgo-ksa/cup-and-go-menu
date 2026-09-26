@@ -2575,6 +2575,20 @@ html[lang="ar"] .popular-run{
   .popular-run{animation-duration:31s!important}
 }
 /* CNG POPULAR PICKS MARQUEE END */
+
+/* CNG POPULAR RATING SYNC FIX 20260926L */
+.popular-run{
+  animation-duration:42s!important;
+  animation-play-state:running!important;
+}
+.popular-marquee:hover .popular-run,
+.popular-marquee:active .popular-run{
+  animation-play-state:running!important;
+}
+@media(max-width:390px){
+  .popular-run{animation-duration:38s!important}
+}
+/* CNG POPULAR RATING SYNC FIX END */
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">AR</button><a class="round" id="headerMenu" href="#">☰</a></div></header><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">SIGNATURE SELECTION</div><h1 id="heroT">Choose your <em>moment.</em></h1><p class="lead" id="heroL">Let the circle glide, or move it with your finger. Tap the large image to see the item details.</p><a class="menu-cta" id="menuCta"><span id="menuText">Open Menu</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">TAP FOR DETAILS</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">DRAG · TAP AN ITEM</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">OUR PLACE</div><h2 id="galleryT">Recognize Cup And Go.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="popular-strip" id="popularStrip" hidden><div class="popular-head"><div class="ey" id="popularK">POPULAR PICKS</div><h2 id="popularT">Customer favorites.</h2></div><div class="popular-marquee" aria-label="Popular items"><div class="popular-run" id="popularRun"></div></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">OUR IDENTITY</div><h2 id="signT">The sign you remember.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">Upload your signboard image from Admin</div></div></div><div class="sign-shadow"></div></div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">OUR BARISTAS</div><h2 id="baristaT">Meet the people behind your cup.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="about" id="about"><div class="ey" id="aboutK">ABOUT CUP AND GO</div><h2 id="aboutT">Coffee made <em>simple.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
@@ -2584,7 +2598,7 @@ html[lang="ar"] .popular-run{
 </script><script>firebase.initializeApp({apiKey:"AIzaSyAoYsT80oNc505TgobYwTv0T7YfUF_fWRs",authDomain:"cup-and-go-pos-e0ad1.firebaseapp.com",databaseURL:"https://cup-and-go-pos-e0ad1-default-rtdb.firebaseio.com",projectId:"cup-and-go-pos-e0ad1"});(()=>{const db=firebase.database(),q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)],FOCUS=78;
 const T={en:{heroK:'SIGNATURE SELECTION',heroT:'Choose your <em>moment.</em>',heroL:'Let the circle glide, or move it with your finger. Tap the large image to see the item name, price and description.',hint:'DRAG · TAP AN ITEM',tap:'TAP FOR DETAILS',menu:'Open Menu',galleryK:'OUR PLACE',galleryT:'Recognize Cup And Go.',photo:'Cup And Go · Store view',signK:'OUR IDENTITY',signT:'The sign you remember.',signEmpty:'Upload your signboard image from Admin',aboutK:'ABOUT CUP AND GO',aboutT:'Coffee made <em>simple.</em>',about:'Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. We also have coffee boxes, sweet boxes and special offers. Our goal is simple: good taste, fast service and a comfortable experience. Tap Open Menu anytime to see all current items and offers.',details:'ITEM DETAILS',baristaK:'OUR TEAM',baristaT:'Meet the people behind your cup.',ownerRole:'Owner',ownerPlaceholder:'Owner name',baristaRole:'Barista',baristaPlaceholder:'Barista name',contacts:'Visit & Contact Cup And Go',loc:'Location',wa:'WhatsApp',ig:'Instagram',tk:'TikTok',dev:'Developer: Mohammed Ashik'},ar:{heroK:'اختيارات كوب أند جو',heroT:'اختر <em>مزاجك.</em>',heroL:'اترك الدائرة تتحرك بهدوء أو حرّكها بإصبعك. اضغط على الصورة الكبيرة لعرض اسم الصنف والسعر والوصف.',hint:'حرّك · اختر الصنف',tap:'اضغط للتفاصيل',menu:'افتح المنيو',galleryK:'مكاننا',galleryT:'تعرّف على كوب أند جو.',photo:'كوب أند جو · صورة المتجر',signK:'هويتنا',signT:'علامة تتذكرها.',signEmpty:'ارفع صورة لوحة المتجر من لوحة الإدارة',aboutK:'عن كوب أند جو',aboutT:'قهوة <em>ببساطة.</em>',about:'مرحباً بكم في كوب أند جو. نقدم قهوة اليوم، V60، الماتشا، الكركديه، المشروبات الباردة والحلويات. كما نقدم بوكسات القهوة والحلويات والعروض الخاصة. هدفنا بسيط: طعم جميل، خدمة سريعة وتجربة مريحة. اضغط على زر المنيو في أي وقت لمشاهدة جميع الأصناف والعروض الحالية.',details:'تفاصيل الصنف',baristaK:'فريقنا',baristaT:'تعرّف على من يصنع لك كوبك.',ownerRole:'المالك',ownerPlaceholder:'اسم المالك',baristaRole:'باريستا',baristaPlaceholder:'اسم الباريستا',contacts:'زورونا وتواصلوا معنا',loc:'الموقع',wa:'واتساب',ig:'إنستغرام',tk:'تيك توك',dev:'المطور: Mohammed Ashik'}};
 const CAT_AR={'Coffee':'قهوة','Sweet':'حلويات','Coffee Box':'بوكس القهوة','Sweet Box':'بوكس الحلويات','Cold Drink':'مشروبات باردة','Cold Drinks':'مشروبات باردة','Special Offer':'العروض الخاصة'};
-let lang=localStorage.getItem('cng_website_lang')||'en',settings={},cfg={},products=[],items=[],active=0,turn=0,drag=false,lastAng=0,pauseUntil=0,lastTs=0,raf=0,gIndex=0,gTimer=null,theme=0,themeTimer=null,sS='',sP='',sC='',initialized=false;
+let lang=localStorage.getItem('cng_website_lang')||'en',settings={},cfg={},products=[],menuRatings={},items=[],active=0,turn=0,drag=false,lastAng=0,pauseUntil=0,lastTs=0,raf=0,gIndex=0,gTimer=null,theme=0,themeTimer=null,sS='',sP='',sC='',initialized=false;
 const THEMES=[['#07130e','#35572d','#e5c158'],['#190b0d','#6f2930','#efc88b'],['#160f09','#704724','#e2b565'],['#0b1518','#28515a','#d7c78f'],['#160d15','#5c3156','#e7bd92']];
 const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])),sig=v=>{try{return JSON.stringify(v)}catch(e){return String(v)}},norm=v=>{v%=360;if(v>180)v-=360;if(v<-180)v+=360;return v};
 const pid=p=>String(p&&(p.id!=null?p.id:p.name)||''),img=p=>String(p&&(p.imageHD||p.imageHd||p.hdImage||p.icon||p.image)||''),name=p=>String(p&&(lang==='ar'?(p.nameAr||p.arName||p.name):(p.name||p.nameEn||p.nameAr))||''),desc=p=>String(p&&(lang==='ar'?(p.descriptionAr||p.descAr||p.description):(p.description||p.desc||p.descriptionAr))||''),cat=p=>String(p&&p.category||'Other').replace(/^\s*[^\p{L}\p{N}]+/u,'').trim()||'Other';
@@ -2624,58 +2638,68 @@ function moveGallery(){
   cards.forEach((card,i)=>card.classList.toggle('active',i===gIndex));
   qa('.gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===gIndex));
 }
-function productRating(p){
-  if(!p)return 0;
-  const nested=[
-    p.ratings&&p.ratings.average,
-    p.ratings&&p.ratings.avg,
-    p.ratings&&p.ratings.value,
-    p.reviews&&p.reviews.average,
-    p.reviews&&p.reviews.rating,
-    p.stats&&p.stats.rating,
-    p.stats&&p.stats.averageRating
-  ];
-  const direct=[
-    p.averageRating,p.avgRating,p.ratingAvg,p.ratingAverage,p.ratingValue,
-    p.starRating,p.ratingsAverage,p.ratingsAvg,p.reviewRating,p.reviewAverage,
-    p.stars,p.star,p.rating
-  ];
-  for(const v of nested.concat(direct)){
-    const n=Number(v);
-    if(Number.isFinite(n)&&n>0)return Math.max(0,Math.min(5,n));
+function ratingKey(p){
+  const raw=String(p&&(p.id!=null?p.id:(p.name||p.nameEn))||'item');
+  try{
+    const bytes=new TextEncoder().encode(raw);
+    return'p_'+Array.from(bytes).map(v=>v.toString(16).padStart(2,'0')).join('');
+  }catch(e){
+    return'p_'+encodeURIComponent(raw).replace(/%/g,'').toLowerCase();
   }
-  const sum=Number(p.ratingSum||p.ratingsSum||0),count=Number(p.ratingCount||p.ratingsCount||p.reviewCount||0);
-  if(sum>0&&count>0)return Math.max(0,Math.min(5,sum/count));
-  return 0;
 }
-function productRatingCount(p){
-  const n=Number(p&&(p.ratingCount||p.ratingsCount||p.reviewCount||p.reviewsCount||0));
-  return Number.isFinite(n)?n:0;
+function ratingInfo(p){
+  const node=menuRatings[ratingKey(p)]||{},votes=node.votes||node;
+  const values=Object.values(votes||{}).map(v=>Number(v&&typeof v==='object'?v.stars:v)).filter(v=>v>=1&&v<=5);
+  const total=values.reduce((a,b)=>a+b,0);
+  return{count:values.length,average:values.length?total/values.length:0};
 }
 function renderPopular(){
   const sec=q('#popularStrip'),run=q('#popularRun'),k=q('#popularK'),t=q('#popularT');
   if(!sec||!run)return;
-  const ranked=products
-    .map(p=>({p,r:productRating(p),count:productRatingCount(p)}))
-    .filter(x=>x.r>0&&img(x.p))
-    .sort((a,b)=>(b.r-a.r)||(b.count-a.count))
-    .slice(0,8);
-  if(!ranked.length){
+
+  const pool=products.filter(p=>p&&img(p));
+  const ranked=pool
+    .map(p=>({p,info:ratingInfo(p)}))
+    .filter(x=>x.info.count>0)
+    .sort((a,b)=>(b.info.average-a.info.average)||(b.info.count-a.info.count));
+
+  // If only a few items have ratings, keep Admin-marked POPULAR items as truthful fallbacks.
+  // Unrated fallbacks show outlined stars instead of pretending they have a 5-star rating.
+  const picked=[];
+  const used=new Set();
+  ranked.forEach(x=>{
+    if(picked.length>=8)return;
+    const id=pid(x.p);
+    if(!used.has(id)){used.add(id);picked.push(x)}
+  });
+  pool.filter(p=>p.isPopular).forEach(p=>{
+    if(picked.length>=8)return;
+    const id=pid(p);
+    if(!used.has(id)){used.add(id);picked.push({p,info:ratingInfo(p)})}
+  });
+
+  if(!picked.length){
     sec.hidden=true;
     run.innerHTML='';
     return;
   }
+
   sec.hidden=false;
   k.textContent=lang==='ar'?'الأكثر طلبًا':'POPULAR PICKS';
-  t.textContent=lang==='ar'?'الأصناف المفضلة لدى عملائنا.':'Customer favorites.';
-  const cards=ranked.map(({p,r})=>{
-    const filled=Math.max(1,Math.min(5,Math.round(r)));
+  t.textContent=lang==='ar'?'الأصناف الأعلى تقييمًا.':'Top-rated favorites.';
+
+  const cards=picked.map(({p,info})=>{
+    const filled=info.count?Math.max(1,Math.min(5,Math.round(info.average))):0;
     const stars=Array.from({length:5},(_,i)=>'<span class="popular-star'+(i<filled?' on':'')+'">★</span>').join('');
-    return '<a class="popular-card" href="'+esc(menuUrl())+'">'+
+    const label=info.count
+      ? (lang==='ar'?'تقييم العملاء':'Customer rating')
+      : (lang==='ar'?'صنف شائع':'Popular item');
+    return '<a class="popular-card" href="'+esc(menuUrl())+'" aria-label="'+esc(name(p))+' - '+esc(label)+'">'+
       '<div class="popular-thumb"><img src="'+esc(img(p))+'" alt="'+esc(name(p))+'" loading="lazy" decoding="async"></div>'+
-      '<div class="popular-meta"><span class="popular-name">'+esc(name(p))+'</span><span class="popular-stars" aria-label="'+filled+' stars">'+stars+'</span></div>'+
+      '<div class="popular-meta"><span class="popular-name">'+esc(name(p))+'</span><span class="popular-stars" title="'+esc(label)+'">'+stars+'</span></div>'+
     '</a>';
   }).join('');
+
   run.innerHTML='<div class="popular-group">'+cards+'</div><div class="popular-group" aria-hidden="true">'+cards+'</div>';
 }
 function sign(){const t=T[lang],im=q('#signImg'),ph=q('#signEmpty'),sec=q('#signboard'),has=!!cfg.signboardImageUrl;q('#signK').textContent=t.signK;q('#signT').textContent=t.signT;if(sec)sec.classList.toggle('has-image',has);if(has){im.src=cfg.signboardImageUrl;im.hidden=false;ph.hidden=true}else{im.removeAttribute('src');im.hidden=true;ph.hidden=false;ph.textContent=t.signEmpty}}
@@ -2833,6 +2857,7 @@ Promise.all([db.ref('/settings').once('value'),db.ref('/products').once('value')
   sS=sig(settings);sP=sig(products);sC=sig(cfg);render();
   db.ref('/settings').on('value',x=>{const v=x.val()||{},z=sig(v);if(z===sS)return;sS=z;settings=v;try{localStorage.setItem('cng_settings',JSON.stringify(v))}catch(e){}render()});
   db.ref('/products').on('value',x=>{const d=x.val(),v=d?Object.values(d).filter(Boolean):[],z=sig(v);if(z===sP)return;sP=z;products=v;try{localStorage.setItem('cng_products',JSON.stringify(v))}catch(e){}render()});
-  db.ref('/website/config').on('value',x=>{const v=x.val()||{},z=sig(v);if(z===sC)return;sC=z;cfg=v;try{localStorage.setItem('cng_website_config',JSON.stringify(v))}catch(e){}render()})
+  db.ref('/website/config').on('value',x=>{const v=x.val()||{},z=sig(v);if(z===sC)return;sC=z;cfg=v;try{localStorage.setItem('cng_website_config',JSON.stringify(v))}catch(e){}render()});
+  db.ref('/menuRatings').on('value',x=>{menuRatings=x.val()||{};renderPopular()});
 }).catch(()=>{});
 })();</script><!-- DOMAIN_OWNER_RECLAIM_20260926 --></body></html>
