@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="notranslate" translate="no">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -362,23 +362,24 @@
   </div>
   <header class="header">
     <div class="shop-logo-frame"><img id="shopLogo" class="shop-logo" alt="شعار كوب أند جو"></div>
-    <div class="brand-copy"><h1 id="shopName" class="shop-name">كوب أند جو</h1><div id="greeting" class="greeting">صباح الخير ☀️</div></div>
+    <div class="brand-copy"><h1 id="shopName" translate="no" class="shop-name">كوب أند جو</h1><div id="greeting" translate="no" class="greeting">صباح الخير ☀️</div></div>
     <div class="header-tools"><button id="langBtn" class="lang-btn" type="button" onclick="toggleLanguage()">عربي</button></div>
     <time id="clock" class="clock">00:00:00</time>
   </header>
   <main class="app-shell content">
-    <section id="signboard" class="signboard" aria-label="لوحة المتجر"><div class="led-window"><span id="ledText" class="led-text">☕ مرحباً بكم في كوب أند جو ☕</span></div></section>
+    <section id="signboard" class="signboard" aria-label="لوحة المتجر"><div class="led-window"><span id="ledText" translate="no" class="led-text">☕ مرحباً بكم في كوب أند جو ☕</span></div></section>
     <section id="slider" class="slider" aria-label="العروض"><div id="sliderTrack" class="slider-track"></div><div id="sliderDots" class="dots"></div></section>
-    <div class="menu-head"><div><h2 id="menuTitle">منيو كوب أند جو</h2><p id="menuSub">قهوة، V60، ماتشا، كركديه، حلويات وعروض كوب أند جو</p></div></div>
-    <nav id="categories" class="categories" aria-label="فئات القائمة"></nav>
-    <section id="menuGrid" class="menu-grid"><div class="loading">جاري تحميل القائمة…</div></section>
-    <footer id="menuFooter" class="footer">© كوب أند جو · المملكة العربية السعودية</footer>
+    <div class="menu-head"><div><h2 id="menuTitle" translate="no">منيو كوب أند جو</h2><p id="menuSub" translate="no">قهوة، V60، ماتشا، كركديه، حلويات وعروض كوب أند جو</p></div></div>
+    <nav id="categories" translate="no" class="categories" aria-label="فئات القائمة"></nav>
+    <section id="menuGrid" translate="no" class="menu-grid"><div class="loading">جاري تحميل القائمة…</div></section>
+    <footer id="menuFooter" translate="no" class="footer">© كوب أند جو · المملكة العربية السعودية</footer>
   </main>
   <div id="previewModal" class="modal" onclick="if(event.target===this)closePreview()">
-    <article class="modal-box"><button id="previewClose" class="close" type="button" onclick="closePreview()" aria-label="إغلاق">×</button><div id="previewImageWrap" class="preview-img-wrap"></div><div class="preview-body"><h2 id="previewName"></h2><p id="previewDesc"></p><div id="previewPrice" class="preview-price"></div><div id="previewRating" class="preview-rating"></div></div></article>
+    <article class="modal-box"><button id="previewClose" class="close" type="button" onclick="closePreview()" aria-label="إغلاق">×</button><div id="previewImageWrap" class="preview-img-wrap"></div><div class="preview-body"><h2 id="previewName" translate="no"></h2><p id="previewDesc" translate="no"></p><div id="previewPrice" class="preview-price"></div><div id="previewRating" class="preview-rating"></div></div></article>
   </div>
   <div id="status" class="status">متصل</div>
   <script>
+    /* CNG_BILINGUAL_LOCK_20260926 */
     const firebaseConfig={apiKey:"AIzaSyAoYsT80oNc505TgobYwTv0T7YfUF_fWRs",authDomain:"cup-and-go-pos-e0ad1.firebaseapp.com",databaseURL:"https://cup-and-go-pos-e0ad1-default-rtdb.firebaseio.com",projectId:"cup-and-go-pos-e0ad1"};
     firebase.initializeApp(firebaseConfig);const db=firebase.database();
     const FALLBACK_LOGO="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23fff'/%3E%3Cpath d='M24 37h48v25a18 18 0 0 1-18 18H42a18 18 0 0 1-18-18V37zm48 7h7a11 11 0 0 1 0 22h-8' fill='none' stroke='%236b1b23' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M37 25c-7-8 7-10 0-18M55 25c-7-8 7-10 0-18' fill='none' stroke='%23d9a927' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E";
@@ -476,7 +477,12 @@
     function syncFixedHeaderHeight(){const header=document.querySelector('.header');if(!header)return;const height=Math.ceil(header.getBoundingClientRect().height);if(height>0)document.documentElement.style.setProperty('--cng-fixed-header-h',`${height}px`)}
     function updateLedLanguage(){const el=document.getElementById('ledText');if(!el)return;const raw=el.dataset.rawText||'☕ Welcome to Cup And Go ☕',plain=normalizeProductKey(raw);if(isArabic&&plain.includes('welcome to cup and go'))el.textContent='☕ مرحباً بكم في كوب أند جو ☕';else if(isArabic&&plain.includes('get 1 free')&&plain.includes('cup and go'))el.textContent='☕ احصل على كوب مجاني من كوب أند جو ☕';else el.textContent=raw}
     function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'منيو كوب أند جو | قائمة Cup And Go | السعودية':'Cup And Go Menu | منيو كوب أند جو | Saudi Arabia';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;document.getElementById('menuSub').textContent=t.sub;document.getElementById('shopName').textContent=isArabic?'كوب أند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب أند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب أند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu();requestAnimationFrame(syncFixedHeaderHeight)}
-    function toggleLanguage(){isArabic=!isArabic;localStorage.setItem('cng_lang',isArabic?'ar':'en');applyLanguage()}
+    function toggleLanguage(){
+  isArabic=!isArabic;
+  localStorage.setItem('cng_lang',isArabic?'ar':'en');
+  applyLanguage();
+  requestAnimationFrame(()=>{applyLanguage()});
+}
     function showStatus(message){const el=document.getElementById('status');el.textContent=message;el.classList.add('show');clearTimeout(showStatus.timer);showStatus.timer=setTimeout(()=>el.classList.remove('show'),2200)}
     async function loadMenuPromoData(){
       try{
@@ -583,7 +589,7 @@
         renderCategories();renderMenu();hideMenuIntro();
       }catch(e){}finally{clearTimeout(timeout);productsFallbackRunning=false}
     }
-    db.ref('/settings').on('value',snap=>{const next=snap.val()||{},changed=menuSettingsSignature(next)!==menuSettingsSignature(settings);settings=next;try{localStorage.setItem(SETTINGS_CACHE,JSON.stringify(settings))}catch(e){}document.getElementById('shopLogo').src=settings.shopLogo||FALLBACK_LOGO;const introName=document.getElementById('menuIntroName');if(introName)introName.textContent=settings.shopName||'Cup And Go';adminCategories=Array.isArray(settings.categories)?settings.categories:[];const banners=Array.isArray(settings.promoBanners)?settings.promoBanners:(settings.offerPosterImage?[settings.offerPosterImage]:[]);initSlider(banners);if(changed)applyLanguage()},()=>showStatus(isArabic?text.ar.offline:text.en.offline));
+    db.ref('/settings').on('value',snap=>{const next=snap.val()||{},changed=menuSettingsSignature(next)!==menuSettingsSignature(settings);settings=next;try{localStorage.setItem(SETTINGS_CACHE,JSON.stringify(settings))}catch(e){}document.getElementById('shopLogo').src=settings.shopLogo||FALLBACK_LOGO;const introName=document.getElementById('menuIntroName');if(introName)introName.textContent=settings.shopName||'Cup And Go';adminCategories=Array.isArray(settings.categories)?settings.categories:[];const banners=Array.isArray(settings.promoBanners)?settings.promoBanners:(settings.offerPosterImage?[settings.offerPosterImage]:[]);initSlider(banners);applyLanguage()},()=>showStatus(isArabic?text.ar.offline:text.en.offline));
     db.ref('/ledMatrix').on('value',snap=>{const led=snap.val()||{};const el=document.getElementById('ledText');el.dataset.rawText=led.text||'☕ Welcome to Cup And Go ☕';updateLedLanguage();el.style.color=led.color||'#ffe855';el.style.fontFamily=led.font||"'Courier New', monospace";el.style.animationDuration=`${Math.min(Math.max(Number(led.speed)||20,5),60)}s`});
     db.ref('/products').on('value',snap=>{const data=snap.val(),next=data?Object.values(data).filter(Boolean):[],changed=menuProductsSignature(next)!==menuProductsSignature(products);products=next;productsLoaded=true;try{localStorage.setItem(PRODUCTS_CACHE,JSON.stringify(products))}catch(e){}if(changed){renderCategories();renderMenu()}hideMenuIntro()},()=>{showStatus(isArabic?text.ar.offline:text.en.offline);setTimeout(hideMenuIntro,500)});
     db.ref('/menuRatings').on('value',snap=>{menuRatings=snap.val()||{};refreshMenuRatingsInPlace();if(currentPreviewId){const p=products.find(x=>String(x.id??x.name??'')===currentPreviewId);if(p)renderPreviewRating(p)}});
