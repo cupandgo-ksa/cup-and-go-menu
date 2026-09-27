@@ -3411,7 +3411,7 @@ html[lang="ar"] .preview{
   inset:0;
   overflow:hidden;
   pointer-events:none;
-  z-index:3;
+  z-index:1;
 }
 .cng-bean{
   position:absolute;
@@ -3445,10 +3445,10 @@ html[lang="ar"] .preview{
   box-shadow:0 0 1px rgba(255,255,255,.08);
 }
 @keyframes cngBeanDrop{
-  0%{opacity:0;transform:translate3d(0,-22px,0) rotate(0deg) scale(.82)}
+  0%{opacity:0;transform:translate3d(0,-22px,0) rotate(0deg) scale(calc(var(--bean-scale,1) * .82))}
   12%{opacity:.66}
   70%{opacity:.54}
-  100%{opacity:0;transform:translate3d(var(--bean-drift,18px),620px,0) rotate(var(--bean-spin,420deg)) scale(1)}
+  100%{opacity:0;transform:translate3d(var(--bean-drift,18px),620px,0) rotate(var(--bean-spin,420deg)) scale(var(--bean-scale,1))}
 }
 @media(max-width:480px){
   .cng-bean{width:11px;height:17px}
@@ -3781,8 +3781,7 @@ function startCoffeeBeans(){
       bean.style.setProperty('--bean-duration',(4.8+Math.random()*1.8).toFixed(2)+'s');
       bean.style.setProperty('--bean-drift',(-34+Math.random()*68).toFixed(0)+'px');
       bean.style.setProperty('--bean-spin',(280+Math.random()*420).toFixed(0)+'deg');
-      const scale=(.78+Math.random()*.5).toFixed(2);
-      bean.style.scale=scale;
+      bean.style.setProperty('--bean-scale',(.78+Math.random()*.5).toFixed(2));
       layer.appendChild(bean);
       bean.addEventListener('animationend',()=>bean.remove(),{once:true});
     }
