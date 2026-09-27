@@ -3677,24 +3677,36 @@ html[lang="ar"] .preview.switch{
 }
 /* CNG REAL COFFEE BEAN PHOTO 20260927AE END */
 
-/* Keep the product poster balanced beside the wheel; preserve its existing transition. */
+/* Balanced product poster and a quiet image crossfade. */
 .preview{
-  width:42vw!important;
+  width:46vw!important;
   min-width:0!important;
-  max-width:164px!important;
-  height:228px!important;
-  top:20px!important;
+  max-width:184px!important;
+  height:250px!important;
+  top:18px!important;
   padding:11px!important;
 }
 .preview img{
   width:auto!important;
   height:auto!important;
-  max-width:88%!important;
-  max-height:88%!important;
+  max-width:90%!important;
+  max-height:90%!important;
   object-fit:contain!important;
+  animation:none!important;
 }
+.preview.switch{opacity:1!important;transform:none!important;filter:none!important}
+.preview .preview-overlay{
+  position:absolute!important;
+  inset:0!important;
+  margin:auto!important;
+  z-index:3!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  transition:opacity .36s ease!important;
+}
+.preview .preview-overlay.visible{opacity:1!important}
 @media(max-width:360px){
-  .preview{width:42vw!important;height:216px!important;padding:10px!important}
+  .preview{width:46vw!important;height:236px!important;padding:10px!important}
 }
 /* The original narrow composition should remain centered on wide screens. */
 @media(min-width:700px){
@@ -3743,7 +3755,30 @@ function angle(i){return 360/items.length*i}
 function drawWheel(){const w=q('#wheel');w.classList.remove('cng-dense');w.style.removeProperty('--cng-node-size');w.style.removeProperty('--cng-node-margin');w.style.removeProperty('--cng-active-size');w.style.removeProperty('--cng-active-margin');qa('.node').forEach(n=>n.remove());items.forEach((it,i)=>{const b=document.createElement('button');b.className='node'+(i===active?' active':'');b.style.setProperty('--a',angle(i)+'deg');b.setAttribute('aria-label',it.name||'Item');b.innerHTML='<span class="node-inner">'+(it.image?'<img src="'+esc(it.image)+'" alt="'+esc(it.name||'')+'" loading="'+(i<2?'eager':'lazy')+'" decoding="async">':'<span>'+esc((it.name||'Item').split(/\s+/)[0])+'</span>')+'</span>';b.onclick=e=>{e.stopPropagation();pauseUntil=performance.now()+3500;select(i,true)};w.appendChild(b)});w.style.setProperty('--turn',turn+'deg')}
 function mark(){qa('.node').forEach((n,i)=>n.classList.toggle('active',i===active))}
 function select(i,anim){active=(i+items.length)%items.length;turn+=norm(FOCUS-angle(active)-turn);q('#wheel').style.setProperty('--turn',turn+'deg');mark();preview(anim);hideInfo()}
-function preview(anim){const it=items[active],box=q('#preview'),im=q('#previewImg');if(anim){box.classList.add('switch');setTimeout(()=>box.classList.remove('switch'),220)}if(it.image){im.src=it.image;im.hidden=false;box.classList.add('png-ready');document.body.classList.add('hero-ready')}else{im.removeAttribute('src');im.hidden=true;box.classList.remove('png-ready')}}
+let previewSeq=0,previewTimer=0;
+function preview(anim){
+  const seq=++previewSeq,it=items[active],box=q('#preview'),im=q('#previewImg');
+  clearTimeout(previewTimer);
+  box.classList.remove('switch');
+  box.querySelector('.preview-overlay')?.remove();
+  const apply=()=>{
+    if(seq!==previewSeq)return;
+    if(it.image){im.src=it.image;im.hidden=false;box.classList.add('png-ready');document.body.classList.add('hero-ready')}
+    else{im.removeAttribute('src');im.hidden=true;box.classList.remove('png-ready')}
+  };
+  if(!anim||!it.image||im.hidden||!im.getAttribute('src')){apply();return}
+  const loader=new Image();
+  loader.onload=()=>{
+    if(seq!==previewSeq)return;
+    const next=document.createElement('img');
+    next.className='preview-overlay';next.alt='';next.src=it.image;
+    box.appendChild(next);
+    requestAnimationFrame(()=>{if(seq===previewSeq)next.classList.add('visible')});
+    previewTimer=setTimeout(()=>{if(seq!==previewSeq)return;apply();next.remove()},360);
+  };
+  loader.onerror=apply;
+  loader.src=it.image;
+}
 function info(){const it=items[active],t=T[lang];q('#infoMini').textContent=t.details;q('#infoName').textContent=it.name;q('#infoPrice').textContent=it.price?it.price.toFixed(2)+' ﷼':'';q('#infoDesc').textContent=it.desc||'';q('#info').classList.add('show');pauseUntil=performance.now()+6000}
 function hideInfo(){q('#info').classList.remove('show')}
 function wheelKey(it){return it&&it.p?pid(it.p):String(it&&it.name||'')}
