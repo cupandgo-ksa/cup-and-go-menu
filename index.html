@@ -3710,6 +3710,9 @@ html[lang="ar"] .preview.switch{
   transition:opacity .56s cubic-bezier(.22,1,.36,1)!important;
 }
 .preview .preview-overlay.visible{opacity:1!important}
+.preview.is-crossfading{
+  box-shadow:0 30px 65px rgba(0,0,0,.32),0 0 0 1px rgba(229,193,88,.24),0 0 28px rgba(229,193,88,.10)!important;
+}
 @media(max-width:360px){
   .preview{width:46vw!important;height:236px!important;padding:10px!important}
 }
@@ -3764,7 +3767,7 @@ let previewSeq=0,previewTimer=0;
 function preview(anim){
   const seq=++previewSeq,it=items[active],box=q('#preview'),im=q('#previewImg');
   clearTimeout(previewTimer);
-  box.classList.remove('switch');
+  box.classList.remove('switch','is-crossfading');
   box.querySelector('.preview-overlay')?.remove();
   const apply=()=>{
     if(seq!==previewSeq)return;
@@ -3778,8 +3781,9 @@ function preview(anim){
     const next=document.createElement('img');
     next.className='preview-overlay';next.alt='';next.src=it.image;
     box.appendChild(next);
+    box.classList.add('is-crossfading');
     requestAnimationFrame(()=>{if(seq===previewSeq)next.classList.add('visible')});
-    previewTimer=setTimeout(()=>{if(seq!==previewSeq)return;apply();next.remove()},580);
+    previewTimer=setTimeout(()=>{if(seq!==previewSeq)return;apply();next.remove();box.classList.remove('is-crossfading')},580);
   };
   loader.onerror=apply;
   loader.src=it.image;
