@@ -3702,14 +3702,26 @@ html[lang="ar"] .preview.switch{
 .preview.switch{opacity:1!important;transform:none!important;filter:none!important}
 .preview .preview-overlay{
   position:absolute!important;
-  inset:0!important;
-  margin:auto!important;
   z-index:3!important;
   opacity:0!important;
+  filter:blur(7px)!important;
   pointer-events:none!important;
-  transition:opacity .56s cubic-bezier(.22,1,.36,1)!important;
+  -webkit-mask-image:radial-gradient(circle,#000 52%,transparent 72%);
+  mask-image:radial-gradient(circle,#000 52%,transparent 72%);
+  -webkit-mask-size:0% 0%;
+  mask-size:0% 0%;
+  -webkit-mask-position:center;
+  mask-position:center;
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  transition:opacity .72s ease,filter .72s ease,-webkit-mask-size .72s cubic-bezier(.22,1,.36,1),mask-size .72s cubic-bezier(.22,1,.36,1)!important;
 }
-.preview .preview-overlay.visible{opacity:1!important}
+.preview .preview-overlay.visible{
+  opacity:1!important;
+  filter:blur(0)!important;
+  -webkit-mask-size:240% 240%;
+  mask-size:240% 240%;
+}
 .preview.is-crossfading{
   box-shadow:0 30px 65px rgba(0,0,0,.32),0 0 0 1px rgba(229,193,88,.24),0 0 28px rgba(229,193,88,.10)!important;
 }
@@ -3783,7 +3795,7 @@ function preview(anim){
     box.appendChild(next);
     box.classList.add('is-crossfading');
     requestAnimationFrame(()=>{if(seq===previewSeq)next.classList.add('visible')});
-    previewTimer=setTimeout(()=>{if(seq!==previewSeq)return;apply();next.remove();box.classList.remove('is-crossfading')},580);
+    previewTimer=setTimeout(()=>{if(seq!==previewSeq)return;apply();next.remove();box.classList.remove('is-crossfading')},760);
   };
   loader.onerror=apply;
   loader.src=it.image;
