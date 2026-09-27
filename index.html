@@ -3686,13 +3686,18 @@ html[lang="ar"] .preview.switch{
   top:18px!important;
   padding:11px!important;
 }
-.preview img{
-  width:auto!important;
-  height:auto!important;
-  max-width:90%!important;
-  max-height:90%!important;
+.preview.png-ready #previewImg,
+.preview.png-ready .preview-overlay{
+  position:absolute!important;
+  inset:11px!important;
+  width:calc(100% - 22px)!important;
+  height:calc(100% - 22px)!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
   object-fit:contain!important;
   animation:none!important;
+  transform:none!important;
 }
 .preview.switch{opacity:1!important;transform:none!important;filter:none!important}
 .preview .preview-overlay{
@@ -3702,7 +3707,7 @@ html[lang="ar"] .preview.switch{
   z-index:3!important;
   opacity:0!important;
   pointer-events:none!important;
-  transition:opacity .36s ease!important;
+  transition:opacity .56s cubic-bezier(.22,1,.36,1)!important;
 }
 .preview .preview-overlay.visible{opacity:1!important}
 @media(max-width:360px){
@@ -3774,7 +3779,7 @@ function preview(anim){
     next.className='preview-overlay';next.alt='';next.src=it.image;
     box.appendChild(next);
     requestAnimationFrame(()=>{if(seq===previewSeq)next.classList.add('visible')});
-    previewTimer=setTimeout(()=>{if(seq!==previewSeq)return;apply();next.remove()},360);
+    previewTimer=setTimeout(()=>{if(seq!==previewSeq)return;apply();next.remove()},580);
   };
   loader.onerror=apply;
   loader.src=it.image;
