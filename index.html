@@ -3794,7 +3794,8 @@ function preview(anim){
     next.className='preview-overlay';next.alt='';next.src=it.image;
     box.appendChild(next);
     box.classList.add('is-crossfading');
-    requestAnimationFrame(()=>{if(seq===previewSeq)next.classList.add('visible')});
+    next.getBoundingClientRect();
+    if(seq===previewSeq)next.classList.add('visible');
     previewTimer=setTimeout(()=>{if(seq!==previewSeq)return;apply();next.remove();box.classList.remove('is-crossfading')},760);
   };
   loader.onerror=apply;
