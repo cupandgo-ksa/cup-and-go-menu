@@ -3676,6 +3676,31 @@ html[lang="ar"] .preview.switch{
   .cng-bean-photo{width:19px!important}
 }
 /* CNG REAL COFFEE BEAN PHOTO 20260927AE */ END
+
+/* Keep the product poster balanced beside the wheel; preserve its existing transition. */
+.preview{
+  width:42vw!important;
+  min-width:0!important;
+  max-width:164px!important;
+  height:228px!important;
+  top:20px!important;
+  padding:11px!important;
+}
+.preview img{
+  width:auto!important;
+  height:auto!important;
+  max-width:88%!important;
+  max-height:88%!important;
+  object-fit:contain!important;
+}
+@media(max-width:360px){
+  .preview{width:42vw!important;height:216px!important;padding:10px!important}
+}
+/* The original narrow composition should remain centered on wide screens. */
+@media(min-width:700px){
+  body{width:520px!important;max-width:520px!important;margin:0 auto!important}
+  .header{width:520px!important;max-width:520px!important;left:50%!important;transform:translateX(-50%)!important}
+}
 </style></head><body><div class="noise"></div><header class="header"><div class="brand"><div class="brand-logo" id="brandLogo">C&G</div><div class="brand-wordmark" id="brandWordmark"><span>Cup And Go</span></div></div><div class="header-tools"><button class="round" id="langBtn">EN</button><a class="round" id="headerMenu" href="#">☰</a></div></header><div class="cng-bean-layer" id="cngBeanLayer" aria-hidden="true"></div><main><section class="hero"><div class="hero-copy"><div class="kicker" id="heroK">اختيارات كوب أند جو</div><h1 id="heroT">اختر <em>مزاجك.</em></h1><p class="lead" id="heroL">اترك الدائرة تتحرك بهدوء أو حرّكها بإصبعك. اضغط على الصورة الكبيرة لعرض اسم الصنف والسعر والوصف.</p><a class="menu-cta" id="menuCta"><span id="menuText">افتح المنيو</span><b>↗</b></a></div><div class="stage"><div class="wheel" id="wheel"><div class="wheel-center" id="wheelCenter"></div></div><button class="preview" id="preview" type="button"><span class="preview-loading"></span><img id="previewImg" alt=""><span class="tap-label" id="tapLabel">اضغط للتفاصيل</span></button><article class="info" id="info"><button class="info-close" id="infoClose">×</button><div class="mini" id="infoMini"></div><h2 id="infoName"></h2><strong class="info-price" id="infoPrice"></strong><p id="infoDesc"></p></article><div class="hint" id="hint">حرّك · اختر الصنف</div></div></section><section class="gallery" id="gallery"><div class="section-head"><div class="ey" id="galleryK">مكاننا</div><h2 id="galleryT">تعرّف على كوب أند جو.</h2></div><div class="gallery-view" id="galleryView"><div class="gallery-track" id="galleryTrack"></div></div><div class="gallery-dots" id="galleryDots"></div></section><section class="popular-strip" id="popularStrip" hidden><div class="popular-head"><div class="ey" id="popularK">الأكثر طلبًا</div><h2 id="popularT">الأصناف الأعلى تقييمًا.</h2></div><div class="popular-marquee" aria-label="Popular items"><div class="popular-run" id="popularRun"></div></div></section><section class="signboard" id="signboard"><div class="ey" id="signK">هويتنا</div><h2 id="signT">علامة تتذكرها.</h2><div class="sign-wall"><div class="sign-frame"><div class="sign-frame-inner"><img id="signImg" alt="" loading="lazy" decoding="async" fetchpriority="low" hidden><div class="sign-placeholder" id="signEmpty">ارفع صورة لوحة المتجر من لوحة الإدارة</div></div></div><div class="sign-shadow"></div></div></section><section class="baristas" id="baristas"><div class="ey" id="baristaK">فريقنا</div><h2 id="baristaT">تعرّف على من يصنع لك كوبك.</h2><div class="barista-grid" id="baristaGrid"></div></section><section class="about" id="about"><div class="ey" id="aboutK">عن كوب أند جو</div><h2 id="aboutT">قهوة <em>ببساطة.</em></h2><div class="about-text" id="aboutText">Welcome to Cup And Go. We serve fresh coffee, V60, matcha, hibiscus, cold drinks and sweets. Tap Open Menu anytime to see all current items and offers.</div></section><section class="contacts" id="contacts"><h3 id="contactTitle">Visit &amp; Contact Cup And Go</h3><div class="icon-row"><a class="social" id="loc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg><span></span></a><a class="social" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.2c.3 2 2 3.8 4.1 4.6l1.1-1c.3-.2.7-.2 1 0l1.3.8c.3.2.4.5.3.8-.4 1.2-1.5 1.8-2.7 1.6-3.9-.7-7-3.8-7.7-7.7-.2-1.2.4-2.3 1.6-2.7.3-.1.6 0 .8.3l.8 1.3c.2.3.2.7 0 1L9 8.2Z"/></svg><span></span></a><a class="social" id="ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span></span></a><a class="social" id="tk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4v10.2a4 4 0 1 1-3.3-3.9"/><path d="M14 4c.6 2.6 2.2 4.1 4.5 4.5"/></svg><span></span></a></div><div class="dev" id="dev" hidden><b>Developer: Mohammed Ashik</b></div></section><section class="brand-footer" id="brandFooter"><div class="brand-footer-inner"><div class="brand-footer-kicker" id="footerKicker">كوب أند جو · قصتنا</div><h3 class="brand-footer-title" id="footerTitle">القهوة تبدأ من بذرة صغيرة.</h3><div class="brand-footer-grid"><div class="brand-footer-col"><p id="footerLine1">ثم تتحول إلى كوب.</p><p id="footerLine2">نرافقك في كل وقت.</p></div><div class="brand-footer-col"><p id="footerLine3">من كوب أند جو.</p><p id="footerLine4">منذ ٢٠٢٥ · المملكة العربية السعودية.</p></div></div><div class="brand-footer-copy" id="footerCopyright">© كوب أند جو · جميع الحقوق محفوظة.</div><div class="developer-strip" id="developerStrip">Developer: Mohammed Ashik</div></div></section></main><script>
 /* CNG_ROOT_CACHE_RESET_20260926 */
 (function(){try{
