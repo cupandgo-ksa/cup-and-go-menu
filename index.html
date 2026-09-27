@@ -3714,13 +3714,16 @@ html[lang="ar"] .preview.switch{
   mask-position:center;
   -webkit-mask-repeat:no-repeat;
   mask-repeat:no-repeat;
-  transition:opacity .72s ease,filter .72s ease,-webkit-mask-size .72s cubic-bezier(.22,1,.36,1),mask-size .72s cubic-bezier(.22,1,.36,1)!important;
+  transition:opacity .72s ease,filter .72s ease!important;
 }
 .preview .preview-overlay.visible{
   opacity:1!important;
   filter:blur(0)!important;
-  -webkit-mask-size:240% 240%;
-  mask-size:240% 240%;
+  animation:heroSoftReveal .76s cubic-bezier(.22,1,.36,1) both!important;
+}
+@keyframes heroSoftReveal{
+  from{-webkit-mask-size:0% 0%;mask-size:0% 0%}
+  to{-webkit-mask-size:240% 240%;mask-size:240% 240%}
 }
 .preview.is-crossfading{
   box-shadow:0 30px 65px rgba(0,0,0,.32),0 0 0 1px rgba(229,193,88,.24),0 0 28px rgba(229,193,88,.10)!important;
