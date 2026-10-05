@@ -4216,20 +4216,21 @@ addEventListener('resize',()=>{
 },{passive:true})}
 try{if('serviceWorker'in navigator)navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>{if((r.scope||'').includes('/website/'))r.unregister()}))}catch(e){}
 try{
-  settings=JSON.parse(localStorage.getItem('cng_settings')||'{}')||{};
+  settings=JSON.parse(localStorage.getItem('cng_public_settings_v1')||'{}')||{};
   products=JSON.parse(localStorage.getItem('cng_products')||'[]')||[];
   cfg=JSON.parse(localStorage.getItem('cng_website_config')||'{}')||{};
 }catch(e){}
 render();init();
-Promise.all([db.ref('/settings').once('value'),db.ref('/products').once('value'),db.ref('/website/config').once('value')]).then(([s,p,c])=>{
+Promise.all([db.ref('/publicSettings').once('value'),db.ref('/products').once('value'),db.ref('/website/config').once('value')]).then(([s,p,c])=>{
   settings=s.val()||settings||{};
   const d=p.val();products=d?Object.values(d).filter(Boolean):products;
   cfg=c.val()||cfg||{};
-  try{localStorage.setItem('cng_settings',JSON.stringify(settings));localStorage.setItem('cng_products',JSON.stringify(products));localStorage.setItem('cng_website_config',JSON.stringify(cfg))}catch(e){}
+  try{localStorage.setItem('cng_public_settings_v1',JSON.stringify(settings));localStorage.setItem('cng_products',JSON.stringify(products));localStorage.setItem('cng_website_config',JSON.stringify(cfg))}catch(e){}
   sS=sig(settings);sP=sig(products);sC=sig(cfg);render();
-  db.ref('/settings').on('value',x=>{const v=x.val()||{},z=sig(v);if(z===sS)return;sS=z;settings=v;try{localStorage.setItem('cng_settings',JSON.stringify(v))}catch(e){}render()});
+  db.ref('/publicSettings').on('value',x=>{const v=x.val()||{},z=sig(v);if(z===sS)return;sS=z;settings=v;try{localStorage.setItem('cng_public_settings_v1',JSON.stringify(v))}catch(e){}render()});
   db.ref('/products').on('value',x=>{const d=x.val(),v=d?Object.values(d).filter(Boolean):[],z=sig(v);if(z===sP)return;sP=z;products=v;try{localStorage.setItem('cng_products',JSON.stringify(v))}catch(e){}render()});
   db.ref('/website/config').on('value',x=>{const v=x.val()||{},z=sig(v);if(z===sC)return;sC=z;cfg=v;try{localStorage.setItem('cng_website_config',JSON.stringify(v))}catch(e){}render()});
   db.ref('/menuRatings').on('value',x=>{menuRatings=x.val()||{};renderPopular()});
 }).catch(()=>{});
 })();</script><!-- DOMAIN_OWNER_RECLAIM_20260926 --></body></html>
+
