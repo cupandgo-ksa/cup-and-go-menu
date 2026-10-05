@@ -1198,7 +1198,7 @@ function cngCustomerRef(path){
 const db={ref:cngCustomerRef};
 
 
-        let menuProducts = []; let cart = []; let currentItem = null; let sheetQtyVal = 1; 
+        let cngCatalog = {}; let menuProducts = []; let cart = []; let currentItem = null; let sheetQtyVal = 1; 
         if(!localStorage.getItem('cng_lang')) localStorage.setItem('cng_lang','ar');
         let isArabic = (localStorage.getItem('cng_lang') !== 'en'); 
         let activeCategory = 'All Items';
@@ -1496,7 +1496,7 @@ const db={ref:cngCustomerRef};
         // Safe to start now: adminNotificationListenerStarted has been initialized.
         listenForAdminNotifications();
 
-        db.ref('/products').on('value', snap => { let data = snap.val(); menuProducts = data ? Object.values(data).filter(p => p != null) : []; renderCategories(); renderMenu(); });
+        db.ref('/products').on('value', snap => { let data = snap.val(); cngCatalog=data||{}; menuProducts = data ? Object.values(data).filter(p => p != null) : []; renderCategories(); renderMenu(); });
 
         db.ref('/customerOrderHistory').on('value', snap => {
             const raw=snap.val(); const arr=raw ? (Array.isArray(raw)?raw:Object.values(raw)) : [];
@@ -1674,11 +1674,12 @@ const db={ref:cngCustomerRef};
             const paymentChoice=document.querySelector('input[name="checkoutPaymentMethod"]:checked');
             if(!paymentChoice){ await appDialog(isArabic ? "اختر طريقة الدفع: نقداً أو بطاقة" : "Please choose payment method: Cash or Card", {icon:"💳"}); return; }
             const paymentMethod=paymentChoice.value;
+            const verifiedItems=[];for(const item of cart){const entry=Object.entries(cngCatalog).find(([key,p])=>p&&String(p.id)===String(item.id));if(!entry||Number(entry[1].price)!==Number(item.price)||!Number.isInteger(Number(item.qty))||Number(item.qty)<1||Number(item.qty)>99){showToast('An item changed. Refresh the menu and check your cart.');return;}verifiedItems.push({id:entry[1].id,productKey:entry[0],name:String(entry[1].name||item.name),price:Number(entry[1].price),qty:Number(item.qty),note:String(item.note||'')});}if(!verifiedItems.length)return;
             let btn = document.getElementById('btnPlaceOrder'); btn.innerText = "Processing..."; btn.disabled = true;
             let orderNote = (document.getElementById('checkoutOrderNote')?.value || '').trim();
             let total = cart.reduce((s, c) => s + (c.price * c.qty), 0); let cashierInfo = car ? `Car: ${car} (${name})` : `Walk-in: ${name}`; let tNow = Date.now();
             await cngCustomerReady;
-            let orderData = { ownerUid:cngCustomerUid, id: tNow, time: new Date().toLocaleTimeString(), items: cart, total: total, cashier: cashierInfo, customerPhone: phone, customerPhoneMasked:cngMaskPhone(phone), customerDeviceId:cngGetCustomerDeviceId(), contactExpiresAt:tNow+(24*60*60*1000), privacyVersion:1, carNumber: car || "", timestamp: tNow, status: 'new', orderSource: 'customer', customerName: name, customerNote: orderNote, paymentMethod: paymentMethod };
+            let orderData = { ownerUid:cngCustomerUid, id: tNow, time: new Date().toLocaleTimeString(), items: verifiedItems, total: total, cashier: cashierInfo, customerPhone: phone, customerPhoneMasked:cngMaskPhone(phone), customerDeviceId:cngGetCustomerDeviceId(), contactExpiresAt:tNow+(24*60*60*1000), privacyVersion:1, carNumber: car || "", timestamp: tNow, status: 'new', orderSource: 'customer', customerName: name, customerNote: orderNote, paymentMethod: paymentMethod };
             // Atomic realtime append: prevents simultaneous customer orders from overwriting each other.
             cngCustomerRawDb.ref('/customerOrders/'+cngCustomerOrderKey(orderData)).set(orderData).then(()=>({committed:true})).then(result => {
                 if(!result.committed) throw new Error('Order was not committed');
@@ -3015,10 +3016,11 @@ html[dir="rtl"] #greetingMsg{
  function tm(t){try{return new Date(Number(t)||Date.now()).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});}catch(e){return '';}}
  function badge(n){n=Number(n)||0;var b=document.getElementById('cngChatBadge');if(b){b.textContent=n>99?'99+':n;b.style.display=n>0?'flex':'none';}var ob=document.querySelector('#cngOrdersChatBtn .cng-orders-chat-badge');if(!ob&&document.getElementById('cngOrdersChatBtn')){ob=document.createElement('span');ob.className='cng-orders-chat-badge';document.getElementById('cngOrdersChatBtn').appendChild(ob);}if(ob){ob.textContent=n>99?'99+':n;ob.style.display=n>0?'flex':'none';}}
  function render(d){var a=document.getElementById('cngChatMessages');if(!a)return;var m=d&&d.messages?Object.values(d.messages):[];m.sort(function(x,y){return(x.timestamp||0)-(y.timestamp||0);});if(!m.length){a.innerHTML='<div style="text-align:center;color:#9299a4;padding:45px 14px;font-size:12px">☕ Send us a message. We will reply here.</div>';return;}var h='';m.forEach(function(x){h+='<div class="cngMsgRow '+(x.sender==='customer'?'me':'them')+'"><div class="cngMsg"><div>'+esc(x.text)+'</div><div class="cngMsgTime">'+tm(x.timestamp)+'</div></div></div>';});a.innerHTML=h;setTimeout(function(){a.scrollTop=a.scrollHeight;},0);}
- function listen(){if(chatRef&&chatListener)chatRef.off('value',chatListener);var p=prof();if(!p.phone)return;chatRef=db.ref('/customerChats/'+key(p.phone));chatListener=function(s){var d=s.val()||{};render(d);badge(d.unreadCustomer||0);if(document.getElementById('cngCustomerChatModal').classList.contains('open')&&Number(d.unreadCustomer)>0)chatRef.update({unreadCustomer:0});};chatRef.on('value',chatListener);}
- window.cngOpenCustomerChat=function(){var p=prof(),setup=document.getElementById('cngChatSetup'),comp=document.getElementById('cngChatComposer');var logo=document.getElementById('shopLogo');if(logo)document.getElementById('cngChatShopLogo').src=logo.src;if(!p.phone){setup.style.display='block';comp.style.display='none';document.getElementById('cngChatName').value=p.name;}else{setup.style.display='none';comp.style.display='flex';listen();}openModal('cngCustomerChatModal');if(chatRef)chatRef.update({unreadCustomer:0});};
+ function listen(){if(chatRef&&chatListener)chatRef.off('value',chatListener);var p=prof();if(!cngCustomerUid)return;chatRef=db.ref('/customerChats/'+cngCustomerUid);chatListener=function(s){var d=s.val()||{};render(d);badge(d.unreadCustomer||0);if(document.getElementById('cngCustomerChatModal').classList.contains('open')&&Number(d.unreadCustomer)>0)chatRef.update({unreadCustomer:0});};chatRef.on('value',chatListener);}
+ window.cngOpenCustomerChat=async function(){try{await window.cngRequireCustomer();}catch(e){return;}var logo=document.getElementById('shopLogo');if(logo)document.getElementById('cngChatShopLogo').src=logo.src;document.getElementById('cngChatSetup').style.display='none';document.getElementById('cngChatComposer').style.display='flex';listen();openModal('cngCustomerChatModal');if(chatRef)chatRef.update({unreadCustomer:0}).catch(()=>{});};
  window.cngSaveChatProfile=function(){var n=document.getElementById('cngChatName').value.trim(),p=document.getElementById('cngChatPhone').value.trim();if(!n||!p){if(typeof showToast==='function')showToast('Name and mobile number required');return;}localStorage.setItem('cng_name',n);localStorage.setItem('cng_phone',p);document.getElementById('cngChatSetup').style.display='none';document.getElementById('cngChatComposer').style.display='flex';listen();};
- window.cngCustomerSendMessage=function(){var p=prof(),i=document.getElementById('cngChatInput'),m=(i.value||'').trim();if(!p.phone){cngOpenCustomerChat();return;}if(!m)return;i.value='';var r=db.ref('/customerChats/'+key(p.phone)),now=Date.now();r.child('messages').push({sender:'customer',text:m,timestamp:now});r.update({customerName:p.name||'Customer',customerPhone:p.phone,updatedAt:now,lastMessage:m,lastSender:'customer',unreadAdmin:firebase.database.ServerValue.increment(1),unreadCustomer:0});};
+ window.cngCustomerSendMessage=async function(){try{await window.cngRequireCustomer();var p=prof(),i=document.getElementById('cngChatInput'),m=(i.value||'').trim();if(!m)return;var r=cngCustomerRawDb.ref('/customerChats/'+cngCustomerUid),now=Date.now(),messageKey=r.child('messages').push().key;await r.update({['messages/'+messageKey]:{sender:'customer',text:m,timestamp:now},customerName:p.name||'Customer',customerPhone:p.phone,updatedAt:now,lastMessage:m,lastSender:'customer',unreadAdmin:firebase.database.ServerValue.increment(1),unreadCustomer:0});i.value='';}catch(e){showToast('Could not send message. Please try again.');}};
+ cngCustomerReady.then(()=>listen());
  document.addEventListener('DOMContentLoaded',function(){if(prof().phone)listen();});setTimeout(function(){if(prof().phone)listen();},800);
 })();
 </script>
