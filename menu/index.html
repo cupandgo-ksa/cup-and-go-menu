@@ -1350,18 +1350,29 @@ body::before{
 
 
 
-<style id="cng-menu-message-rotator-v12">
-/* One clean message at a time directly under the Menu title. */
+
+<style id="cng-menu-message-rotator-v13">
+/* Premium one-message-at-a-time animation under the Menu title.
+   No sideways marquee: soft rise, focus, glow, hold, then fade away. */
 .menu-head{margin:10px 3px 14px!important;background:transparent!important}
 .menu-head>div{width:100%!important;min-width:0!important}
 .menu-item-ticker{
   position:relative;
   width:100%;
-  min-height:24px;
+  min-height:25px;
   margin-top:7px;
   overflow:hidden;
   display:flex;
   align-items:center;
+}
+.menu-item-ticker::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(232,197,116,.30),rgba(90,7,22,.10),transparent);
+  opacity:.62;
+  pointer-events:none;
 }
 .menu-item-ticker-track{
   display:block;
@@ -1370,18 +1381,27 @@ body::before{
   color:#766a6e;
   font-family:'Cairo','Inter',sans-serif;
   font-size:11.5px;
-  font-weight:750;
+  font-weight:760;
   line-height:1.45;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
   opacity:0;
-  transform:translateY(5px);
-  transition:opacity .38s ease,transform .38s ease;
+  transform:translateY(7px) scale(.985);
+  filter:blur(3px);
+  transform-origin:center;
+  will-change:opacity,transform,filter;
 }
 .menu-item-ticker-track.show{
-  opacity:1;
-  transform:translateY(0);
+  animation:cngMenuMessageReveal 3.8s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes cngMenuMessageReveal{
+  0%{opacity:0;transform:translateY(7px) scale(.985);filter:blur(3px);letter-spacing:.18px}
+  10%{opacity:1;transform:translateY(-1px) scale(1.008);filter:blur(0);letter-spacing:.04px}
+  18%{opacity:1;transform:translateY(0) scale(1);filter:blur(0);letter-spacing:0}
+  76%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+  90%{opacity:.72;transform:translateY(-2px) scale(.997);filter:blur(.25px)}
+  100%{opacity:0;transform:translateY(-6px) scale(.985);filter:blur(2.4px)}
 }
 html[dir="rtl"] .menu-item-ticker-track{
   text-align:right;
@@ -1393,11 +1413,12 @@ html[dir="ltr"] .menu-item-ticker-track{
   direction:ltr;
 }
 @media(max-width:430px){
-  .menu-item-ticker{min-height:22px;margin-top:6px}
+  .menu-item-ticker{min-height:23px;margin-top:6px}
   .menu-item-ticker-track{font-size:10.8px}
 }
 @media(prefers-reduced-motion:reduce){
-  .menu-item-ticker-track{transition:none!important;transform:none!important}
+  .menu-item-ticker-track{opacity:1!important;transform:none!important;filter:none!important}
+  .menu-item-ticker-track.show{animation:none!important}
 }
 </style>
 </body>
