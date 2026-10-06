@@ -4022,6 +4022,55 @@ body{
 }
 .live-clock{color:#85797c!important}
 </style>
+
+<style id="cng-water-glass-customer-v4">
+/* Transparent water-glass layer: keep the customer layout/functions unchanged. */
+.header,.cat-slider,.bottom-nav,.home-menu-cta,.co-account-bar,.co-my-orders,.item-card,
+.saved-profile-card,.about-card,.checkout-note-card,.premium-cart-row{
+  background:linear-gradient(145deg,rgba(255,255,255,.34),rgba(255,255,255,.12))!important;
+  border:1px solid rgba(255,255,255,.64)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.84),
+    inset 0 -1px 0 rgba(255,255,255,.20),
+    0 14px 32px rgba(72,48,40,.09)!important;
+  backdrop-filter:blur(28px) saturate(155%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(155%)!important;
+}
+.header{border-top:0!important}
+.header::before{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(115deg,rgba(255,255,255,.34),transparent 28%,transparent 68%,rgba(255,255,255,.12));
+  opacity:.65
+}
+.shop-logo,.nav-icon-btn,.lang-btn,.cat-chip{
+  background:linear-gradient(145deg,rgba(255,255,255,.46),rgba(255,255,255,.18))!important;
+  border-color:rgba(255,255,255,.68)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86),0 7px 18px rgba(66,43,36,.07)!important;
+  backdrop-filter:blur(18px) saturate(145%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(145%)!important;
+}
+.cat-chip.active,.nav-item.active i,.btn-add,.btn-confirm-add,.co-account-bar button{
+  background:linear-gradient(145deg,rgba(118,16,36,.96),rgba(78,6,20,.96))!important;
+  color:#fff8e9!important;
+}
+.item-info{
+  background:linear-gradient(145deg,rgba(255,255,255,.42),rgba(255,250,245,.18))!important;
+  border-top:1px solid rgba(255,255,255,.58)!important;
+  backdrop-filter:blur(20px) saturate(145%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(145%)!important;
+}
+.shop-title,.item-name,.home-menu-cta,.co-account-bar{color:#4f1421!important}
+.greeting-msg,.live-clock{color:#706469!important}
+.nav-item{color:#756a6e!important}
+.nav-item.active{color:#5a0716!important}
+@supports (-webkit-touch-callout:none){
+  .header,.cat-slider,.bottom-nav,.home-menu-cta,.co-account-bar,.co-my-orders,.item-card,.item-info,
+  .shop-logo,.nav-icon-btn,.lang-btn,.cat-chip{
+    backdrop-filter:blur(22px) saturate(145%)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(145%)!important;
+  }
+}
+</style>
 </body>
 </html>
 
