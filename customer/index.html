@@ -3974,6 +3974,24 @@ body{
   .nav-icon-btn,.lang-btn{background:#fff!important}
 }
 </style>
+
+<style id="cng-customer-top-gap-fix-v1">
+/* Remove legacy reserved space from the old fixed header.
+   Keep the current customer header design exactly the same. */
+html,body{
+  margin-top:0!important;
+}
+body{
+  padding-top:0!important;
+}
+.header{
+  top:0!important;
+  margin-top:0!important;
+}
+@supports(padding:max(0px)){
+  body{padding-top:0!important}
+}
+</style>
 </body>
 </html>
 
