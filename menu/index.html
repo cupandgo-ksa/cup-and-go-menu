@@ -1420,6 +1420,29 @@ html[dir="ltr"] .menu-item-ticker-track{
 }
 </style>
 
+
+<style id="cng-white-striped-paper-bg-v16">
+/* White menu canvas with the same subtle vertical stripe language as the main website.
+   Only the page background changes; cards, header, sizing and interactions stay untouched. */
+html{
+  background:#fff!important;
+}
+body{
+  background-color:#fff!important;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 11px,
+      rgba(92,69,66,.028) 12px 13px
+    ),
+    linear-gradient(180deg,#fff 0%,#fff 100%)!important;
+  background-size:auto!important;
+  background-attachment:fixed!important;
+}
+@supports (-webkit-touch-callout:none){
+  body{background-attachment:scroll!important}
+}
+</style>
 </body>
 </html>
 
