@@ -1305,46 +1305,46 @@ body::before{
 </style>
 
 
-<style id="cng-premium-signboard-headline-v9">
-/* Premium treatment for the default signboard headline only.
-   Other admin-controlled LED messages keep the existing marquee behavior. */
+
+<style id="cng-premium-signboard-headline-v10">
+/* Welcome headline stays moving; no inner box/badge, just clean premium type. */
 .led-text.cng-led-welcome{
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-56%)!important;
-  animation:none!important;
-  min-width:0!important;
-  width:max-content!important;
-  max-width:calc(100% - 58px)!important;
-  padding:8px 16px!important;
-  border-radius:14px!important;
-  border:1px solid rgba(244,223,170,.18)!important;
-  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018))!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 5px 14px rgba(0,0,0,.10)!important;
+  position:absolute!important;
+  left:100%!important;
+  top:auto!important;
+  transform:none!important;
+  min-width:max-content!important;
+  width:auto!important;
+  max-width:none!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
   color:#f6dfa1!important;
   font-family:'Cairo','Inter',sans-serif!important;
-  font-size:clamp(15px,4.3vw,20px)!important;
-  font-weight:900!important;
-  line-height:1.1!important;
-  letter-spacing:.2px!important;
-  text-align:center!important;
+  font-size:clamp(16px,4.4vw,20px)!important;
+  font-weight:800!important;
+  line-height:1!important;
+  letter-spacing:.25px!important;
+  text-align:start!important;
   white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-  text-shadow:0 1px 8px rgba(232,197,116,.18)!important;
-  will-change:auto!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  text-shadow:0 1px 7px rgba(232,197,116,.18)!important;
+  animation-name:cngFullLedMarquee!important;
+  animation-timing-function:linear!important;
+  animation-iteration-count:infinite!important;
+  will-change:transform!important;
 }
 html[dir="rtl"] .led-text.cng-led-welcome{
   direction:rtl!important;
-  font-family:'Cairo','Inter',sans-serif!important;
   letter-spacing:0!important;
 }
 @media(max-width:390px){
   .led-text.cng-led-welcome{
-    max-width:calc(100% - 42px)!important;
-    padding:7px 12px!important;
-    font-size:15.5px!important;
-    border-radius:12px!important;
+    font-size:16px!important;
+    font-weight:800!important;
   }
 }
 </style>
