@@ -1114,6 +1114,58 @@ body{
   }
 }
 </style>
+
+<style id="cng-real-water-glass-menu-v5">
+/* TRUE WATER GLASS — transparent, not white paint */
+.header,.categories,.item-card{
+  background:rgba(246,252,255,.10)!important;
+  border:1px solid rgba(255,255,255,.50)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    inset 1px 0 0 rgba(255,255,255,.20),
+    inset 0 -1px 0 rgba(90,7,22,.035),
+    0 12px 28px rgba(57,38,33,.08)!important;
+  backdrop-filter:blur(18px) saturate(180%) contrast(102%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(180%)!important;
+}
+.header{
+  border-top:0!important;
+  background:rgba(246,252,255,.08)!important;
+}
+.header::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:
+    linear-gradient(118deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,.08) 22%,transparent 48%),
+    radial-gradient(circle at 82% 18%,rgba(255,255,255,.22),transparent 24%);
+  opacity:.72!important
+}
+.header::after{
+  height:1px!important;opacity:.48!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.92),rgba(232,197,116,.32),rgba(255,255,255,.92),transparent)!important
+}
+.shop-logo-frame,.lang-btn,.cat-btn{
+  background:rgba(250,253,255,.16)!important;
+  border:1px solid rgba(255,255,255,.54)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 6px 15px rgba(48,32,28,.055)!important;
+  backdrop-filter:blur(14px) saturate(175%)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(175%)!important;
+}
+.cat-btn.active{
+  background:linear-gradient(145deg,rgba(112,9,31,.94),rgba(75,5,19,.94))!important;
+  color:#fff9ed!important;border-color:rgba(232,197,116,.38)!important
+}
+.item-info{
+  background:rgba(252,253,255,.13)!important;
+  border-top:1px solid rgba(255,255,255,.50)!important;
+  backdrop-filter:blur(14px) saturate(165%)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(165%)!important
+}
+.shop-name,.menu-head h2,.item-name{color:#541323!important;text-shadow:none!important}
+.greeting,.menu-head p,.item-desc{color:#6e6065!important}
+@media(max-width:430px){
+  .header,.categories,.item-card{background:rgba(246,252,255,.075)!important}
+}
+</style>
 </body>
 </html>
 
