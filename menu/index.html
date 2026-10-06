@@ -375,9 +375,8 @@
     <time id="clock" class="clock">00:00:00</time>
   </header>
   <main class="app-shell content">
-    <section id="signboard" class="signboard" aria-label="لوحة المتجر"><div class="led-window"><span id="ledText" translate="no" class="led-text">☕ مرحباً بكم في كوب أند جو ☕</span></div></section>
     <section id="slider" class="slider" aria-label="العروض"><div id="sliderTrack" class="slider-track"></div><div id="sliderDots" class="dots"></div></section>
-    <div class="menu-head"><div><h2 id="menuTitle" translate="no">منيو كوب أند جو</h2><p id="menuSub" translate="no">قهوة، V60، ماتشا، كركديه، حلويات وعروض كوب أند جو</p></div></div>
+    <div class="menu-head"><div><h2 id="menuTitle" translate="no">منيو كوب أند جو</h2><div id="menuSub" class="menu-item-ticker" translate="no" aria-label="أصناف القائمة"><span id="menuItemTickerTrack" class="menu-item-ticker-track">جاري تحميل الأصناف…</span></div></div></div>
     <nav id="categories" translate="no" class="categories" aria-label="فئات القائمة"></nav>
     <section id="menuGrid" translate="no" class="menu-grid"><div class="loading">جاري تحميل القائمة…</div></section>
     <footer id="menuFooter" translate="no" class="footer">© كوب أند جو · المملكة العربية السعودية</footer>
@@ -495,6 +494,18 @@
       return key.split(/\s+/).map(w=>w.toLowerCase()==='v60'?'V60':w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
     }
     function nameOf(p){const translated=arabicProductOf(p),arabicSaved=[p?.nameAr,p?.name].find(v=>hasArabic(v));return isArabic?(arabicSaved||translated?.name||'صنف'):englishProductName(p)}
+    function updateMenuItemTicker(){
+      const box=document.getElementById('menuSub'),track=document.getElementById('menuItemTickerTrack');if(!box||!track)return;
+      const names=[...new Set((products||[]).map(p=>String(nameOf(p)||'').trim()).filter(Boolean))];
+      const fallback=isArabic?'جاري تحميل الأصناف…':'Loading items…';
+      const value=names.length?names.join('   •   '):fallback;
+      track.textContent=value;
+      track.dir=isArabic?'rtl':'ltr';
+      box.setAttribute('aria-label',isArabic?'أسماء أصناف القائمة':'Menu item names');
+      const seconds=Math.max(18,Math.min(90,14+names.length*1.9));
+      track.style.animationDuration=seconds+'s';
+      track.style.animationPlayState=names.length?'running':'paused';
+    }
     function descOf(p){const translated=arabicProductOf(p),key=matchedProductKey(p),fallbackEn=englishDescriptions[key]||'',englishCandidates=[p?.descriptionEn,p?.description].filter(v=>v&&!hasArabic(v)),arabicSaved=[p?.descriptionAr,p?.description].find(v=>hasArabic(v));return isArabic?(arabicSaved||translated?.description||''):(englishCandidates[0]||fallbackEn||'')}
     function categoryName(c){
       const raw=String(c||''),icons=[...new Set(raw.match(/\p{Extended_Pictographic}/gu)||[])].join(' '),clean=normalizeProductKey(raw);
@@ -508,7 +519,7 @@
     function updateClock(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString(isArabic?'ar-SA':'en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});const h=d.getHours();document.getElementById('greeting').textContent=isArabic?(h<12?'صباح الخير ☀️':h<17?'مساء الخير 🌤️':'مساء النور 🌙'):(h<12?'Good Morning ☀️':h<17?'Good Afternoon 🌤️':h<21?'Good Evening 🌙':'Have a great night ☕')}
     function syncFixedHeaderHeight(){const header=document.querySelector('.header');if(!header)return;const height=Math.ceil(header.getBoundingClientRect().height);if(height>0)document.documentElement.style.setProperty('--cng-fixed-header-h',`${height}px`)}
     function updateLedLanguage(){const el=document.getElementById('ledText');if(!el)return;const raw=el.dataset.rawText||'☕ Welcome to Cup And Go ☕',plain=normalizeProductKey(raw),welcome=plain.includes('welcome to cup and go')||/مرحب.*كوب.*جو/.test(String(raw));el.classList.toggle('cng-led-welcome',welcome);if(isArabic&&plain.includes('welcome to cup and go'))el.textContent='☕ مرحباً بكم في كوب أند جو ☕';else if(isArabic&&plain.includes('get 1 free')&&plain.includes('cup and go'))el.textContent='☕ احصل على كوب مجاني من كوب أند جو ☕';else el.textContent=raw}
-    function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.setAttribute('translate','no');document.documentElement.classList.add('notranslate');document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'منيو كوب أند جو | قائمة Cup And Go | السعودية':'Cup And Go Menu | منيو كوب أند جو | Saudi Arabia';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;document.getElementById('menuSub').textContent=t.sub;document.getElementById('shopName').textContent=isArabic?'كوب أند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب أند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب أند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu();requestAnimationFrame(syncFixedHeaderHeight)}
+    function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.setAttribute('translate','no');document.documentElement.classList.add('notranslate');document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'منيو كوب أند جو | قائمة Cup And Go | السعودية':'Cup And Go Menu | منيو كوب أند جو | Saudi Arabia';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;updateMenuItemTicker();document.getElementById('shopName').textContent=isArabic?'كوب أند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب أند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب أند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu();requestAnimationFrame(syncFixedHeaderHeight)}
     function toggleLanguage(){
   isArabic=!isArabic;
   localStorage.setItem('cng_lang',isArabic?'ar':'en');
@@ -625,8 +636,7 @@ const cngRatingApp=firebase.initializeApp(firebase.app().options,'cng-menu-ratin
       }catch(e){}finally{clearTimeout(timeout);productsFallbackRunning=false}
     }
     db.ref('/publicSettings').on('value',snap=>{const next=snap.val()||{},changed=menuSettingsSignature(next)!==menuSettingsSignature(settings);settings=next;try{localStorage.setItem(SETTINGS_CACHE,JSON.stringify(settings))}catch(e){}document.getElementById('shopLogo').src=settings.shopLogo||FALLBACK_LOGO;const introName=document.getElementById('menuIntroName');if(introName)introName.textContent=settings.shopName||'Cup And Go';adminCategories=Array.isArray(settings.categories)?settings.categories:[];const banners=Array.isArray(settings.promoBanners)?settings.promoBanners:(settings.offerPosterImage?[settings.offerPosterImage]:[]);initSlider(banners);applyLanguage()},()=>showStatus(isArabic?text.ar.offline:text.en.offline));
-    db.ref('/ledMatrix').on('value',snap=>{const led=snap.val()||{};const el=document.getElementById('ledText');el.dataset.rawText=led.text||'☕ Welcome to Cup And Go ☕';updateLedLanguage();el.style.color=led.color||'#ffe855';el.style.fontFamily=led.font||"'Courier New', monospace";el.style.animationDuration=`${Math.min(Math.max(Number(led.speed)||20,5),60)}s`});
-    db.ref('/products').on('value',snap=>{const data=snap.val(),next=data?Object.values(data).filter(Boolean):[],changed=menuProductsSignature(next)!==menuProductsSignature(products);products=next;productsLoaded=true;try{localStorage.setItem(PRODUCTS_CACHE,JSON.stringify(products))}catch(e){}if(changed){renderCategories();renderMenu()}hideMenuIntro()},()=>{showStatus(isArabic?text.ar.offline:text.en.offline);setTimeout(hideMenuIntro,500)});
+    db.ref('/products').on('value',snap=>{const data=snap.val(),next=data?Object.values(data).filter(Boolean):[],changed=menuProductsSignature(next)!==menuProductsSignature(products);products=next;productsLoaded=true;try{localStorage.setItem(PRODUCTS_CACHE,JSON.stringify(products))}catch(e){}updateMenuItemTicker();if(changed){renderCategories();renderMenu()}hideMenuIntro()},()=>{showStatus(isArabic?text.ar.offline:text.en.offline);setTimeout(hideMenuIntro,500)});
     db.ref('/menuRatings').on('value',snap=>{menuRatings=snap.val()||{};refreshMenuRatingsInPlace();if(currentPreviewId){const p=products.find(x=>String(x.id??x.name??'')===currentPreviewId);if(p)renderPreviewRating(p)}});
     promoDataPromise=loadMenuPromoData();promoWarmPromise=promoDataPromise.then(data=>data&&data.mediaType==='image'?warmPromoPhoto(data):null);document.getElementById('shopLogo').src=settings.shopLogo||FALLBACK_LOGO;document.getElementById('menuIntroName').textContent=settings.shopName||'Cup And Go';const cachedBanners=Array.isArray(settings.promoBanners)?settings.promoBanners:(settings.offerPosterImage?[settings.offerPosterImage]:[]);initSlider(cachedBanners);updateClock();setInterval(updateClock,1000);applyLanguage();armBackGuard();syncFixedHeaderHeight();requestAnimationFrame(syncFixedHeaderHeight);if('ResizeObserver'in window)new ResizeObserver(syncFixedHeaderHeight).observe(document.querySelector('.header'));window.addEventListener('resize',syncFixedHeaderHeight,{passive:true});if(window.visualViewport)window.visualViewport.addEventListener('resize',syncFixedHeaderHeight,{passive:true});if(productsLoaded)hideMenuIntro();setTimeout(loadProductsFallback,4500);setTimeout(()=>{if(!productsLoaded)loadProductsFallback()},12000);setTimeout(hideMenuIntro,5000);
     if('serviceWorker'in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>{const inMenu=/\/menu\/?(?:index\.html)?$/.test(location.pathname),swUrl=inMenu?'../sw.js':'./sw.js';navigator.serviceWorker.register(swUrl).catch(()=>{})},{once:true})}
@@ -1306,46 +1316,53 @@ body::before{
 
 
 
-<style id="cng-premium-signboard-headline-v10">
-/* Welcome headline stays moving; no inner box/badge, just clean premium type. */
-.led-text.cng-led-welcome{
-  position:absolute!important;
-  left:100%!important;
-  top:auto!important;
-  transform:none!important;
-  min-width:max-content!important;
-  width:auto!important;
-  max-width:none!important;
-  padding:0!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  color:#f6dfa1!important;
-  font-family:'Cairo','Inter',sans-serif!important;
-  font-size:clamp(16px,4.4vw,20px)!important;
-  font-weight:800!important;
-  line-height:1!important;
-  letter-spacing:.25px!important;
-  text-align:start!important;
-  white-space:nowrap!important;
-  overflow:visible!important;
-  text-overflow:clip!important;
-  text-shadow:0 1px 7px rgba(232,197,116,.18)!important;
-  animation-name:cngFullLedMarquee!important;
-  animation-timing-function:linear!important;
-  animation-iteration-count:infinite!important;
-  will-change:transform!important;
+
+<style id="cng-menu-item-name-ticker-v11">
+/* Small product-name ticker under the Menu title. No LED/matrix box. */
+.menu-head{margin:10px 3px 14px!important;background:transparent!important}
+.menu-head>div{width:100%!important;min-width:0!important}
+.menu-item-ticker{
+  position:relative;
+  width:100%;
+  height:24px;
+  margin-top:7px;
+  overflow:hidden;
+  direction:ltr;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
 }
-html[dir="rtl"] .led-text.cng-led-welcome{
-  direction:rtl!important;
-  letter-spacing:0!important;
+.menu-item-ticker-track{
+  position:absolute;
+  left:100%;
+  top:50%;
+  transform:translateY(-50%);
+  display:inline-block;
+  width:max-content;
+  max-width:none;
+  white-space:nowrap;
+  color:#766a6e;
+  font-family:'Cairo','Inter',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:.05px;
+  animation:cngMenuItemTicker 32s linear infinite;
+  will-change:transform;
 }
-@media(max-width:390px){
-  .led-text.cng-led-welcome{
-    font-size:16px!important;
-    font-weight:800!important;
-  }
+@keyframes cngMenuItemTicker{
+  from{transform:translate(0,-50%)}
+  to{transform:translate(calc(-100% - 100vw),-50%)}
+}
+html[dir="rtl"] .menu-item-ticker-track{
+  font-family:'Cairo','Inter',sans-serif;
+  letter-spacing:0;
+}
+@media(max-width:430px){
+  .menu-item-ticker{height:22px;margin-top:6px}
+  .menu-item-ticker-track{font-size:10.5px}
+}
+@media(prefers-reduced-motion:reduce){
+  .menu-item-ticker-track{animation-duration:70s!important}
 }
 </style>
 </body>
