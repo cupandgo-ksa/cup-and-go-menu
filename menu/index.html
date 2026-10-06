@@ -1351,9 +1351,9 @@ body::before{
 
 
 
-<style id="cng-menu-message-rotator-v13">
-/* Premium one-message-at-a-time animation under the Menu title.
-   No sideways marquee: soft rise, focus, glow, hold, then fade away. */
+
+<style id="cng-menu-message-rotator-v14">
+/* Fixed-position message animation: appears and disappears from the exact same spot. */
 .menu-head{margin:10px 3px 14px!important;background:transparent!important}
 .menu-head>div{width:100%!important;min-width:0!important}
 .menu-item-ticker{
@@ -1370,8 +1370,8 @@ body::before{
   position:absolute;
   inset:auto 0 0;
   height:1px;
-  background:linear-gradient(90deg,transparent,rgba(232,197,116,.30),rgba(90,7,22,.10),transparent);
-  opacity:.62;
+  background:linear-gradient(90deg,transparent,rgba(232,197,116,.26),rgba(90,7,22,.08),transparent);
+  opacity:.52;
   pointer-events:none;
 }
 .menu-item-ticker-track{
@@ -1387,21 +1387,19 @@ body::before{
   overflow:hidden;
   text-overflow:ellipsis;
   opacity:0;
-  transform:translateY(7px) scale(.985);
-  filter:blur(3px);
-  transform-origin:center;
-  will-change:opacity,transform,filter;
+  transform:scale(.992);
+  filter:blur(2px);
+  transform-origin:center center;
+  will-change:opacity,filter,transform;
 }
 .menu-item-ticker-track.show{
-  animation:cngMenuMessageReveal 3.8s cubic-bezier(.22,1,.36,1) both;
+  animation:cngMenuMessageFixed 3.8s ease-in-out both;
 }
-@keyframes cngMenuMessageReveal{
-  0%{opacity:0;transform:translateY(7px) scale(.985);filter:blur(3px);letter-spacing:.18px}
-  10%{opacity:1;transform:translateY(-1px) scale(1.008);filter:blur(0);letter-spacing:.04px}
-  18%{opacity:1;transform:translateY(0) scale(1);filter:blur(0);letter-spacing:0}
-  76%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
-  90%{opacity:.72;transform:translateY(-2px) scale(.997);filter:blur(.25px)}
-  100%{opacity:0;transform:translateY(-6px) scale(.985);filter:blur(2.4px)}
+@keyframes cngMenuMessageFixed{
+  0%{opacity:0;filter:blur(2px);transform:scale(.992)}
+  11%{opacity:1;filter:blur(0);transform:scale(1)}
+  82%{opacity:1;filter:blur(0);transform:scale(1)}
+  100%{opacity:0;filter:blur(1.5px);transform:scale(.994)}
 }
 html[dir="rtl"] .menu-item-ticker-track{
   text-align:right;
