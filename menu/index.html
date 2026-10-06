@@ -536,7 +536,7 @@
     function updateMenuItemTicker(reset=false){
       if(reset)menuMessageIndex=0;
       showMenuMessage();
-      if(!menuMessageTimer)menuMessageTimer=setInterval(()=>{menuMessageIndex=(menuMessageIndex+1)%menuMessages.ar.length;showMenuMessage()},3800);
+      if(!menuMessageTimer)menuMessageTimer=setInterval(()=>{menuMessageIndex=(menuMessageIndex+1)%menuMessages.ar.length;showMenuMessage()},7000);
     }
     function descOf(p){const translated=arabicProductOf(p),key=matchedProductKey(p),fallbackEn=englishDescriptions[key]||'',englishCandidates=[p?.descriptionEn,p?.description].filter(v=>v&&!hasArabic(v)),arabicSaved=[p?.descriptionAr,p?.description].find(v=>hasArabic(v));return isArabic?(arabicSaved||translated?.description||''):(englishCandidates[0]||fallbackEn||'')}
     function categoryName(c){
@@ -1393,7 +1393,7 @@ body::before{
   will-change:opacity,filter,transform;
 }
 .menu-item-ticker-track.show{
-  animation:cngMenuMessageFixed 3.8s ease-in-out both;
+  animation:cngMenuMessageFixed 7s ease-in-out both;
 }
 @keyframes cngMenuMessageFixed{
   0%{opacity:0;filter:blur(2px);transform:scale(.992)}
