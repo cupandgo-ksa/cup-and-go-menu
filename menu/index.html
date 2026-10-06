@@ -1248,6 +1248,61 @@ body::before{
   }
 }
 </style>
+
+<style id="cng-menu-water-glass-controls-v7">
+/* Water-glass assistant button + clearer category container */
+.cng-assistant-launcher{
+  background:rgba(248,252,255,.12)!important;
+  color:#5a0716!important;
+  border:1px solid rgba(255,255,255,.68)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.88),
+    inset 0 -1px 0 rgba(255,255,255,.20),
+    0 10px 24px rgba(35,35,45,.11)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  text-shadow:none!important;
+}
+.cng-assistant-launcher::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(120deg,rgba(255,255,255,.46),rgba(255,255,255,.08) 32%,transparent 60%);
+  opacity:.72;
+}
+.cng-assistant-launcher>span{position:relative;z-index:1}
+.cng-assistant-launcher:active{
+  background:rgba(248,252,255,.20)!important;
+  transform:scale(.98);
+}
+
+/* Make the category glass box visibly separate from the white page */
+.categories{
+  position:relative!important;
+  border:1.5px solid rgba(90,7,22,.22)!important;
+  outline:1px solid rgba(232,197,116,.22)!important;
+  outline-offset:-3px!important;
+  background:rgba(248,252,255,.12)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    inset 0 -1px 0 rgba(255,255,255,.24),
+    0 12px 30px rgba(90,7,22,.09)!important;
+}
+.categories::before{
+  content:"";position:absolute;inset:1px;border-radius:22px;pointer-events:none;
+  background:linear-gradient(120deg,rgba(255,255,255,.34),transparent 34%,transparent 70%,rgba(232,197,116,.06));
+  opacity:.75;
+}
+.categories>.cat-btn{position:relative;z-index:1}
+.cat-btn:not(.active){
+  border-color:rgba(90,7,22,.12)!important;
+  color:#55474b!important;
+}
+.cat-btn.active{
+  box-shadow:
+    0 10px 22px rgba(90,7,22,.22),
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 0 1px rgba(232,197,116,.20)!important;
+}
+</style>
 </body>
 </html>
 
