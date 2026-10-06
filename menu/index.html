@@ -1166,6 +1166,88 @@ body{
   .header,.categories,.item-card{background:rgba(246,252,255,.075)!important}
 }
 </style>
+
+<style id="cng-final-menu-water-glass-v6">
+/* FINAL MENU: pure white canvas + transparent water-glass everywhere */
+html,body{
+  background:#ffffff!important;
+  background-image:none!important;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+    radial-gradient(circle at 14% 8%,rgba(210,232,244,.22),transparent 26%),
+    radial-gradient(circle at 86% 18%,rgba(235,222,205,.16),transparent 30%),
+    linear-gradient(180deg,#fff 0%,#fff 100%);
+}
+.header,.categories,.item-card,.item-info,.menu-head,.category-title{
+  background:rgba(255,255,255,.10)!important;
+}
+.header,.categories,.item-card{
+  border:1px solid rgba(255,255,255,.58)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.88),
+    inset 0 -1px 0 rgba(255,255,255,.24),
+    0 12px 30px rgba(28,35,48,.07)!important;
+  backdrop-filter:blur(22px) saturate(175%)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(175%)!important;
+}
+.header{
+  border-top:0!important;
+  background:rgba(255,255,255,.08)!important;
+}
+.header::before{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:
+    linear-gradient(120deg,rgba(255,255,255,.44),rgba(255,255,255,.08) 25%,transparent 52%),
+    radial-gradient(circle at 88% 10%,rgba(255,255,255,.24),transparent 25%);
+  opacity:.78!important;
+}
+.shop-logo-frame,.lang-btn,.cat-btn{
+  background:rgba(255,255,255,.16)!important;
+  border:1px solid rgba(255,255,255,.64)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86),0 7px 18px rgba(28,35,48,.05)!important;
+  backdrop-filter:blur(16px) saturate(170%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(170%)!important;
+}
+.cat-btn.active{
+  background:linear-gradient(145deg,rgba(112,9,31,.95),rgba(75,5,19,.95))!important;
+  color:#fff9ed!important;
+  border-color:rgba(232,197,116,.40)!important;
+}
+.item-card{
+  background:rgba(255,255,255,.09)!important;
+  overflow:hidden!important;
+}
+.item-image-btn{
+  background:rgba(255,255,255,.07)!important;
+  border-bottom:1px solid rgba(255,255,255,.42)!important;
+}
+.item-info{
+  background:rgba(255,255,255,.11)!important;
+  border-top:1px solid rgba(255,255,255,.42)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.40)!important;
+  backdrop-filter:blur(18px) saturate(165%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(165%)!important;
+}
+.premium-row,.preview-rating{
+  background:rgba(255,255,255,.08)!important;
+  border-color:rgba(255,255,255,.42)!important;
+}
+.menu-head,.category-title{
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.shop-name,.menu-head h2,.category-title,.item-name{color:#541323!important;text-shadow:none!important}
+.greeting,.menu-head p,.item-desc{color:#6e6065!important}
+.item-price{color:#6f0b1d!important}
+@supports (-webkit-touch-callout:none){
+  .header,.categories,.item-card,.item-info,.shop-logo-frame,.lang-btn,.cat-btn{
+    backdrop-filter:blur(18px) saturate(160%)!important;
+    -webkit-backdrop-filter:blur(18px) saturate(160%)!important;
+  }
+}
+</style>
 </body>
 </html>
 
