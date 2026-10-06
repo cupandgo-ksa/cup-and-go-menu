@@ -1419,6 +1419,115 @@ html[dir="ltr"] .menu-item-ticker-track{
   .menu-item-ticker-track.show{animation:none!important}
 }
 </style>
+
+<style id="cng-visible-water-glass-v15">
+/* Stronger visible water-glass depth on a still-light canvas.
+   Header, layout, item sizes and message animation are intentionally untouched. */
+html{
+  background:#f8fbfd!important;
+}
+body{
+  background:
+    radial-gradient(circle at 10% 12%,rgba(176,225,239,.34),transparent 28%),
+    radial-gradient(circle at 90% 30%,rgba(205,236,245,.30),transparent 30%),
+    radial-gradient(circle at 18% 72%,rgba(235,218,190,.18),transparent 27%),
+    radial-gradient(circle at 84% 88%,rgba(184,226,238,.20),transparent 30%),
+    linear-gradient(180deg,#fbfdff 0%,#f4fafc 50%,#fffaf5 100%)!important;
+  background-image:
+    radial-gradient(circle at 10% 12%,rgba(176,225,239,.34),transparent 28%),
+    radial-gradient(circle at 90% 30%,rgba(205,236,245,.30),transparent 30%),
+    radial-gradient(circle at 18% 72%,rgba(235,218,190,.18),transparent 27%),
+    radial-gradient(circle at 84% 88%,rgba(184,226,238,.20),transparent 30%),
+    linear-gradient(180deg,#fbfdff 0%,#f4fafc 50%,#fffaf5 100%)!important;
+}
+body::before{
+  background:none!important;
+}
+
+/* Product card: clearer glass edge + transparent aqua depth */
+.item-card{
+  position:relative!important;
+  background:rgba(248,253,255,.20)!important;
+  border:1px solid rgba(255,255,255,.82)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    inset 1px 0 0 rgba(255,255,255,.34),
+    inset 0 -1px 0 rgba(90,7,22,.025),
+    0 15px 34px rgba(53,84,96,.11),
+    0 2px 8px rgba(90,7,22,.035)!important;
+  backdrop-filter:blur(18px) saturate(180%) contrast(103%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(180%)!important;
+}
+.item-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  border-radius:inherit;
+  background:
+    linear-gradient(118deg,rgba(255,255,255,.48) 0%,rgba(255,255,255,.10) 22%,transparent 45%),
+    radial-gradient(circle at 86% 8%,rgba(213,244,250,.22),transparent 24%);
+  opacity:.74;
+}
+.item-card>*{position:relative;z-index:1}
+
+/* Cool icy image stage instead of flat white */
+.item-image-btn{
+  background:
+    linear-gradient(145deg,rgba(238,249,252,.48),rgba(255,255,255,.16))!important;
+  border-bottom:1px solid rgba(255,255,255,.64)!important;
+}
+.item-image{
+  background:transparent!important;
+}
+
+/* Lower information panel keeps the background visible */
+.item-info{
+  background:linear-gradient(145deg,rgba(255,255,255,.28),rgba(242,251,253,.14))!important;
+  border-top:1px solid rgba(255,255,255,.68)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.74),
+    inset 0 -1px 0 rgba(188,226,237,.10)!important;
+  backdrop-filter:blur(15px) saturate(175%)!important;
+  -webkit-backdrop-filter:blur(15px) saturate(175%)!important;
+}
+
+/* Existing category layout is unchanged; only the glass is easier to see. */
+.categories{
+  background:rgba(244,251,253,.19)!important;
+  border-color:rgba(255,255,255,.78)!important;
+  outline-color:rgba(90,7,22,.14)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    inset 0 -1px 0 rgba(173,221,234,.12),
+    0 12px 30px rgba(53,84,96,.09)!important;
+  backdrop-filter:blur(17px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(17px) saturate(180%)!important;
+}
+.cat-btn:not(.active){
+  background:rgba(255,255,255,.24)!important;
+  border-color:rgba(255,255,255,.70)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.92),0 5px 14px rgba(53,84,96,.05)!important;
+}
+
+/* Floating assistant matches the same glass depth. */
+.cng-assistant-launcher{
+  background:rgba(244,251,253,.22)!important;
+  border-color:rgba(255,255,255,.80)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    inset 0 -1px 0 rgba(184,226,238,.14),
+    0 10px 24px rgba(53,84,96,.11)!important;
+}
+
+@supports (-webkit-touch-callout:none){
+  .item-card,.item-info,.categories,.cat-btn:not(.active),.cng-assistant-launcher{
+    backdrop-filter:blur(14px) saturate(165%)!important;
+    -webkit-backdrop-filter:blur(14px) saturate(165%)!important;
+  }
+}
+</style>
 </body>
 </html>
 
