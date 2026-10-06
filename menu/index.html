@@ -507,7 +507,7 @@
     }
     function updateClock(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString(isArabic?'ar-SA':'en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});const h=d.getHours();document.getElementById('greeting').textContent=isArabic?(h<12?'صباح الخير ☀️':h<17?'مساء الخير 🌤️':'مساء النور 🌙'):(h<12?'Good Morning ☀️':h<17?'Good Afternoon 🌤️':h<21?'Good Evening 🌙':'Have a great night ☕')}
     function syncFixedHeaderHeight(){const header=document.querySelector('.header');if(!header)return;const height=Math.ceil(header.getBoundingClientRect().height);if(height>0)document.documentElement.style.setProperty('--cng-fixed-header-h',`${height}px`)}
-    function updateLedLanguage(){const el=document.getElementById('ledText');if(!el)return;const raw=el.dataset.rawText||'☕ Welcome to Cup And Go ☕',plain=normalizeProductKey(raw);if(isArabic&&plain.includes('welcome to cup and go'))el.textContent='☕ مرحباً بكم في كوب أند جو ☕';else if(isArabic&&plain.includes('get 1 free')&&plain.includes('cup and go'))el.textContent='☕ احصل على كوب مجاني من كوب أند جو ☕';else el.textContent=raw}
+    function updateLedLanguage(){const el=document.getElementById('ledText');if(!el)return;const raw=el.dataset.rawText||'☕ Welcome to Cup And Go ☕',plain=normalizeProductKey(raw),welcome=plain.includes('welcome to cup and go')||/مرحب.*كوب.*جو/.test(String(raw));el.classList.toggle('cng-led-welcome',welcome);if(isArabic&&plain.includes('welcome to cup and go'))el.textContent='☕ مرحباً بكم في كوب أند جو ☕';else if(isArabic&&plain.includes('get 1 free')&&plain.includes('cup and go'))el.textContent='☕ احصل على كوب مجاني من كوب أند جو ☕';else el.textContent=raw}
     function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.setAttribute('translate','no');document.documentElement.classList.add('notranslate');document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'منيو كوب أند جو | قائمة Cup And Go | السعودية':'Cup And Go Menu | منيو كوب أند جو | Saudi Arabia';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;document.getElementById('menuSub').textContent=t.sub;document.getElementById('shopName').textContent=isArabic?'كوب أند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب أند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب أند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu();requestAnimationFrame(syncFixedHeaderHeight)}
     function toggleLanguage(){
   isArabic=!isArabic;
@@ -1304,41 +1304,48 @@ body::before{
 }
 </style>
 
-<style id="cng-premium-menu-headline-v8">
-.menu-head{
-  position:relative!important;display:block!important;margin:10px 0 14px!important;
-  padding:17px 58px 18px 18px!important;border-radius:24px!important;
-  border:1px solid rgba(255,255,255,.62)!important;background:rgba(248,252,255,.10)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.88),inset 0 -1px 0 rgba(255,255,255,.20),0 12px 28px rgba(28,35,48,.07)!important;
-  backdrop-filter:blur(20px) saturate(175%)!important;-webkit-backdrop-filter:blur(20px) saturate(175%)!important;
+
+<style id="cng-premium-signboard-headline-v9">
+/* Premium treatment for the default signboard headline only.
+   Other admin-controlled LED messages keep the existing marquee behavior. */
+.led-text.cng-led-welcome{
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-56%)!important;
+  animation:none!important;
+  min-width:0!important;
+  width:max-content!important;
+  max-width:calc(100% - 58px)!important;
+  padding:8px 16px!important;
+  border-radius:14px!important;
+  border:1px solid rgba(244,223,170,.18)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 5px 14px rgba(0,0,0,.10)!important;
+  color:#f6dfa1!important;
+  font-family:'Cairo','Inter',sans-serif!important;
+  font-size:clamp(15px,4.3vw,20px)!important;
+  font-weight:900!important;
+  line-height:1.1!important;
+  letter-spacing:.2px!important;
+  text-align:center!important;
+  white-space:nowrap!important;
   overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  text-shadow:0 1px 8px rgba(232,197,116,.18)!important;
+  will-change:auto!important;
 }
-[dir="rtl"] .menu-head{padding:17px 18px 18px 58px!important}
-.menu-head::before{
-  content:"☕";position:absolute;top:50%;right:16px;transform:translateY(-50%);
-  width:34px;height:34px;display:grid;place-items:center;border-radius:13px;
-  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.64);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.82),0 6px 16px rgba(28,35,48,.06);
-  font-size:17px;backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);
-}
-[dir="rtl"] .menu-head::before{right:auto;left:16px}
-.menu-head::after{
-  content:"";position:absolute;left:18px;right:18px;bottom:8px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(232,197,116,.72),rgba(90,7,22,.22),transparent);opacity:.86;
-}
-.menu-head>div{position:relative;z-index:1}
-.menu-head h2{
-  margin:0!important;color:#541323!important;font-family:inherit!important;
-  font-size:clamp(25px,6.4vw,31px)!important;line-height:1.12!important;font-weight:950!important;
-  letter-spacing:-.02em!important;text-shadow:none!important;
-}
-.menu-head p{
-  margin-top:7px!important;color:#706469!important;font-family:inherit!important;
-  font-size:11.5px!important;line-height:1.55!important;font-weight:700!important;
+html[dir="rtl"] .led-text.cng-led-welcome{
+  direction:rtl!important;
+  font-family:'Cairo','Inter',sans-serif!important;
+  letter-spacing:0!important;
 }
 @media(max-width:390px){
-  .menu-head{border-radius:21px!important;padding-top:15px!important;padding-bottom:17px!important}
-  .menu-head h2{font-size:25px!important}.menu-head p{font-size:10.5px!important}
+  .led-text.cng-led-welcome{
+    max-width:calc(100% - 42px)!important;
+    padding:7px 12px!important;
+    font-size:15.5px!important;
+    border-radius:12px!important;
+  }
 }
 </style>
 </body>
