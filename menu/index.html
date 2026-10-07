@@ -624,6 +624,7 @@
     function armBackGuard(){
       if(backGuardReady)return;
       try{
+        history.scrollRestoration='manual';
         // Reuse the current guard on refresh rather than adding another history entry.
         if(history.state?.cngMenuGuard){backGuardReady=true;return}
         if(!history.state?.cngMenuRoot)history.replaceState({...history.state,cngMenuRoot:true},document.title,location.href);
@@ -642,7 +643,7 @@
       const preview=document.getElementById('previewModal'),promo=document.getElementById('menuPromoAd');
       if(preview?.classList.contains('show')){closePreview();lastBackAt=0;pushMenuGuard();return}
       if(promo?.classList.contains('show')){closeMenuPromo();lastBackAt=0;pushMenuGuard();return}
-      if((window.scrollY||0)>80){window.scrollTo({top:0,behavior:'auto'});lastBackAt=0;pushMenuGuard();return}
+      if(Math.max(window.scrollY||0,document.documentElement.scrollTop||0)>80){window.scrollTo({top:0,behavior:'auto'});lastBackAt=0;pushMenuGuard();return}
       const now=Date.now();
       if(!lastBackAt||now-lastBackAt>2200){lastBackAt=now;showStatus(isArabic?'اضغط رجوع مرة أخرى للخروج':'Press back again to exit');pushMenuGuard();return}
       leavingMenu=true;backGuardReady=false;history.back();
