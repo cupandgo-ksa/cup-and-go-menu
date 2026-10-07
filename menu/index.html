@@ -576,7 +576,7 @@
       return key?key+(icons?' '+icons:''):raw;
     }
     function updateClock(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString(isArabic?'ar-SA':'en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});const h=d.getHours();document.getElementById('greeting').textContent=isArabic?(h<12?'صباح الخير ☀️':h<17?'مساء الخير 🌤️':'مساء النور 🌙'):(h<12?'Good Morning ☀️':h<17?'Good Afternoon 🌤️':h<21?'Good Evening 🌙':'Have a great night ☕')}
-    function syncFixedHeaderHeight(){const header=document.querySelector('.header');if(!header)return;const height=Math.ceil(header.getBoundingClientRect().height);if(height>0)document.documentElement.style.setProperty('--cng-fixed-header-h',`${height}px`)}
+    function syncFixedHeaderHeight(){const header=document.querySelector('.header');if(!header)return;const height=Math.ceil(header.getBoundingClientRect().height);if(height>0&&document.documentElement.style.getPropertyValue('--cng-fixed-header-h')!==`${height}px`)document.documentElement.style.setProperty('--cng-fixed-header-h',`${height}px`)}
     function updateLedLanguage(){const el=document.getElementById('ledText');if(!el)return;const raw=el.dataset.rawText||'☕ Welcome to Cup And Go ☕',plain=normalizeProductKey(raw),welcome=plain.includes('welcome to cup and go')||/مرحب.*كوب.*جو/.test(String(raw));el.classList.toggle('cng-led-welcome',welcome);if(isArabic&&plain.includes('welcome to cup and go'))el.textContent='☕ مرحباً بكم في كوب أند جو ☕';else if(isArabic&&plain.includes('get 1 free')&&plain.includes('cup and go'))el.textContent='☕ احصل على كوب مجاني من كوب أند جو ☕';else el.textContent=raw}
     function applyLanguage(){const t=isArabic?text.ar:text.en;document.documentElement.setAttribute('translate','no');document.documentElement.classList.add('notranslate');document.documentElement.lang=isArabic?'ar':'en';document.documentElement.dir=isArabic?'rtl':'ltr';document.title=isArabic?'منيو كوب أند جو | قائمة Cup And Go | السعودية':'Cup And Go Menu | منيو كوب أند جو | Saudi Arabia';document.getElementById('langBtn').textContent=t.lang;document.getElementById('menuTitle').textContent=t.menu;updateMenuItemTicker(true);document.getElementById('shopName').textContent=isArabic?'كوب أند جو':(settings.shopName||'Cup And Go');const introLabel=document.querySelector('.menu-intro-label');if(introLabel)introLabel.textContent=isArabic?'القائمة':'MENU';const story=document.getElementById('menuIntroStory');if(story){story.dir=isArabic?'rtl':'ltr';document.getElementById('menuIntroStoryTitle').textContent=isArabic?'القهوة تبدأ من بذرة صغيرة.':'Coffee starts with a small seed.';document.getElementById('menuIntroStoryLine').textContent=isArabic?'ثم تتحول إلى كوب · نرافقك في كل وقت.':'Then it is made into a cup · Accompanying you all the time.';document.getElementById('menuIntroOrigin').textContent=isArabic?'من كوب أند جو · منذ ٢٠٢٥ · المملكة العربية السعودية':'From Cup And Go · Since 2025 · Saudi Arabia.';}const introDev=document.getElementById('menuIntroDeveloper');if(introDev)introDev.textContent=isArabic?'تطوير Mohammed Ashik':'Developed by Mohammed Ashik';const footer=document.getElementById('menuFooter');if(footer)footer.textContent=isArabic?'© كوب أند جو · المملكة العربية السعودية':'© Cup And Go · Saudi Arabia';const close=document.getElementById('previewClose');if(close)close.setAttribute('aria-label',isArabic?'إغلاق':'Close');const cats=document.getElementById('categories');if(cats)cats.setAttribute('aria-label',isArabic?'فئات القائمة':'Menu categories');const slider=document.getElementById('slider');if(slider)slider.setAttribute('aria-label',isArabic?'العروض':'Offers');const sign=document.getElementById('signboard');if(sign)sign.setAttribute('aria-label',isArabic?'لوحة المتجر':'Shop signboard');const promo=document.getElementById('menuPromoImage');if(promo)promo.alt=isArabic?'عرض كوب أند جو':'Cup And Go offer';updateLedLanguage();updateClock();renderCategories();renderMenu();requestAnimationFrame(syncFixedHeaderHeight)}
     function toggleLanguage(){
@@ -679,7 +679,7 @@ const cngRatingApp=firebase.initializeApp(firebase.app().options,'cng-menu-ratin
     cngRatingReady.then(user=>{ratingDeviceId=user.uid;refreshMenuRatingsInPlace();if(currentPreviewId){const p=products.find(x=>String(x.id??x.name??'')===currentPreviewId);if(p)renderPreviewRating(p)}}).catch(()=>{});
     window.ratePreview=ratePreview;
     function openPreview(encoded){let id='';try{id=decodeURIComponent(encoded)}catch(e){id=encoded}const p=products.find(x=>String(x.id??x.name??'')===id);if(!p)return;currentPreviewId=id;const cardImage=String(p.icon||''),previewImage=String(p.imageHD||p.imageHd||p.hdImage||cardImage),hasImage=previewImage.length>15;document.getElementById('previewImageWrap').innerHTML=hasImage?`<img class="preview-img" src="${esc(previewImage)}" alt="${esc(nameOf(p))}" loading="eager" decoding="async" fetchpriority="high">`:`<span class="item-fallback">${esc(p.icon||'☕')}</span>`;document.getElementById('previewName').textContent=nameOf(p);document.getElementById('previewDesc').textContent=descOf(p);document.getElementById('previewPrice').textContent=`${Number(p.price||0).toFixed(2)} ﷼`;renderPreviewRating(p);document.getElementById('previewModal').classList.add('show');document.querySelector('#previewModal .modal-box').scrollTop=0;lockPageScroll()}
-    function closePreview(){currentPreviewId='';document.getElementById('previewModal').classList.remove('show');unlockPageScroll()}
+    function closePreview(){currentPreviewId='';document.getElementById('previewModal').classList.remove('show');document.getElementById('previewImageWrap').replaceChildren();unlockPageScroll()}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closePreview()});
     let productsFallbackRunning=false;
     async function loadProductsFallback(){
@@ -760,9 +760,9 @@ const cngRatingApp=firebase.initializeApp(firebase.app().options,'cng-menu-ratin
       const box=img.parentElement;if(box){box.classList.add('cng-img-loading');const done=()=>{box.classList.remove('cng-img-loading');box.classList.add('cng-img-loaded')};if(img.complete&&img.naturalWidth>0)done();else{img.addEventListener('load',done,{once:true});img.addEventListener('error',done,{once:true})}}
       if(priority)loadImage(img,true);else if(observer)observer.observe(img);else queueFallback();
     });
-    queueFallback();
+    if(!observer)queueFallback();
   }
-  const start=()=>{prepare();new MutationObserver(prepare).observe(document.body,{childList:true,subtree:true});addEventListener('scroll',queueFallback,{passive:true});addEventListener('resize',queueFallback,{passive:true})};
+  const start=()=>{prepare();const grid=document.getElementById('menuGrid');if(grid)new MutationObserver(()=>{if(observer)observer.disconnect();prepare();if(observer)document.querySelectorAll(`${selector}[data-src]`).forEach(img=>observer.observe(img))}).observe(grid,{childList:true});if(!observer){addEventListener('scroll',queueFallback,{passive:true});addEventListener('resize',queueFallback,{passive:true})}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
 </script>
@@ -1471,6 +1471,28 @@ body{
 }
 </style>
 
+
+
+<style id="cng-ios-menu-performance-20261007">
+/* Keep the earlier lightweight iOS rendering last in the cascade. */
+@supports (-webkit-touch-callout:none){
+  body{background-attachment:scroll!important}
+  .header,.categories,.item-card,.item-info,.shop-logo-frame,.lang-btn,.cat-btn,
+  .slider,.modal,.modal-box,.merch-tag,.menu-promo-skip,.cng-assistant-launcher,
+  .cng-assistant-panel,.cng-assistant-head{
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  }
+  .header{background:rgba(255,255,255,.97)!important}
+  .categories{background:rgba(255,255,255,.94)!important}
+  .item-card{background:#fff!important;transform:none!important;will-change:auto!important}
+  .item-info{background:rgba(255,255,255,.94)!important}
+  .cng-assistant-launcher{background:rgba(248,252,255,.96)!important}
+  .item-card.premium-item::after,.cng-img-loading::after{display:none!important;animation:none!important}
+  .menu-item-ticker-track{filter:none!important;will-change:auto!important}
+  .menu-item-ticker-track.show{animation:cngMenuMessageLight 7s ease-in-out both!important}
+  @keyframes cngMenuMessageLight{0%,100%{opacity:0}11%,82%{opacity:1}}
+}
+</style>
 
 </body>
 </html>
