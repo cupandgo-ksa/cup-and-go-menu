@@ -617,17 +617,35 @@
       Object.assign(document.body.style,{position:'',top:'',left:'',right:'',width:'',overflow:'',touchAction:''});
       const restore=()=>{if(token!==scrollRestoreToken)return;window.scrollTo({top:targetY,left:0,behavior:'auto'})};restore();requestAnimationFrame(()=>{restore();requestAnimationFrame(()=>{restore();if(token===scrollRestoreToken)document.documentElement.style.scrollBehavior=previousInlineScrollBehavior})});setTimeout(restore,90);
     }
-    function armBackGuard(){
-      if(backGuardReady)return;try{history.replaceState({cngMenuRoot:true},document.title,location.href);history.pushState({cngMenuGuard:true},document.title,location.href);backGuardReady=true}catch(e){}
+    let leavingMenu=false;
+    function pushMenuGuard(){
+      try{history.pushState({cngMenuGuard:true},document.title,location.href);backGuardReady=true}catch(e){}
     }
-    window.addEventListener('popstate',()=>{
-      const assistant=document.getElementById('cngAssistantOverlay');if(assistant?.classList.contains('show')){document.getElementById('cngAssistantClose')?.click();try{history.pushState({cngMenuGuard:true},document.title,location.href)}catch(e){}return}
+    function armBackGuard(){
+      if(backGuardReady)return;
+      try{
+        // Reuse the current guard on refresh rather than adding another history entry.
+        if(history.state?.cngMenuGuard){backGuardReady=true;return}
+        if(!history.state?.cngMenuRoot)history.replaceState({...history.state,cngMenuRoot:true},document.title,location.href);
+        pushMenuGuard();
+      }catch(e){}
+    }
+    window.addEventListener('popstate',event=>{
+      if(leavingMenu){
+        if(event.state?.cngMenuRoot||event.state?.cngMenuGuard)history.back();
+        return;
+      }
+      if(event.state?.cngMenuGuard){backGuardReady=true;return}
+      backGuardReady=false;
+      const assistant=document.getElementById('cngAssistantOverlay');
+      if(assistant?.classList.contains('show')){document.getElementById('cngAssistantClose')?.click();lastBackAt=0;pushMenuGuard();return}
       const preview=document.getElementById('previewModal'),promo=document.getElementById('menuPromoAd');
-      if(preview?.classList.contains('show')){closePreview();try{history.pushState({cngMenuGuard:true},document.title,location.href)}catch(e){}return}
-      if(promo?.classList.contains('show')){closeMenuPromo();try{history.pushState({cngMenuGuard:true},document.title,location.href)}catch(e){}return}
-      if((window.scrollY||0)>80){window.scrollTo({top:0,behavior:'smooth'});try{history.pushState({cngMenuGuard:true},document.title,location.href)}catch(e){}return}
-      const now=Date.now();if(now-lastBackAt>2200){lastBackAt=now;showStatus(isArabic?'اضغط رجوع مرة أخرى للخروج':'Press back again to exit');try{history.pushState({cngMenuGuard:true},document.title,location.href)}catch(e){}return}
-      backGuardReady=false;history.back();
+      if(preview?.classList.contains('show')){closePreview();lastBackAt=0;pushMenuGuard();return}
+      if(promo?.classList.contains('show')){closeMenuPromo();lastBackAt=0;pushMenuGuard();return}
+      if((window.scrollY||0)>80){window.scrollTo({top:0,behavior:'auto'});lastBackAt=0;pushMenuGuard();return}
+      const now=Date.now();
+      if(!lastBackAt||now-lastBackAt>2200){lastBackAt=now;showStatus(isArabic?'اضغط رجوع مرة أخرى للخروج':'Press back again to exit');pushMenuGuard();return}
+      leavingMenu=true;backGuardReady=false;history.back();
     });
     function closeMenuPromo(){
       clearTimeout(promoTimer);const ad=document.getElementById('menuPromoAd'),video=document.getElementById('menuPromoVideo');
@@ -641,7 +659,7 @@
       if(ad?.classList.contains('show')&&!ad.classList.contains('closing'))return;
       unlockPageScroll();
     }
-    window.addEventListener('pageshow',recoverMenuScroll);
+    window.addEventListener('pageshow',()=>{leavingMenu=false;lastBackAt=0;backGuardReady=false;armBackGuard();recoverMenuScroll()});
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)recoverMenuScroll()});
 
     function promoImageFallback(data){
