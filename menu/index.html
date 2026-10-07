@@ -612,8 +612,8 @@
       Object.assign(document.body.style,{position:'fixed',top:`-${lockedScrollY}px`,left:'0',right:'0',width:'100%',overflow:'hidden',touchAction:'auto'});
     }
     function unlockPageScroll(){
-      if(!pageScrollLocked)return;pageScrollLocked=false;
-      const targetY=lockedScrollY,token=++scrollRestoreToken;document.documentElement.style.scrollBehavior='auto';document.documentElement.style.overflow='';document.documentElement.style.overscrollBehavior='';
+      const wasLocked=pageScrollLocked;pageScrollLocked=false;
+      const targetY=wasLocked?lockedScrollY:Math.max(0,window.scrollY||0),token=++scrollRestoreToken;document.documentElement.style.scrollBehavior='auto';document.documentElement.style.overflow='';document.documentElement.style.overscrollBehavior='';
       Object.assign(document.body.style,{position:'',top:'',left:'',right:'',width:'',overflow:'',touchAction:''});
       const restore=()=>{if(token!==scrollRestoreToken)return;window.scrollTo({top:targetY,left:0,behavior:'auto'})};restore();requestAnimationFrame(()=>{restore();requestAnimationFrame(()=>{restore();if(token===scrollRestoreToken)document.documentElement.style.scrollBehavior=previousInlineScrollBehavior})});setTimeout(restore,90);
     }
@@ -635,6 +635,15 @@
       if(ad.contains(document.activeElement))document.activeElement.blur();ad.classList.add('closing');setTimeout(()=>{ad.classList.remove('show','closing','ready');ad.setAttribute('aria-hidden','true');ad.inert=true;try{video.removeAttribute('src');video.load()}catch(e){}const photo=document.getElementById('menuPromoImage'),backdrop=document.getElementById('menuPromoBackdrop');if(photo)photo.removeAttribute('src');if(backdrop)backdrop.style.backgroundImage='none';unlockPageScroll()},460);
     }
     window.closeMenuPromo=closeMenuPromo;
+    function recoverMenuScroll(){
+      const preview=document.getElementById('previewModal'),ad=document.getElementById('menuPromoAd');
+      if(preview?.classList.contains('show'))return;
+      if(ad?.classList.contains('show')&&!ad.classList.contains('closing'))return;
+      unlockPageScroll();
+    }
+    window.addEventListener('pageshow',recoverMenuScroll);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)recoverMenuScroll()});
+
     function promoImageFallback(data){
       const liveBanners=Array.isArray(settings.promoBanners)?settings.promoBanners.filter(Boolean):(settings.offerPosterImage?[settings.offerPosterImage]:[]);
       return liveBanners.find(src=>src&&src!==data?.media)||'';
@@ -644,7 +653,7 @@
       return new Promise(resolve=>{const pre=new Image();let done=false;const timeout=setTimeout(()=>finish(null),8000);const finish=value=>{if(done)return;done=true;clearTimeout(timeout);pre.onload=null;pre.onerror=null;resolve(value)};pre.decoding='async';pre.fetchPriority='high';pre.onload=async()=>{try{await pre.decode()}catch(e){}finish(src)};pre.onerror=()=>{const backup=isFallback?'':promoImageFallback(data);if(backup)warmPromoPhoto(data,backup,true).then(finish);else finish(null)};pre.src=src;if(pre.complete&&pre.naturalWidth)pre.onload()});
     }
     async function maybeShowMenuPromo(attempt=0){
-      if(promoShown||menuPromoSeenThisSession())return;let data=await (attempt===0&&promoDataPromise?promoDataPromise:loadMenuPromoData());
+      if(promoShown||menuPromoSeenThisSession()){if(!document.getElementById('previewModal')?.classList.contains('show'))unlockPageScroll();return}let data=await (attempt===0&&promoDataPromise?promoDataPromise:loadMenuPromoData());
       if(promoShown||menuPromoSeenThisSession())return;
       if(data?.disabled){promoShown=true;return}if(!data&&attempt<4){setTimeout(()=>maybeShowMenuPromo(attempt+1),500);return}if(!data)return;
       const ad=document.getElementById('menuPromoAd'),img=document.getElementById('menuPromoImage'),video=document.getElementById('menuPromoVideo'),skip=document.getElementById('menuPromoSkip');
@@ -1507,9 +1516,13 @@ body{
 }
 </style>
 
-<style id="cng-menu-session-scroll-20261007">
-html,body{overscroll-behavior-y:contain}
+
+
+<style id="cng-menu-scroll-recovery-20261007">
+html,body{overscroll-behavior-y:auto}
+.menu-promo-ad:not(.show){pointer-events:none!important}
 </style>
+
 </body>
 </html>
 
