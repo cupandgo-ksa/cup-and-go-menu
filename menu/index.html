@@ -636,7 +636,6 @@
         if(event.state?.cngMenuRoot||event.state?.cngMenuGuard)history.back();
         return;
       }
-      if(event.state?.cngMenuGuard){backGuardReady=true;return}
       backGuardReady=false;
       const assistant=document.getElementById('cngAssistantOverlay');
       if(assistant?.classList.contains('show')){document.getElementById('cngAssistantClose')?.click();lastBackAt=0;pushMenuGuard();return}
