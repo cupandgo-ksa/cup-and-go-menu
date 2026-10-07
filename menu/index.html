@@ -749,20 +749,22 @@ const cngRatingApp=firebase.initializeApp(firebase.app().options,'cng-menu-ratin
     img.loading=priority?'eager':'lazy';img.decoding='async';img.setAttribute('fetchpriority',priority?'high':'auto');
     img.src=img.dataset.src;img.removeAttribute('data-src');
   };
-  const observer='IntersectionObserver'in window?new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;loadImage(entry.target);observer.unobserve(entry.target)})},{root:null,rootMargin:nearbyMargin,threshold:.01}):null;
+  const observer='IntersectionObserver'in window?new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;loadImage(entry.target);if(!appleMobile)observer.unobserve(entry.target)})},{root:null,rootMargin:nearbyMargin,threshold:.01}):null;
+  // On iOS, retain nearby decoded images and release distant ones while scrolling.
+  const retentionObserver=appleMobile&&observer?new IntersectionObserver(entries=>{entries.forEach(entry=>{const img=entry.target;if(entry.isIntersecting||!img.hasAttribute('src')||!img.dataset.cngSource)return;img.dataset.src=img.dataset.cngSource;img.removeAttribute('src')})},{root:null,rootMargin:'2000px 0px',threshold:0}):null;
   let fallbackTick=0;const checkFallback=()=>{fallbackTick=0;document.querySelectorAll(`${selector}[data-src]`).forEach(img=>{const r=img.getBoundingClientRect();if(r.top<innerHeight+fallbackMargin&&r.bottom>-fallbackMargin)loadImage(img)})};const queueFallback=()=>{if(!fallbackTick)fallbackTick=requestAnimationFrame(checkFallback)};
   function prepare(){
     document.querySelectorAll(selector).forEach((img,index)=>{
       if(img.dataset.cngPrepared)return;img.dataset.cngPrepared='1';
       const priority=img.dataset.eager==='1'||index<3;
-      const candidate=img.getAttribute('src')||img.dataset.src||'';if(index<8&&candidate)warmOrigin(candidate);
+      const candidate=img.getAttribute('src')||img.dataset.src||'';if(candidate)img.dataset.cngSource=candidate;if(index<8&&candidate)warmOrigin(candidate);
       img.loading=priority?'eager':'lazy';img.decoding='async';img.setAttribute('fetchpriority',priority?'high':'auto');
       const box=img.parentElement;if(box){box.classList.add('cng-img-loading');const done=()=>{box.classList.remove('cng-img-loading');box.classList.add('cng-img-loaded')};if(img.complete&&img.naturalWidth>0)done();else{img.addEventListener('load',done,{once:true});img.addEventListener('error',done,{once:true})}}
-      if(priority)loadImage(img,true);else if(observer)observer.observe(img);else queueFallback();
+      if(priority)loadImage(img,true);if(observer&&(appleMobile||!priority))observer.observe(img);else if(!observer&&!priority)queueFallback();if(retentionObserver)retentionObserver.observe(img);
     });
     if(!observer)queueFallback();
   }
-  const start=()=>{prepare();const grid=document.getElementById('menuGrid');if(grid)new MutationObserver(()=>{if(observer)observer.disconnect();prepare();if(observer)document.querySelectorAll(`${selector}[data-src]`).forEach(img=>observer.observe(img))}).observe(grid,{childList:true});if(!observer){addEventListener('scroll',queueFallback,{passive:true});addEventListener('resize',queueFallback,{passive:true})}};
+  const start=()=>{prepare();const grid=document.getElementById('menuGrid');if(grid)new MutationObserver(()=>{if(observer)observer.disconnect();if(retentionObserver)retentionObserver.disconnect();prepare();if(observer)document.querySelectorAll(appleMobile?selector:`${selector}[data-src]`).forEach(img=>observer.observe(img));if(retentionObserver)document.querySelectorAll(selector).forEach(img=>retentionObserver.observe(img))}).observe(grid,{childList:true});if(!observer){addEventListener('scroll',queueFallback,{passive:true});addEventListener('resize',queueFallback,{passive:true})}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
 </script>
@@ -1487,7 +1489,12 @@ body{
   .item-card{background:#fff!important;transform:none!important;will-change:auto!important}
   .item-info{background:rgba(255,255,255,.94)!important}
   .cng-assistant-launcher{background:rgba(248,252,255,.96)!important}
-  .item-card.premium-item::after,.cng-img-loading::after{display:none!important;animation:none!important}
+  .item-card::before,.item-card::after,.item-image-btn::before,.item-image-btn::after,.cng-img-loading::after{content:none!important;display:none!important;animation:none!important}
+  .item-card,.item-image-btn,.item-image,.item-info,.preview-img{animation:none!important;filter:none!important;will-change:auto!important}
+  .item-card{box-shadow:0 5px 16px rgba(28,34,48,.07)!important}
+  .categories{transform:none!important;will-change:auto!important}
+  .skeleton-image,.skeleton-line{animation:none!important}
+  .menu-promo-backdrop{filter:none!important;transform:none!important}
   .menu-item-ticker-track{filter:none!important;will-change:auto!important}
   .menu-item-ticker-track.show{animation:cngMenuMessageLight 7s ease-in-out both!important}
   @keyframes cngMenuMessageLight{0%,100%{opacity:0}11%,82%{opacity:1}}
