@@ -1564,12 +1564,14 @@ html,body{overscroll-behavior-y:auto}
 <aside id="cngSaudiGreeting" class="cng-saudi-greeting" hidden aria-live="polite"><button type="button" id="cngSaudiGreetingClose" aria-label="إغلاق">×</button><div id="cngSaudiGreetingText"></div><small id="cngSaudiGreetingLabel"></small></aside>
 <script id="cng-saudi-greeting-script">
 (function(){
-var greeting=document.getElementById('cngSaudiGreeting'),launcher=document.getElementById('cngAssistantLauncher'),shown=false,timer;
-function sync(){var ar=document.documentElement.lang==='ar';document.getElementById('cngSaudiGreetingText').textContent=ar?'هلا والله 👋 كيف أقدر أساعدك؟':'Hi 👋 How can I help you?';document.getElementById('cngSaudiGreetingLabel').textContent=ar?'مساعد كوب أند جو':'Cup And Go Assistant';document.getElementById('cngSaudiGreetingClose').setAttribute('aria-label',ar?'إغلاق':'Close');launcher.setAttribute('aria-label',ar?'افتح مساعد كوب أند جو':'Open Cup And Go Assistant');launcher.setAttribute('aria-controls','cngAssistantPanel');launcher.setAttribute('aria-expanded',document.getElementById('cngAssistantOverlay').classList.contains('show')?'true':'false')}
-function dismiss(){greeting.hidden=true;clearTimeout(timer)}
-function showWhenReady(){if(shown)return;var intro=document.getElementById('menuIntro'),promo=document.getElementById('menuPromoAd');if((intro&&!intro.classList.contains('hide'))||(promo&&promo.classList.contains('show'))){timer=setTimeout(showWhenReady,500);return}shown=true;launcher.classList.add('cng-welcoming');if(!document.getElementById('cngAssistantOverlay').classList.contains('show')){sync();greeting.hidden=false;timer=setTimeout(dismiss,10000)}}
-document.getElementById('cngSaudiGreetingClose').addEventListener('click',dismiss);launcher.addEventListener('click',function(){shown=true;dismiss()});greeting.addEventListener('click',function(e){if(!e.target.closest('button'))launcher.click()});
-new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});new MutationObserver(sync).observe(document.getElementById('cngAssistantOverlay'),{attributes:true,attributeFilter:['class']});sync();timer=setTimeout(showWhenReady,1200);
+var greeting=document.getElementById('cngSaudiGreeting'),launcher=document.getElementById('cngAssistantLauncher'),overlay=document.getElementById('cngAssistantOverlay'),shown=false,stopped=false,timer,index=0;
+var messages={ar:['هلا والله 👋 كيف أقدر أساعدك؟','وش مزاجك اليوم؟ ☕','ودّك تشوف عروضنا؟ ✨','قهوة ومعها حلى؟ خلّني أساعدك 🍰'],en:['Hi 👋 How can I help you?','What are you craving today? ☕','Want to see our offers? ✨','Coffee and a sweet? Let me help 🍰']};
+function sync(){var ar=document.documentElement.lang==='ar';document.getElementById('cngSaudiGreetingText').textContent=messages[ar?'ar':'en'][index];document.getElementById('cngSaudiGreetingLabel').textContent=ar?'مساعد كوب أند جو':'Cup And Go Assistant';document.getElementById('cngSaudiGreetingClose').setAttribute('aria-label',ar?'إغلاق':'Close');launcher.setAttribute('aria-label',ar?'افتح مساعد كوب أند جو':'Open Cup And Go Assistant');launcher.setAttribute('aria-controls','cngAssistantPanel');launcher.setAttribute('aria-expanded',overlay.classList.contains('show')?'true':'false');if(overlay.classList.contains('show'))greeting.hidden=true}
+function dismiss(){stopped=true;greeting.hidden=true;clearTimeout(timer)}
+function blocked(){var intro=document.getElementById('menuIntro'),promo=document.getElementById('menuPromoAd');return document.hidden||overlay.classList.contains('show')||(intro&&!intro.classList.contains('hide'))||(promo&&promo.classList.contains('show'))}
+function showMessage(){if(stopped)return;if(blocked()){timer=setTimeout(showMessage,1000);return}if(!shown){shown=true;launcher.classList.add('cng-welcoming')}sync();greeting.hidden=false;timer=setTimeout(function(){greeting.hidden=true;index=(index+1)%messages.en.length;timer=setTimeout(showMessage,15000)},8000)}
+document.getElementById('cngSaudiGreetingClose').addEventListener('click',dismiss);launcher.addEventListener('click',function(){launcher.classList.add('cng-welcoming');dismiss()});greeting.addEventListener('click',function(e){if(!e.target.closest('button'))launcher.click()});
+new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});new MutationObserver(sync).observe(overlay,{attributes:true,attributeFilter:['class']});sync();timer=setTimeout(showMessage,1200);
 })();
 </script>
 
@@ -1589,6 +1591,14 @@ new MutationObserver(sync).observe(document.documentElement,{attributes:true,att
 .cng-assistant-launcher{width:64px!important;min-height:78px!important;align-items:center!important;justify-content:flex-end!important;gap:0!important;overflow:visible!important}
 .cng-assistant-launcher #cngAssistantLauncherText{display:flex!important;align-items:center;justify-content:center;flex:0 0 auto;width:64px;min-height:21px;margin:4px 0 0!important;padding:3px 5px!important;border:1px solid rgba(209,179,116,.65);border-radius:8px!important;background:linear-gradient(145deg,rgba(255,253,248,.98),rgba(248,241,228,.96))!important;box-shadow:0 3px 9px rgba(48,0,8,.12),inset 0 1px 0 #fff;color:#541323!important;font:700 9px/1.2 Cairo,Inter,sans-serif!important;letter-spacing:.1px;text-align:center;white-space:nowrap}
 .cng-assistant-launcher .cng-saudi-character{margin:0 auto!important;flex:0 0 56px}
+</style>
+<style id="cng-assistant-joined-base-20261014">
+.cng-assistant-launcher{height:75px!important;min-height:75px!important;justify-content:flex-end!important}
+.cng-assistant-launcher .cng-saudi-character{position:absolute!important;left:4px;bottom:18px;z-index:1;margin:0!important;transform-origin:center bottom}
+.cng-assistant-launcher #cngAssistantLauncherText{position:relative!important;z-index:2!important;min-height:22px;margin:0!important;border-radius:7px!important}
+.cng-assistant-launcher.cng-welcoming .cng-saudi-character{animation:cngAssistantEmerge .7s cubic-bezier(.2,.8,.3,1) both}
+@keyframes cngAssistantEmerge{from{opacity:0;transform:translateY(20px) scale(.86)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.cng-assistant-launcher.cng-welcoming .cng-saudi-character{animation:none}}
 </style>
 </body>
 </html>
