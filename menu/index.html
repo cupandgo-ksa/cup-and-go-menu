@@ -395,6 +395,16 @@
     </div>
     <button id="menuPromoSkip" class="menu-promo-skip" type="button" onclick="closeMenuPromo()">تخطي</button>
   </div>
+  <div id="menuPopupCard" class="menu-popup-card" aria-hidden="true" inert role="dialog" aria-label="عرض جديد">
+    <button id="menuPopupClose" class="menu-popup-close" type="button" onclick="closeMenuPopupCard()" aria-label="Close">✕</button>
+    <span class="menu-popup-badge">NEW • جديد</span>
+    <img id="menuPopupImage" alt="">
+    <div class="menu-popup-body">
+      <div id="menuPopupTitle" class="menu-popup-title"></div>
+      <div id="menuPopupPrice" class="menu-popup-price"></div>
+      <button id="menuPopupView" class="menu-popup-view" type="button" onclick="viewMenuPopupItem()">View • عرض</button>
+    </div>
+  </div>
   <header class="header">
     <div class="shop-logo-frame"><img id="shopLogo" class="shop-logo" alt="شعار كوب أند جو"></div>
     <div class="brand-copy"><h1 id="shopName" translate="no" class="shop-name">كوب أند جو</h1><div id="greeting" translate="no" class="greeting">صباح الخير ☀️</div></div>
@@ -653,6 +663,81 @@
       if(ad.contains(document.activeElement))document.activeElement.blur();ad.classList.add('closing');setTimeout(()=>{ad.classList.remove('show','closing','ready');ad.setAttribute('aria-hidden','true');ad.inert=true;try{video.removeAttribute('src');video.load()}catch(e){}const photo=document.getElementById('menuPromoImage'),backdrop=document.getElementById('menuPromoBackdrop');if(photo)photo.removeAttribute('src');if(backdrop)backdrop.style.backgroundImage='none';unlockPageScroll()},460);
     }
     window.closeMenuPromo=closeMenuPromo;
+    // ======= SMALL CENTRED MENU POPUP CARDS (separate from the full-screen Intro Ad) =======
+    // Two slots: popup1, popup2. One at a time, centred, item-photo sized, once per day each.
+    // The small popup never locks page scroll, so closing it leaves the menu working normally.
+    let menuPopupQueue=[],menuPopupCurrent=null,menuPopupScheduled=false,menuPopupTimer=null,menuPopupRetry=0;
+    function menuPopupDayKey(slot,id){const d=new Date();const day=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;return `cng.menu.popup.seen.${slot}.${String(id||'default')}.${day}`;}
+    function menuPopupSeenToday(slot,id){try{return localStorage.getItem(menuPopupDayKey(slot,id))==='1'}catch(e){return false}}
+    function rememberMenuPopupToday(slot,id){try{localStorage.setItem(menuPopupDayKey(slot,id),'1')}catch(e){}}
+    async function loadMenuPopupSlot(slot){
+      try{
+        const cfgSnap=await db.ref('/menuPopup/'+slot+'/config').once('value');const cfg=cfgSnap.val()||{};
+        if(!cfgSnap.exists()||cfg.enabled===false)return null;
+        if(cfg.mediaType&&cfg.mediaType!=='image')return null;
+        const mediaSnap=await db.ref('/menuPopup/'+slot+'/media').once('value');const media=mediaSnap.val()||'';
+        if(!media)return null;
+        return{slot,...cfg,media};
+      }catch(e){return null}
+    }
+    async function loadMenuPopupQueue(){
+      const [p1,p2]=await Promise.all([loadMenuPopupSlot('popup1'),loadMenuPopupSlot('popup2')]);
+      return [p1,p2].filter(Boolean).filter(p=>!menuPopupSeenToday(p.slot,String(p.id||p.updatedAt||'default')));
+    }
+    function closeMenuPopupCard(){
+      clearTimeout(menuPopupTimer);
+      const card=document.getElementById('menuPopupCard');if(!card)return;
+      if(menuPopupCurrent)rememberMenuPopupToday(menuPopupCurrent.slot,String(menuPopupCurrent.id||menuPopupCurrent.updatedAt||'default'));
+      card.classList.add('closing');
+      const next=menuPopupQueue.shift();
+      setTimeout(()=>{
+        card.classList.remove('show','closing');card.setAttribute('aria-hidden','true');card.inert=true;
+        const img=document.getElementById('menuPopupImage');if(img)img.removeAttribute('src');
+        menuPopupCurrent=null;
+        if(next)showMenuPopupCard(next,1500);
+      },350);
+    }
+    window.closeMenuPopupCard=closeMenuPopupCard;
+    function viewMenuPopupItem(){
+      const card=document.getElementById('menuPopupCard');const itemName=card?.dataset.itemName||'';
+      closeMenuPopupCard();
+      if(!itemName)return;
+      const needle=String(itemName).trim().toLowerCase();if(!needle)return;
+      const p=(products||[]).find(x=>[x?.id,x?.name,x?.nameAr].some(v=>v!=null&&String(v).trim().toLowerCase()===needle))||(products||[]).find(x=>{try{return String(nameOf(x)).trim().toLowerCase()===needle}catch(e){return false}});
+      if(!p)return;
+      try{openPreview(encodeURIComponent(String(p.id??p.name??'')))}catch(e){}
+    }
+    window.viewMenuPopupItem=viewMenuPopupItem;
+    function showMenuPopupCard(data,delayMs){
+      menuPopupTimer=setTimeout(()=>{
+        const promo=document.getElementById('menuPromoAd');
+        if(promo?.classList.contains('show')){menuPopupRetry++;if(menuPopupRetry<40)showMenuPopupCard(data,1000);return}
+        const preview=document.getElementById('previewModal');
+        if(preview?.classList.contains('show')){menuPopupRetry++;if(menuPopupRetry<40)showMenuPopupCard(data,1000);return}
+        menuPopupRetry=0;
+        const card=document.getElementById('menuPopupCard'),img=document.getElementById('menuPopupImage'),title=document.getElementById('menuPopupTitle'),price=document.getElementById('menuPopupPrice'),view=document.getElementById('menuPopupView');
+        if(!card||!img)return;
+        img.src=data.media;img.alt=String(data.titleAr||data.titleEn||'عرض كوب أند جو');
+        title.textContent=String(data.titleAr||data.titleEn||'');
+        title.style.display=title.textContent?'':'none';
+        const priceNum=Number(data.price||0);
+        price.textContent=priceNum>0?`${priceNum.toFixed(2)} ﷼`:'';
+        price.style.display=price.textContent?'':'none';
+        view.style.display=data.itemName?'':'none';
+        card.dataset.popupId=String(data.id||data.updatedAt||'default');card.dataset.itemName=String(data.itemName||'');
+        menuPopupCurrent=data;rememberMenuPopupToday(data.slot,String(data.id||data.updatedAt||'default'));
+        card.inert=false;card.classList.add('show');card.setAttribute('aria-hidden','false');
+      },delayMs);
+    }
+    async function scheduleMenuPopups(){
+      if(menuPopupScheduled)return;menuPopupScheduled=true;
+      const promo=document.getElementById('menuPromoAd');
+      if(promo?.classList.contains('show')){menuPopupScheduled=false;setTimeout(scheduleMenuPopups,1000);return}
+      menuPopupQueue=await loadMenuPopupQueue();
+      const first=menuPopupQueue.shift();if(!first)return;
+      const delay=Math.max(3,Math.min(20,parseInt(first.delaySeconds)||5))*1000;
+      showMenuPopupCard(first,delay);
+    }
     function recoverMenuScroll(){
       const preview=document.getElementById('previewModal'),ad=document.getElementById('menuPromoAd');
       if(preview?.classList.contains('show'))return;
@@ -688,7 +773,7 @@
         promoTimer=setTimeout(closeMenuPromo,Math.max(2,Math.min(10,parseInt(data.duration)||4))*1000);
       }
     }
-    function hideMenuIntro(){if(introHidden)return;const wait=Math.max(0,3200-(Date.now()-introStartedAt));setTimeout(()=>{if(introHidden)return;introHidden=true;const el=document.getElementById('menuIntro');if(!el){maybeShowMenuPromo();return}el.classList.add('hide');setTimeout(()=>{el.remove();maybeShowMenuPromo()},760)},wait)}
+    function hideMenuIntro(){if(introHidden)return;const wait=Math.max(0,3200-(Date.now()-introStartedAt));setTimeout(()=>{if(introHidden)return;introHidden=true;const el=document.getElementById('menuIntro');if(!el){maybeShowMenuPromo();scheduleMenuPopups();return}el.classList.add('hide');setTimeout(()=>{el.remove();maybeShowMenuPromo();scheduleMenuPopups()},760)},wait)}
     function initSlider(images){slides=(images||[]).filter(Boolean).slice(0,3);const box=document.getElementById('slider'),track=document.getElementById('sliderTrack'),dots=document.getElementById('sliderDots');clearInterval(sliderTimer);slideIndex=0;if(!slides.length){box.style.display='none';return}box.style.display='block';track.innerHTML=slides.map((src,i)=>`<div class="slide"><img src="${esc(src)}" alt="${isArabic?'عرض':'Offer'} ${i+1}" loading="${i?'lazy':'eager'}" decoding="async"></div>`).join('');dots.innerHTML=slides.map((_,i)=>`<span class="dot ${i===0?'active':''}"></span>`).join('');track.style.transform='translateX(0)';if(slides.length>1)sliderTimer=setInterval(()=>{slideIndex=(slideIndex+1)%slides.length;track.style.transform=`translateX(${(isArabic?1:-1)*slideIndex*100}%)`;[...dots.children].forEach((d,i)=>d.classList.toggle('active',i===slideIndex))},3000)}
     function productCategory(p){return String((p&&p.category)||'Other').trim()||'Other'}
     function allMenuCategories(items=products){return [...new Set([...(adminCategories||[]),...items.map(productCategory)].filter(Boolean))]}
@@ -1542,6 +1627,20 @@ html,body{overscroll-behavior-y:auto}
 </style>
 
 
+<style id="cng-menu-popup-card">
+/* Small centred menu popup card — sized like one menu item photo (4/5), NOT full-screen.
+   It never locks page scroll, so closing it leaves the menu working normally. */
+.menu-popup-card{position:fixed;left:50%;top:50%;z-index:2147483400;width:min(220px,58vw);background:#fff;border:1px solid rgba(229,193,88,.6);border-radius:25px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.45);color:#1a050a;opacity:0;visibility:hidden;transform:translate(-50%,-50%) scale(.96);transition:opacity .35s ease,transform .35s cubic-bezier(.22,1,.36,1),visibility 0s linear .35s;pointer-events:none}
+.menu-popup-card.show{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1);transition-delay:0s;pointer-events:auto}
+.menu-popup-card.closing{opacity:0;transform:translate(-50%,-50%) scale(.97)}
+.menu-popup-card img{display:block;width:100%;aspect-ratio:4/5;object-fit:contain;background:#f1f2f4}
+.menu-popup-close{position:absolute;top:8px;right:8px;z-index:2;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.65);color:#fff;font-size:15px;line-height:1;cursor:pointer}
+.menu-popup-badge{position:absolute;top:10px;left:10px;z-index:2;background:#efc84c;color:#1a050a;font-weight:900;font-size:11px;padding:5px 9px;border-radius:999px;letter-spacing:.04em}
+.menu-popup-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;background:#fff}
+.menu-popup-title{font-weight:900;font-size:16px;line-height:1.3}
+.menu-popup-price{color:#9c7c1e;font-weight:900;font-size:15px}
+.menu-popup-view{align-self:flex-start;border:1px solid #efc84c;background:#efc84c;color:#1a050a;font-weight:900;font-size:13px;padding:8px 16px;border-radius:999px;cursor:pointer}
+</style>
 <style id="cng-saudi-assistant-20261014">
 .cng-assistant-launcher{width:56px;min-width:0;min-height:70px;padding:0!important;flex-direction:column;gap:1px;border-radius:0!important;background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 .cng-saudi-avatar{display:block;width:48px;height:56px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 2px 3px rgba(48,0,8,.15))}
