@@ -698,7 +698,7 @@
         card.classList.remove('show','closing');card.setAttribute('aria-hidden','true');card.inert=true;
         const img=document.getElementById('menuPopupImage');if(img)img.removeAttribute('src');
         menuPopupCurrent=null;
-        if(next)showMenuPopupCard(next,1500);
+        if(next)showMenuPopupCard(next,3000);
       },350);
     }
     window.closeMenuPopupCard=closeMenuPopupCard;
